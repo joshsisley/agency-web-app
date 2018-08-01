@@ -1,8 +1,15 @@
 .form-signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-    background-color: white;
+    position: absolute;
+    box-shadow: 3px 3px 0 rgba(6,41,66,.1);
+    top: 50%;
+    left: 50%;
+    background: white;
+    -webkit-transform: translate(-50%, -75%);
+    transform: translate(-50%, -75%);
+    width: 25%;
+    border-radius: 6px;
+    padding: 35px;
+    text-align: center;
 }
 
 .form-signin .form-signin-heading,

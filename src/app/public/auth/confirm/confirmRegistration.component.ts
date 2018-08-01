@@ -21,7 +21,7 @@ export class LogoutComponent implements LoggedInCallback {
             this.router.navigate(['/home']);
         }
 
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/login']);
     }
 }
 
