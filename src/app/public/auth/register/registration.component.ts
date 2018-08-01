@@ -4,7 +4,8 @@ import {UserRegistrationService} from "../../../service/user-registration.servic
 import {CognitoCallback} from "../../../service/cognito.service";
 
 export class RegistrationUser {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     phone_number: string;
     password: string;

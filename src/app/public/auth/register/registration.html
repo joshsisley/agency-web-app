@@ -6,9 +6,14 @@
         {{ errorMessage }}
     </div>
     <div class="form-group">
-        <label class="control-label" for="signupName">Name</label>
-        <input id="signupName" type="text" maxlength="50" class="form-control"
-               [(ngModel)]="registrationUser.name" [ngModelOptions]="{standalone: true}">
+        <label class="control-label" for="signupFirstName">First Name</label>
+        <input id="signupFirstName" type="text" maxlength="50" class="form-control"
+               [(ngModel)]="registrationUser.firstName" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="signupLastName">Last Name</label>
+        <input id="signupLastName" type="text" maxlength="50" class="form-control"
+               [(ngModel)]="registrationUser.lastName" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
         <label class="control-label" for="signupEmail">Email</label>

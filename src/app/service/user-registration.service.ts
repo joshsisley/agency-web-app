@@ -21,12 +21,17 @@ export class UserRegistrationService {
             Name: 'email',
             Value: user.email
         };
-        let dataNickname = {
-            Name: 'nickname',
-            Value: user.name
+        let dataFirstName = {
+            Name: 'custom:first_name',
+            Value: user.firstName
+        };
+        let dataLastName = {
+            Name: 'custom:last_name',
+            Value: user.lastName
         };
         attributeList.push(new CognitoUserAttribute(dataEmail));
-        attributeList.push(new CognitoUserAttribute(dataNickname));
+        attributeList.push(new CognitoUserAttribute(dataFirstName));
+        attributeList.push(new CognitoUserAttribute(dataLastName));
         attributeList.push(new CognitoUserAttribute({
             Name: 'phone_number',
             Value: user.phone_number
