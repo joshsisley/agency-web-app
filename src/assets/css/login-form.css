@@ -5,8 +5,8 @@
     left: 50%;
     background: white;
     -webkit-transform: translate(-50%, -75%);
-    transform: translate(-50%, -75%);
-    width: 25%;
+    transform: translate(-50%, -50%);
+    width: 30%;
     border-radius: 6px;
     padding: 35px;
     text-align: center;
