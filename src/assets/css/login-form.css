@@ -12,6 +12,11 @@
     text-align: center;
 }
 
+.form-signin h2 {
+    color: #597be3;
+    margin-bottom: 30px;
+}
+
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
     margin-bottom: 10px;

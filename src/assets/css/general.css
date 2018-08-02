@@ -1,0 +1,20 @@
+.primary-btn {
+  height: 45px;
+  color: white;
+  background: #597be3;
+}
+
+.primary-btn:hover {
+  background: #5093e1;
+}
+
+.primary-link {
+  color: #5093e1;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.alert-danger {
+  background: #f33155;
+  color: white;
+}

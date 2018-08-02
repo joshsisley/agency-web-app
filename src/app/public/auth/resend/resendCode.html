@@ -6,18 +6,17 @@
         {{ errorMessage }}
     </div>
     <div class="form-group">
-        <label class="control-label" for="signupEmail">Email</label>
-        <input id="signupEmail" type="email" maxlength="50" class="form-control" [(ngModel)]="email"
+        <input id="signupEmail" placeholder="Enter Email" type="email" maxlength="50" class="form-control" [(ngModel)]="email"
                [ngModelOptions]="{standalone: true}">
     </div>
     <div class="form-group">
-        <button (click)="resendCode()" id="signupSubmit" type="submit" class="btn btn-info btn-block">
+        <button (click)="resendCode()" id="signupSubmit" type="submit" class="btn btn-info btn-block primary-btn">
             Resend Code
         </button>
     </div>
 
     <hr>
-    <p><a [routerLink]="['/home/register']"> <i class="fa fa-fw fa-group"></i> Register</a> <a
+    <p><a class="primary-link" [routerLink]="['/home/register']"> <i class="fa fa-fw fa-group"></i> Register</a> <a class="primary-link"
             [routerLink]="['/home/login']"> <i class="fa fa-fw fa-user"></i> Login</a>
     </p>
 </form>
