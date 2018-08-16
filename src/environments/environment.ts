@@ -1,17 +1,19 @@
 export const environment = {
     production: false,
 
-    region: 'us-east-1',
+    region: 'us-east-2',
 
-    identityPoolId: 'us-east-1:9c25aa12-6790-48fc-903a-e8c36d6b290d',
-    userPoolId: 'us-east-1_NVM2GgVaL',
-    clientId: '264bme7j9mi9kaa5bus8jg17tq',
+    identityPoolId: 'us-east-2:6be0f345-9534-4aa5-9359-bfa5a140e7ef ',
+    userPoolId: 'us-east-2_PGz5RpI5p',
+    clientId: '517mf7f9ele95e1876dc18grha',
 
     rekognitionBucket: 'rekognition-pics',
     albumName: "usercontent",
-    bucketRegion: 'us-east-1',
+    bucketRegion: 'us-east-2',
 
     ddbTableName: 'LoginTrail',
+
+    frontEndApiUrl: 'https://qcj5gnlj4h.execute-api.us-east-2.amazonaws.com/v1/frontendapi',
 
     cognito_idp_endpoint: '',
     cognito_identity_endpoint: '',

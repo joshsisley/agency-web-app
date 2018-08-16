@@ -22,6 +22,8 @@ import {LogoutComponent, RegistrationConfirmationComponent} from "./public/auth/
 import {ResendCodeComponent} from "./public/auth/resend/resendCode.component";
 import {NewPasswordComponent} from "./public/auth/newpassword/newpassword.component";
 import { MFAComponent } from './public/auth/mfa/mfa.component';
+import { OrganizationService } from "./service/organization.service";
+import { UserService } from "./service/user.service";
 
 
 @NgModule({
@@ -56,7 +58,10 @@ import { MFAComponent } from './public/auth/mfa/mfa.component';
         DynamoDBService,
         UserRegistrationService,
         UserLoginService,
-        UserParametersService],
+        UserParametersService,
+        OrganizationService,
+        UserService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

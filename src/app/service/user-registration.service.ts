@@ -50,6 +50,7 @@ export class UserRegistrationService {
 
     confirmRegistration(username: string, confirmationCode: string, callback: CognitoCallback): void {
 
+        console.log('registration is confirmed');
         let userData = {
             Username: username,
             Pool: this.cognitoUtil.getUserPool()
@@ -59,8 +60,12 @@ export class UserRegistrationService {
 
         cognitoUser.confirmRegistration(confirmationCode, true, function (err, result) {
             if (err) {
+                console.log('there was an error');
+                console.log(err);
                 callback.cognitoCallback(err.message, null);
             } else {
+                console.log('it was successful - user confirmed');
+                console.log(result);
                 callback.cognitoCallback(null, result);
             }
         });
