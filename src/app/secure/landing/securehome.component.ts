@@ -4,6 +4,7 @@ import {UserLoginService} from "../../service/user-login.service";
 import {LoggedInCallback} from "../../service/cognito.service";
 import { OrganizationService } from "../../service/organization.service";
 import { resolve } from "../../../../node_modules/@types/q";
+import { UserService } from "../../service/user.service";
 
 @Component({
     selector: 'awscognito-angular2-app',
@@ -12,8 +13,11 @@ import { resolve } from "../../../../node_modules/@types/q";
 })
 export class SecureHomeComponent implements OnInit, LoggedInCallback {
 
-    constructor(public router: Router, public userService: UserLoginService, public orgService: OrganizationService) {
-        this.userService.isAuthenticated(this);
+    constructor(public router: Router, 
+        public userLoginService: UserLoginService, 
+        public orgService: OrganizationService,
+        public userService: UserService) {
+        this.userLoginService.isAuthenticated(this);
         console.log("SecureHomeComponent: constructor");
     }
 
@@ -26,8 +30,14 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
             this.router.navigate(['/home/login']);
         } else {
             console.log('the user is logged in');
-            this.getUserInfo().then((user) => {
+            this.userService.getUserByCognitoID().then((user) => {
+                console.log('here is the user');
+                console.log(user);
                 this.getOrgInfo(user).then((org) => {
+
+
+                    // Write function for this yet
+
                     console.log('here is the org');
                     console.log(org);
                 });
@@ -37,16 +47,8 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
         }
     }
 
-    getUserInfo() {
-        var promise = new Promise((resolve,reject) => {
-            // make call to get the user here
-            // save user info locally
-            // resolve with user
-        });
-        return promise;
-    }
-
     getOrgInfo(user:any) {
+        alert('Write the function for finding org by orgid inside of frontendapi')
         var promise = new Promise((resolve,reject) => {
             // make call to get the org using the user orgId param
             // resolve with org info
