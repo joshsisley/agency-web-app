@@ -32,15 +32,11 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
             console.log('the user is logged in');
             this.userService.getUserByCognitoID().then((user) => {
                 console.log('here is the user');
-                console.log(user);
-                this.getOrgInfo(user).then((org) => {
-
-
-                    // Write function for this yet
-
-                    console.log('here is the org');
+                console.log(user["Org"]);
+                this.orgService.getOrgById(user["Org"]).then((org) => {
+                    console.log('successfully receives the org');
                     console.log(org);
-                });
+                })
             });
             // Make call to ge the User
             // this.orgService.getOrgById();

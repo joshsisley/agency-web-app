@@ -15,25 +15,30 @@ export class OrganizationService {
   /* 
   *   Takes in Param of Id = orgId = string
   */
-  getOrgById(id) {
+  getOrgById(orgId) {
 
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    var promise = new Promise((res,rej) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    let body = {
-      'action': 'find_by_ordId',
-      'orgId': id
-    }
+      let body = {
+        'action': 'search_org_by_orgId',
+        'OrgID': orgId
+      }
 
-    this.http.post('https://qcj5gnlj4h.execute-api.us-east-2.amazonaws.com/v1/FrontEndApi', body, {headers: headers})
-    .toPromise()
-    .then(response => {
-      console.log('here is the response from lambda');
-      console.log(response);
-    })
-    .catch(err => {
-      console.log('here is the error');
-      console.log(err);
-    })
+      this.http.post('https://qcj5gnlj4h.execute-api.us-east-2.amazonaws.com/v1/FrontEndApi', body, {headers: headers})
+      .toPromise()
+      .then(response => {
+        console.log('here is the response from lambda');
+        console.log(response);
+        res(response);
+      })
+      .catch(err => {
+        console.log('here is the error');
+        console.log(err);
+        rej(err);
+      })
+    });
+    return promise;
   }
 }
