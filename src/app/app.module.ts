@@ -28,6 +28,8 @@ import { DashboardComponent } from './secure/dashboard/dashboard.component';
 import { SetupComponent } from './secure/setup/setup.component';
 import { AgencyComponent } from './secure/setup/components/agency/agency.component';
 import { FirstCampaignComponent } from './secure/setup/components/campaign/campaign.component';
+import { NavbarComponent } from "./secure/navbar/navbar.component";
+import { SidebarComponent } from "./secure/sidebar/sidebar.component";
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { FirstCampaignComponent } from './secure/setup/components/campaign/campa
         DashboardComponent,
         SetupComponent,
         AgencyComponent,
-        FirstCampaignComponent
+        FirstCampaignComponent,
+        NavbarComponent,
+        SidebarComponent
     ],
     imports: [
         BrowserModule,

@@ -10,6 +10,7 @@ export class AgencyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

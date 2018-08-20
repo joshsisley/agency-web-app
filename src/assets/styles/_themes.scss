@@ -1,0 +1,30 @@
+.card {
+  border-radius: 0;
+  border: 0;
+  &.card-statistics {
+    .highlight-icon {
+      font-size: 3.125rem;
+    }
+    p {
+      margin-bottom: 0;
+    }
+  }
+  &.card-faded {
+    background: #b5b0b2;
+    border-color: #b5b0b2;
+  }
+  &.card-circle-progress {
+    color: $white;
+    text-align: center;
+  }
+}
+
+.badge {
+  padding: 0.5em 1em;
+}
+
+.form-control {
+  @include placeholder {
+    color: $light-text-color;
+  }
+}
