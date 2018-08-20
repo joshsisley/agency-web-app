@@ -13,6 +13,8 @@ import { UserService } from "../../service/user.service";
 })
 export class SecureHomeComponent implements OnInit, LoggedInCallback {
 
+    loading:boolean = true;
+
     constructor(public router: Router, 
         public userLoginService: UserLoginService, 
         public orgService: OrganizationService,
@@ -36,20 +38,22 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
                 this.orgService.getOrgById(user["Org"]).then((org) => {
                     console.log('successfully receives the org');
                     console.log(org);
+                    if (org["onboardingComplete"] && org["onboardingComplete"] === 'completed') {
+                        this.router.navigate(['/securehome'])
+                        this.loading = false;
+                    } else if (org["onboardingComplete"] && org["onboardingComplete"] === 'campaign') {
+                        console.log('it is set to campaign');
+                        this.router.navigate(['/securehome/setup/campaign'])
+                        this.loading = false;
+                    } else {
+                        this.router.navigate(['/securehome/setup'])
+                        this.loading = false;
+                    }
                 })
             });
             // Make call to ge the User
             // this.orgService.getOrgById();
         }
-    }
-
-    getOrgInfo(user:any) {
-        alert('Write the function for finding org by orgid inside of frontendapi')
-        var promise = new Promise((resolve,reject) => {
-            // make call to get the org using the user orgId param
-            // resolve with org info
-        });
-        return promise;
     }
 }
 

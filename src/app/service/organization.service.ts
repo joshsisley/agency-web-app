@@ -31,7 +31,8 @@ export class OrganizationService {
       .then(response => {
         console.log('here is the response from lambda');
         console.log(response);
-        res(response);
+        let org = JSON.parse(response["_body"]);
+        res(org);
       })
       .catch(err => {
         console.log('here is the error');

@@ -24,6 +24,10 @@ import {NewPasswordComponent} from "./public/auth/newpassword/newpassword.compon
 import { MFAComponent } from './public/auth/mfa/mfa.component';
 import { OrganizationService } from "./service/organization.service";
 import { UserService } from "./service/user.service";
+import { DashboardComponent } from './secure/dashboard/dashboard.component';
+import { SetupComponent } from './secure/setup/setup.component';
+import { AgencyComponent } from './secure/setup/components/agency/agency.component';
+import { FirstCampaignComponent } from './secure/setup/components/campaign/campaign.component';
 
 
 @NgModule({
@@ -44,7 +48,11 @@ import { UserService } from "./service/user.service";
         MyProfileComponent,
         SecureHomeComponent,
         JwtComponent,
-        AppComponent
+        AppComponent,
+        DashboardComponent,
+        SetupComponent,
+        AgencyComponent,
+        FirstCampaignComponent
     ],
     imports: [
         BrowserModule,

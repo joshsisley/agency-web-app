@@ -11,6 +11,10 @@ import {ForgotPassword2Component, ForgotPasswordStep1Component} from "./public/a
 import {LogoutComponent, RegistrationConfirmationComponent} from "./public/auth/confirm/confirmRegistration.component";
 import {ResendCodeComponent} from "./public/auth/resend/resendCode.component";
 import {NewPasswordComponent} from "./public/auth/newpassword/newpassword.component";
+import { DashboardComponent } from "./secure/dashboard/dashboard.component";
+import { SetupComponent } from "./secure/setup/setup.component";
+import { AgencyComponent } from "./secure/setup/components/agency/agency.component";
+import { FirstCampaignComponent } from "./secure/setup/components/campaign/campaign.component";
 
 const homeRoutes: Routes = [
     {
@@ -48,7 +52,11 @@ const secureHomeRoutes: Routes = [
         {path: 'jwttokens', component: JwtComponent},
         {path: 'myprofile', component: MyProfileComponent},
         {path: 'useractivity', component: UseractivityComponent},
-        {path: '', component: MyProfileComponent}]
+        {path: 'setup', component: SetupComponent, children: [
+            {path: '', component: AgencyComponent},
+            {path: 'campaign', component: FirstCampaignComponent}
+        ]},
+        {path: '', component: DashboardComponent}]
     }
 ];
 
