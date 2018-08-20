@@ -9,6 +9,8 @@ import { CognitoCallback, CognitoUtil, LoggedInCallback } from "./cognito.servic
 
 @Injectable()
 export class OrganizationService {
+
+  orgId:string;
   
   constructor(public cognitoUtil: CognitoUtil, public http: Http) {}
   
@@ -16,6 +18,8 @@ export class OrganizationService {
   *   Takes in Param of Id = orgId = string
   */
   getOrgById(orgId) {
+
+    this.orgId = orgId;
 
     var promise = new Promise((res,rej) => {
       let headers = new Headers();
@@ -37,6 +41,32 @@ export class OrganizationService {
       .catch(err => {
         console.log('here is the error');
         console.log(err);
+        rej(err);
+      })
+    });
+    return promise;
+  }
+
+  updateOrg(orgInfo) {
+    console.log('still has the org id: ' + this.orgId);
+    console.log(orgInfo);
+    var promise = new Promise((res,rej) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+      let queryString = `OrgID=${this.orgId}&OrgName=${orgInfo.name}&OrgOnboardingComplete=${orgInfo.orgOnboardingStatus}`;
+
+      this.http.post('https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/core-stage-v1/organization', queryString, {headers: headers})
+      .toPromise()
+      .then(response => {
+        console.log('here is the response from lambda');
+        console.log(response._body);
+        let tempBody = response._body.replace(/[{}]/g, "");
+        let responseArray = tempBody.split('=');
+        res(responseArray);
+      })
+      .catch(err => {
+        console.log('there was an error');
         rej(err);
       })
     });

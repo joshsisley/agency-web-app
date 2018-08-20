@@ -1,58 +1,39 @@
 <nav class="sidebar sidebar-fixed sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
-        <i class="flaticon-speedometer"></i>
-        <span class="menu-title">Dashboard</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/widgets" routerLinkActive="active">
-        <i class="flaticon-paper"></i>
-        <span class="menu-title">Widgets</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/forms" routerLinkActive="active">
-        <i class="flaticon-interface-1"></i>
-        <span class="menu-title">Forms</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/buttons" routerLinkActive="active">
-        <i class="flaticon-settings"></i>
-        <span class="menu-title">Buttons</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/tables" routerLinkActive="active">
-        <i class="flaticon-square"></i>
-        <span class="menu-title">Tables</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/ui-elements" routerLinkActive="active">
-        <i class="flaticon-weather"></i>
-        <span class="menu-title">UI Elements</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/icons" routerLinkActive="active">
-        <i class="flaticon-smiley"></i>
-        <span class="menu-title">Icons</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/typography" routerLinkActive="active">
-        <i class="flaticon-layout"></i>
-        <span class="menu-title">Typography</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="logout()" routerLinkActive="active">
-        <i class="flaticon-layout"></i>
-        <span class="menu-title">Logout</span>
-      </a>
-    </li>
+    <div *ngIf="!setupFlow">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+          <i class="flaticon-speedometer"></i>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/widgets" routerLinkActive="active">
+          <i class="flaticon-paper"></i>
+          <span class="menu-title">Widgets</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/forms" routerLinkActive="active">
+          <i class="flaticon-interface-1"></i>
+          <span class="menu-title">Forms</span>
+        </a>
+      </li>
+    </div>
+    <!-- These are used for setup -->
+    <div *ngIf="setupFlow">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/forms" routerLinkActive="active">
+          <i class="flaticon-interface-1"></i>
+          <span class="menu-title">Setup Agency</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/forms" routerLinkActive="active">
+          <i class="flaticon-interface-1"></i>
+          <span class="menu-title">First Campaign</span>
+        </a>
+      </li>
+    </div>
   </ul>
 </nav>

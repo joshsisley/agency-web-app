@@ -76,7 +76,7 @@
     <app-navbar *ngIf="!isLogin"></app-navbar>
     <div [class.login-no-top-padding]="isLogin" class="container-fluid page-body-wrapper">
         <div class="row row-offcanvas row-offcanvas-right">
-            <app-sidebar></app-sidebar>
+            <app-sidebar [setupFlow]="setupFlow"></app-sidebar>
             <div class="content-wrapper">
                 <router-outlet></router-outlet>
             </div>

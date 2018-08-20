@@ -6836,7 +6836,7 @@ pre {
       .sidebar .nav .nav-item.nav-category .nav-link {
         padding: 1.2rem 2rem .2rem; }
         .sidebar .nav .nav-item.nav-category .nav-link:hover {
-          color: #302f3f; }
+          color: #302f3f !important; }
     .sidebar .nav.sub-menu {
       padding-left: 2.5em; }
       .sidebar .nav.sub-menu .nav-item .nav-link {
@@ -6845,7 +6845,7 @@ pre {
         font-size: .9375rem; }
       .sidebar .nav.sub-menu .nav-item.active .nav-link {
         border-left: 0;
-        color: #597be3;
+        color: #597be3 !important;
         background: transparent; }
   @media (min-width: 992px) {
     .sidebar.sidebar-fixed {

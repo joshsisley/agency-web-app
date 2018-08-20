@@ -71,7 +71,7 @@
         .nav-link {
           padding: 1.2rem 2rem .2rem;
           &:hover {
-            color: theme-color(dark);
+            color: theme-color(dark) !important;
           }
         }
       }
@@ -88,7 +88,7 @@
         &.active {
           .nav-link {
             border-left: 0;
-            color: theme-color(primary);
+            color: theme-color(primary) !important;
             background: transparent;
           }
         }
