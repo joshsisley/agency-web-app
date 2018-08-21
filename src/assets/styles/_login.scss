@@ -4,6 +4,13 @@ $break-small: 415px;
 $primary-color: #373D42;
 $primary-btn: #216cee;
 
+.form-signin {
+    width: 30%;
+    left: 35%;
+    position: fixed;
+    top: 30%;
+}
+
 .login-container {
   position: absolute;
   box-shadow: 3px 3px 0 rgba(6,41,66,.1);

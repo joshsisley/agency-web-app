@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizationService } from '../../../../service/organization.service';
+import { Router } from '../../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-agency',
@@ -10,7 +11,7 @@ export class AgencyComponent implements OnInit {
 
   agency:any = {}
 
-  constructor(private orgService: OrganizationService) { }
+  constructor(private orgService: OrganizationService, private router:Router) { }
 
   ngOnInit() {
 
@@ -22,6 +23,7 @@ export class AgencyComponent implements OnInit {
     this.orgService.updateOrg(this.agency).then(response => {
       console.log(response);
       if (response[1] == 'true') {
+        this.router.navigate(['/securehome/setup/campaign'])
         // route to campaign
       } else {
         console.log('there was an error');

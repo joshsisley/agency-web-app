@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   public sidebarOpened = false;
+  @Input() isLogin:boolean;
   toggleSubmenu() {
     this.sidebarOpened = !this.sidebarOpened;
     if (this.sidebarOpened) {

@@ -1,46 +1,20 @@
 <!--Navbar-->
 <nav class="navbar navbar-dark col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="#">Titan Admin</a>
+        <a class="navbar-brand brand-logo" href="#">Agency App</a>
         <a class="navbar-brand brand-logo-mini" href="#">T</a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center">
-        <form class="form-inline mt-2 mt-md-0 d-none d-lg-block">
+        <!-- <form class="form-inline mt-2 mt-md-0 d-none d-lg-block">
             <input class="form-control mr-sm-2 search" type="text" placeholder="Search">
-        </form>
+        </form> -->
         <ul class="navbar-nav ml-lg-auto">
-            <li ngbDropdown placement="bottom-right" class="nav-item dropdown">
-                <a class="nav-link count-indicator" id="notificationDropdown" ngbDropdownToggle>
-                    <i class="fa fa-bell-o"></i>
-                    <span class="count">7</span>
-                </a>
-                <div ngbDropdownMenu class="dropdown-menu navbar-dropdown notification-drop-down" aria-labelledby="notificationDropdown">
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-birthday-cake text-success fa-fw"></i>
-                        <span class="notification-text">Today is John's birthday</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-phone text-danger fa-fw"></i>
-                        <span class="notification-text">Call John Doe</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-handshake-o text-primary fa-fw"></i>
-                        <span class="notification-text">Meeting Alisa</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-exclamation-triangle text-danger fa-fw"></i>
-                        <span class="notification-text">Server space almost full</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fa fa-bell text-warning fa-fw"></i>
-                        <span class="notification-text">Payment Due</span>
-                    </a>
-                </div>
-            </li>
             <li class="nav-item nav-profile">
-                <a class="nav-link" href="#">
-                    <img src="assets/images/faces/face6.jpg" /> Profile
-                    <i class="fa fa-angle-down text-primary ml-1"></i>
+                <a *ngIf="!isLogin" class="nav-link" [routerLink]="['/securehome/logout']">
+                    Logout
+                </a>
+                <a *ngIf="isLogin" class="nav-link" [routerLink]="['/home/login']">
+                    Login
                 </a>
             </li>
         </ul>

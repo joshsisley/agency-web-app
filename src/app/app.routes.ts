@@ -19,7 +19,7 @@ import { FirstCampaignComponent } from "./secure/setup/components/campaign/campa
 const homeRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/home/login',
         pathMatch: 'full'
     },
     {

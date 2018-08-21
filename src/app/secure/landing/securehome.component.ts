@@ -14,7 +14,7 @@ import { UserService } from "../../service/user.service";
 export class SecureHomeComponent implements OnInit, LoggedInCallback {
 
     loading:boolean = true;
-    setupFlow:boolean = false;
+    setupFlow:string = 'completed';
 
     constructor(public router: Router, 
         public userLoginService: UserLoginService, 
@@ -40,15 +40,16 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
                     console.log('successfully receives the org');
                     console.log(org);
                     if (org["onboardingComplete"] && org["onboardingComplete"] === 'completed') {
+                        this.setupFlow = 'completed';
                         this.router.navigate(['/securehome'])
                         this.loading = false;
                     } else if (org["onboardingComplete"] && org["onboardingComplete"] === 'campaign') {
                         console.log('it is set to campaign');
-                        this.setupFlow = true;
+                        this.setupFlow = 'campaign';
                         this.router.navigate(['/securehome/setup/campaign'])
                         this.loading = false;
                     } else {
-                        this.setupFlow = true;
+                        this.setupFlow = 'agency';
                         this.router.navigate(['/securehome/setup'])
                         this.loading = false;
                     }

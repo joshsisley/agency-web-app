@@ -6,8 +6,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   public samplePagesCollapsed = true;
-  @Input() setupFlow:boolean = false;
-  
+  @Input() setupFlow:string;
+
   constructor() { }
 
   ngOnInit() {

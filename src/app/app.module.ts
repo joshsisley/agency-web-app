@@ -30,6 +30,7 @@ import { AgencyComponent } from './secure/setup/components/agency/agency.compone
 import { FirstCampaignComponent } from './secure/setup/components/campaign/campaign.component';
 import { NavbarComponent } from "./secure/navbar/navbar.component";
 import { SidebarComponent } from "./secure/sidebar/sidebar.component";
+import { CampaignService } from "./service/campaign.service";
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { SidebarComponent } from "./secure/sidebar/sidebar.component";
         UserLoginService,
         UserParametersService,
         OrganizationService,
-        UserService
+        UserService,
+        CampaignService
     ],
     bootstrap: [AppComponent]
 })

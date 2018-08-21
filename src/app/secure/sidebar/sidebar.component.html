@@ -1,6 +1,6 @@
 <nav class="sidebar sidebar-fixed sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-    <div *ngIf="!setupFlow">
+    <div *ngIf="setupFlow === 'completed'">
       <li class="nav-item">
         <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
           <i class="flaticon-speedometer"></i>
@@ -21,11 +21,12 @@
       </li>
     </div>
     <!-- These are used for setup -->
-    <div *ngIf="setupFlow">
+    <div *ngIf="setupFlow !== 'completed'">
       <li class="nav-item">
         <a class="nav-link" routerLink="/forms" routerLinkActive="active">
           <i class="flaticon-interface-1"></i>
-          <span class="menu-title">Setup Agency</span>
+          <span class="menu-title">Setup Agency</span> 
+          <i *ngIf="setupFlow === 'campaign'" class="fa fa-check-circle-o text-success" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item">

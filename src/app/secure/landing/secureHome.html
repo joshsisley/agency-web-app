@@ -73,9 +73,21 @@
 <!-- /#wrapper -->
 
 <div class=" container-scroller">
-    <app-navbar *ngIf="!isLogin"></app-navbar>
+    <app-navbar [isLogin]="false" *ngIf="!isLogin"></app-navbar>
     <div [class.login-no-top-padding]="isLogin" class="container-fluid page-body-wrapper">
-        <div class="row row-offcanvas row-offcanvas-right">
+        <div *ngIf="loading" class="main-loader">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+            <h2>Thank you for using Agency Name. We appreciate it!</h2>
+            <p>- Your friends at Agency Name</p>
+        </div>
+        <!-- Need to add loading spinner here -->
+        <!-- Make it similar to the one used in brewbettr -->
+        <div class="row row-offcanvas row-offcanvas-right" *ngIf="!loading">
             <app-sidebar [setupFlow]="setupFlow"></app-sidebar>
             <div class="content-wrapper">
                 <router-outlet></router-outlet>
