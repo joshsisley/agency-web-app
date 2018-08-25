@@ -46,7 +46,7 @@ export class OrganizationService {
         console.log('here is the response from lambda');
         console.log(response);
         let org = JSON.parse(response["_body"]);
-        localStorage.setItem('orgInfo', JSON.stringify({'name':org.OrgName,'orgOnboardingStatus':org.OrgOnboardingComplete}))
+        localStorage.setItem('orgInfo', JSON.stringify({'name':org.OrgName, 'orgOwner': org.OrgOwner, 'orgOnboardingStatus':org.OrgOnboardingComplete}))
         res(org);
       })
       .catch(err => {

@@ -88,7 +88,7 @@
         <!-- Need to add loading spinner here -->
         <!-- Make it similar to the one used in brewbettr -->
         <div class="row row-offcanvas row-offcanvas-right" *ngIf="!loading">
-            <app-sidebar [setupFlow]="setupFlow"></app-sidebar>
+            <app-sidebar *ngIf="setupFlow !== 'completed'"></app-sidebar>
             <div class="content-wrapper">
                 <router-outlet></router-outlet>
             </div>

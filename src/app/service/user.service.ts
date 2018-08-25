@@ -10,11 +10,21 @@ import { resolve } from "dns";
 @Injectable()
 export class UserService {
 
+  user:any;
+
   constructor(public cognitoUtil: CognitoUtil, public http:Http){}
+
+  getCognitoUser() {
+    return this.cognitoUtil.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    return this.user;
+  }
   
   getUserByCognitoID() {
     var promise = new Promise((resolve, reject) => {
-      let cognitoUser = this.cognitoUtil.getCurrentUser();
+      let cognitoUser = this.getCognitoUser();
       console.log('got the current cognito user');
       console.log(cognitoUser);
 
@@ -31,6 +41,7 @@ export class UserService {
         console.log('here is the response from lambda');
         console.log(response['_body']);
         let user = JSON.parse(response['_body']);
+        this.user = user;
         resolve(user);
       })
       .catch(err => {

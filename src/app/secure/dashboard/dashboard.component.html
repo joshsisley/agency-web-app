@@ -1,4 +1,4 @@
-<h3 class="page-title">Dashboard</h3>
+<!-- <h3 class="page-title">Dashboard</h3>
 <div class="row">
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
         <div class="card card-statistics">
@@ -332,4 +332,21 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+<nav style="margin-top: -1rem; margin-left: -260px;" class="sidebar sidebar-fixed sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" (click)="setSelectedTab('overview')" routerLinkActive="active">
+            <i class="flaticon-speedometer"></i>
+            <span class="menu-title">Overview</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="setSelectedTab('campaigns')" routerLinkActive="active">
+            <i class="flaticon-paper"></i>
+            <span class="menu-title">Campaigns</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<campaigns *ngIf="selectedTab == 'campaigns'" [campaigns]="campaigns"></campaigns>
