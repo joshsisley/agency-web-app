@@ -59,7 +59,7 @@ export class CampaignService {
           .toPromise()
           .then(response => {
             let campaignArray = [];
-            let campaignObj = JSON.parse(response._body);
+            let campaignObj = JSON.parse(response['_body']);
             let campaigns = campaignObj.Campaign;
             for (var x in campaigns) {
               campaignArray.push(this.formatCampaign(campaigns[x]));

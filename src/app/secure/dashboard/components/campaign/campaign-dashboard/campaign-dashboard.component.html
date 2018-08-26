@@ -1,0 +1,25 @@
+<div class="row mb-2">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <ngb-tabset>
+          <ngb-tab title="Campaign Info">
+            <ng-template ngbTabContent>
+              <campaign-edit [selectedCampaign]="selectedCampaign"></campaign-edit>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Keywords">
+            <ng-template ngbTabContent>
+              <keywords></keywords>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Location Profile">
+            <ng-template ngbTabContent>
+              <location-profile></location-profile>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>

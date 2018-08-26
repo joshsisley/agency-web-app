@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Campaign } from "../../../../models/campaign";
+import { Campaign } from "../../../../../models/campaign";
 import {Router} from "@angular/router";
-import { CampaignService } from '../../../../service/campaign.service';
+import { CampaignService } from '../../../../../service/campaign.service';
 
 @Component({
   selector: 'campaign-create',

@@ -47,7 +47,7 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
                 this.orgService.getOrgById(user["Org"]).then((org) => {
                     console.log('successfully receives the org');
                     console.log(org);
-                    if (user.CognitoID === org.owner) {
+                    if (user['CognitoID'] === org['owner']) {
                         localStorage.setItem('orgOwner', 'true');
                         // Check the org setup flow since user is the owner
                         if (org["onboardingComplete"] && org["onboardingComplete"] === 'completed') {

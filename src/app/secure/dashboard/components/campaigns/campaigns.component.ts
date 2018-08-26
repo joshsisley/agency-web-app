@@ -12,6 +12,7 @@ export class CampaignsComponent implements OnInit {
   showCreateCampaign:boolean = false;
   showEditCampaign:boolean = false;
   selectedCampaign:any;
+  campaignStep:string = 'campaigns';
   updateDashboardCampaignList:EventEmitter<string> = new EventEmitter();
 
   constructor() { }
@@ -21,7 +22,12 @@ export class CampaignsComponent implements OnInit {
 
   editCampaign(campaign) {
     this.selectedCampaign = campaign;
-    this.showEditCampaign = true;
+    this.campaignStep = 'edit';
+  }
+
+  manageCampaign(campaign) {
+    this.selectedCampaign = campaign;
+    this.campaignStep = 'dashboard';
   }
 
   updateCampaignList(event) {
@@ -31,8 +37,7 @@ export class CampaignsComponent implements OnInit {
   }
 
   backToCampaigns() {
-    this.showCreateCampaign = false;
-    this.showEditCampaign = false;
+    this.campaignStep = 'campaigns';
   }
 
 }

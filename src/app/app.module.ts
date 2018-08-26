@@ -31,9 +31,13 @@ import { FirstCampaignComponent } from './secure/setup/components/campaign/campa
 import { NavbarComponent } from "./secure/navbar/navbar.component";
 import { SidebarComponent } from "./secure/sidebar/sidebar.component";
 import { CampaignService } from "./service/campaign.service";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CampaignsComponent } from './secure/dashboard/components/campaigns/campaigns.component';
-import { CampaignCreateComponent } from './secure/dashboard/components/campaign-create/campaign-create.component';
-import { CampaignEditComponent } from './secure/dashboard/components/campaign-edit/campaign-edit.component';
+import { CampaignCreateComponent } from './secure/dashboard/components/campaign/campaign-create/campaign-create.component';
+import { CampaignEditComponent } from './secure/dashboard/components/campaign/campaign-edit/campaign-edit.component';
+import { CampaignDashboardComponent } from './secure/dashboard/components/campaign/campaign-dashboard/campaign-dashboard.component';
+import { KeywordsComponent } from './secure/dashboard/components/campaign/keywords/keywords.component';
+import { LocationProfileComponent } from './secure/dashboard/components/campaign/location-profile/location-profile.component';
 
 
 @NgModule({
@@ -63,13 +67,17 @@ import { CampaignEditComponent } from './secure/dashboard/components/campaign-ed
         SidebarComponent,
         CampaignsComponent,
         CampaignCreateComponent,
-        CampaignEditComponent
+        CampaignEditComponent,
+        CampaignDashboardComponent,
+        KeywordsComponent,
+        LocationProfileComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        routing
+        routing,
+        NgbModule.forRoot()
     ],
     providers: [
         CognitoUtil,
