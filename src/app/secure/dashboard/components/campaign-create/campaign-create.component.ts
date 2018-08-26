@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Campaign } from "../../../../models/campaign";
+import {Router} from "@angular/router";
+import { CampaignService } from '../../../../service/campaign.service';
 
 @Component({
   selector: 'campaign-create',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampaignCreateComponent implements OnInit {
 
-  constructor() { }
+  campaign:any = new Campaign();
+  @Output() updateCampaigns:EventEmitter<Object> = new EventEmitter();
+
+  constructor(private campaignService: CampaignService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  saveCampaign() {
+    this.campaignService.createCampaign(this.campaign).then((res) => {
+      console.log(res);
+      this.updateCampaigns.emit(this.campaign)
+    });
   }
 
 }

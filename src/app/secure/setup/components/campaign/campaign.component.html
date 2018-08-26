@@ -1,86 +1,113 @@
-<h3 class="page-title">First Campaign Setup</h3>
 <div class="row mb-2">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Campaign Information</h5>
-        <form #campaignForm="ngForm">
-          <div class="row">
-            <div class="form-group col-md-6 col-sm-12">
-              <label for="inputName">Name</label>
-              <input type="text" [(ngModel)]="campaign.name" [ngModelOptions]="{standalone: true}" class="form-control" id="inputName" aria-describedby="campaignName" placeholder="Enter name">
-              <small id="emailHelp" class="form-text text-muted">Enter the name that will be used for the campaign.</small>
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Campaign Information</h5>
+          <form #campaignForm="ngForm">
+            <div class="row mt-4">
+              <div class="form-group col-md-6 col-sm-12">
+                <label for="inputName">Name</label>
+                <input type="text" [(ngModel)]="campaign.CampName" [ngModelOptions]="{standalone: true}" class="form-control" id="inputName" aria-describedby="campaignName" placeholder="Enter name">
+                <small id="emailHelp" class="form-text text-muted">Enter the name of the site or business.</small>
+              </div>
+              <div class="form-group col-md-6 col-sm-12">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" [(ngModel)]="campaign.CampPhone" [ngModelOptions]="{standalone: true}" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Enter phone number">
+                <small id="emailHelp" class="form-text text-muted">Enter the main phone number.</small>
+              </div>
             </div>
-            <div class="form-group col-md-6 col-sm-12">
-              <label for="phoneNumber">Phone Number</label>
-              <input type="tel" [(ngModel)]="campaign.phoneNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="phoneNumber" aria-describedby="phoneNumber" placeholder="Enter phone number">
-              <small id="emailHelp" class="form-text text-muted">Enter an email address that will be used for support purposes.</small>
+            <div class="form-group mt-2">
+              <label for="websiteURL">Website URL</label>
+              <input type="text" [(ngModel)]="campaign.CampURL" [ngModelOptions]="{standalone: true}"  class="form-control" id="websiteURL" aria-describedby="websiteURL" placeholder="Enter website URL">
+              <small id="emailHelp" class="form-text text-muted">Enter the sites primary web address.</small>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="address1">Street Address 1</label>
-            <input type="text" [(ngModel)]="campaign.address1" [ngModelOptions]="{standalone: true}" class="form-control" id="address1" aria-describedby="address1" placeholder="Enter street address">
-            <small id="emailHelp" class="form-text text-muted">Street address, P.O. box.</small>
-          </div>
-          <div class="form-group">
-            <label for="address2">Street Address 2</label>
-            <input type="text" [(ngModel)]="campaign.address2" [ngModelOptions]="{standalone: true}" class="form-control" id="address2" aria-describedby="address2" placeholder="Enter street address">
-            <small id="emailHelp" class="form-text text-muted">Apartment, suite, unit, building, floor, etc.</small>
-          </div>
-          <div class="row">
-              <div class="form-group col-md-4 col-sm-12">
-                <label for="city">City</label>
-                <input type="text" [(ngModel)]="campaign.city" [ngModelOptions]="{standalone: true}" class="form-control" id="city" aria-describedby="city" placeholder="City">
+            <div class="row mt-2">
+              <div class="form-group col-md-6 col-sm-12">
+                <label for="exampleSelect1">What is the type of your site?</label>
+                <select class="form-control" id="exampleSelect1">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
               </div>
-              <div class="form-group col-md-4 col-sm-12">
-                <label for="state">State</label>
-                <input type="text" [(ngModel)]="campaign.state" [ngModelOptions]="{standalone: true}" class="form-control" id="state" aria-describedby="state" placeholder="State">
+              <div class="form-group col-md-6 col-sm-12">
+                <label for="exampleSelect2">What is your site's industry or specialty?</label>
+                <select class="form-control" id="exampleSelect2">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
               </div>
-              <div class="form-group col-md-4 col-sm-12">
-                <label for="zip">ZIP</label>
-                <input type="text" [(ngModel)]="campaign.zip" [ngModelOptions]="{standalone: true}" class="form-control" id="zip" aria-describedby="zip" placeholder="ZIP">
+            </div>
+            <div class="form-check mt-2">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input">
+                  Is your site locally focused?
+                </label>
               </div>
-          </div>
-          <div class="form-group">
-            <label for="websiteURL">Website URL</label>
-            <input type="text" [(ngModel)]="campaign.url" [ngModelOptions]="{standalone: true}"  class="form-control" id="websiteURL" aria-describedby="websiteURL" placeholder="Enter website URL">
-            <small id="emailHelp" class="form-text text-muted">Enter the url for the website.</small>
-          </div>
-          <!-- <div class="form-group">
-            <label for="exampleSelect1">Example select</label>
-            <select class="form-control" id="exampleSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                          </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleSelect2">Example multiple select</label>
-            <select multiple class="form-control" id="exampleSelect2">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                          </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleTextarea">Example textarea</label>
-            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-          </div> -->
-          <!-- <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-            <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-          </div> -->
-          <div class="mt-4">
-              <button type="submit" (click)="saveCampaign()" class="btn btn-primary">Save</button>
-          </div>
-          <!-- <button type="submit" class="btn btn-success">Next</button> -->
-        </form>
+            <div class="form-group mt-4">
+              <label for="address1">Street Address 1</label>
+              <input type="text" [(ngModel)]="campaign.CampAddress1" [ngModelOptions]="{standalone: true}" class="form-control" id="address1" aria-describedby="address1" placeholder="Enter street address">
+              <small id="emailHelp" class="form-text text-muted">Street address, P.O. box.</small>
+            </div>
+            <div class="form-group">
+              <label for="address2">Street Address 2</label>
+              <input type="text" [(ngModel)]="campaign.CampAddress2" [ngModelOptions]="{standalone: true}" class="form-control" id="address2" aria-describedby="address2" placeholder="Enter street address">
+              <small id="emailHelp" class="form-text text-muted">Apartment, suite, unit, building, floor, etc.</small>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4 col-sm-12">
+                  <label for="city">City</label>
+                  <input type="text" [(ngModel)]="campaign.CampCity" [ngModelOptions]="{standalone: true}" class="form-control" id="city" aria-describedby="city" placeholder="City">
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                  <label for="state">State</label>
+                  <input type="text" [(ngModel)]="campaign.CampState" [ngModelOptions]="{standalone: true}" class="form-control" id="state" aria-describedby="state" placeholder="State">
+                </div>
+                <div class="form-group col-md-4 col-sm-12">
+                  <label for="zip">ZIP</label>
+                  <input type="text" [(ngModel)]="campaign.CampPostal" [ngModelOptions]="{standalone: true}" class="form-control" id="zip" aria-describedby="zip" placeholder="ZIP">
+                </div>
+            </div>
+            <!-- <div class="form-group">
+              <label for="exampleSelect1">Example select</label>
+              <select class="form-control" id="exampleSelect1">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleSelect2">Example multiple select</label>
+              <select multiple class="form-control" id="exampleSelect2">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleTextarea">Example textarea</label>
+              <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+            </div> -->
+            <!-- <div class="form-group">
+              <label for="exampleInputFile">File input</label>
+              <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+              <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+            </div> -->
+            <div class="mt-4">
+                <button type="submit" (click)="saveCampaign()" class="btn btn-primary">Save</button>
+            </div>
+            <!-- <button type="submit" class="btn btn-success">Next</button> -->
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>

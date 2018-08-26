@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'campaigns',
@@ -8,9 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CampaignsComponent implements OnInit {
 
   @Input() campaigns:any;
+  @Input() loading:boolean;
   showCreateCampaign:boolean = false;
   showEditCampaign:boolean = false;
   selectedCampaign:any;
+  updateDashboardCampaignList:EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
@@ -20,6 +22,17 @@ export class CampaignsComponent implements OnInit {
   editCampaign(campaign) {
     this.selectedCampaign = campaign;
     this.showEditCampaign = true;
+  }
+
+  updateCampaignList(event) {
+    console.log('this gets called to update the list');
+    this.campaigns.push(event);
+    this.backToCampaigns();
+  }
+
+  backToCampaigns() {
+    this.showCreateCampaign = false;
+    this.showEditCampaign = false;
   }
 
 }

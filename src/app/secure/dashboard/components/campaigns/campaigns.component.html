@@ -1,5 +1,12 @@
-<h3 class="page-title">Campaigns <span *ngIf="showCreateCampaign">- Create Campaign</span><span *ngIf="showEditCampaign">- Edit Campaign</span></h3>
-<div *ngIf="!showCreateCampaign && !showEditCampaign" class="row mb-2">
+<div class="row">
+    <h3 class="page-title col-sm-12 col-md-9">Campaigns <span *ngIf="showCreateCampaign">- Create Campaign</span><span *ngIf="showEditCampaign">- Edit Campaign</span></h3>
+    <div class="col-md-3 col-sm-12">
+        <button *ngIf="!showCreateCampaign && !showEditCampaign" class="btn btn-success btn-sm float-right" (click)="showCreateCampaign = true">Create Campaign</button>
+        <button *ngIf="showCreateCampaign || showEditCampaign" class="btn btn-default btn-sm float-right" (click)="backToCampaigns()">Back</button>
+    </div>
+  </div>
+
+<div *ngIf="!showCreateCampaign && !showEditCampaign && !loading" class="row mb-2">
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
@@ -22,10 +29,10 @@
             </thead>
             <tbody>
               <tr *ngFor="let campaign of campaigns" class="">
-                <td>{{campaign.name}}</td>
-                <td>{{campaign.url}}</td>
-                <td>{{campaign.phoneNumber}}</td>
-                <td>{{campaign.address1}} {{campaign.city}}, {{campaign.state}}</td>
+                <td>{{campaign.CampName}}</td>
+                <td>{{campaign.CampURL}}</td>
+                <td>{{campaign.CampPhone}}</td>
+                <td>{{campaign.CampAddress1}} {{campaign.CampCity}}, {{campaign.CampState}}</td>
                 <td><a (click)="editCampaign(campaign)" class="btn btn-primary btn-sm">Manage</a></td>
               </tr>
             </tbody>
@@ -35,5 +42,5 @@
     </div>
   </div>
 </div>
-<campaign-create *ngIf="showCreateCampaign"></campaign-create>
+<campaign-create *ngIf="showCreateCampaign" (updateCampaigns)="updateCampaignList($event)"></campaign-create>
 <campaign-edit [selectedCampaign]="selectedCampaign" *ngIf="showEditCampaign"></campaign-edit>

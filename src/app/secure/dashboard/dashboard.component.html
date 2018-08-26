@@ -335,12 +335,12 @@
 </div> -->
 <nav style="margin-top: -1rem; margin-left: -260px;" class="sidebar sidebar-fixed sidebar-offcanvas" id="sidebar">
     <ul class="nav">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" (click)="setSelectedTab('overview')" routerLinkActive="active">
             <i class="flaticon-speedometer"></i>
             <span class="menu-title">Overview</span>
             </a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" (click)="setSelectedTab('campaigns')" routerLinkActive="active">
             <i class="flaticon-paper"></i>
@@ -349,4 +349,4 @@
         </li>
     </ul>
 </nav>
-<campaigns *ngIf="selectedTab == 'campaigns'" [campaigns]="campaigns"></campaigns>
+<campaigns *ngIf="selectedTab == 'campaigns'" [loading]="loading" [campaigns]="campaigns"></campaigns>

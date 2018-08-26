@@ -7,6 +7,7 @@ import * as AWS from "aws-sdk";
 import * as awsservice from "aws-sdk/lib/service";
 import { CognitoCallback, CognitoUtil, LoggedInCallback } from "./cognito.service";
 import { OrganizationService } from "./organization.service";
+import { Campaign } from "../models/campaign";
 
 @Injectable()
 export class CampaignService {
@@ -20,41 +21,7 @@ export class CampaignService {
     let tempQueryString = `OrgID=${orgId}&CampStatus=active`;
     for (var key in campObj) {
       console.log(key);
-      switch (key) {
-        case 'url':
-          tempQueryString += `&CampURL=${campObj[key]}`;
-          break;
-
-        case 'name':
-          tempQueryString += `&CampName=${campObj[key]}`;
-          break;
-
-        case 'address1':
-          tempQueryString += `&CampAddress1=${campObj[key]}`;
-          break;
-
-        case 'address2':
-          tempQueryString += `&CampAddress2=${campObj[key]}`;
-          break;
-
-        case 'city':
-          tempQueryString += `&CampCity=${campObj[key]}`;
-          break;
-
-        case 'state':
-          tempQueryString += `&CampState=${campObj[key]}`;
-          break;
-
-        case 'zip':
-          tempQueryString += `&CampPostal=${campObj[key]}`;
-          break;
-
-        case 'phoneNumber':
-          tempQueryString += `&CampPhone=${campObj[key]}`
-      
-        default:
-          break;
-      }
+      tempQueryString += `&${key}=${campObj[key]}`;
     }
     return tempQueryString;
   }
@@ -67,17 +34,48 @@ export class CampaignService {
     }
   }
 
+  formatCampaign(awsCampaign) {
+    let campaign = new Campaign();
+    for (var key in awsCampaign) {
+      campaign[key] = awsCampaign[key];
+    }
+    return campaign;
+  }
+
   getCampaignsByOrgId(orgId) {
     console.log('get campaigns by ord id is called');
     console.log(orgId);
     // If the campaigns don't exist, go fetch them
-    if (!this.campaigns) {
-      // make call to get campaigns from aws by orgId
-      // save campaigns to the service
-
-    } else {
-      return this.campaigns;
-    }
+    var promise = new Promise((res,rej) => {
+      if (!this.campaigns || this.campaigns.length == 0) {
+        // make call to get campaigns from aws by orgId
+        // save campaigns to the service
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+    
+          let queryString = `?OrgID=${orgId}`;
+    
+          this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign${queryString}`, {headers: headers})
+          .toPromise()
+          .then(response => {
+            let campaignArray = [];
+            let campaignObj = JSON.parse(response._body);
+            let campaigns = campaignObj.Campaign;
+            for (var x in campaigns) {
+              campaignArray.push(this.formatCampaign(campaigns[x]));
+            }
+            res(campaignArray);
+          })
+          .catch(err => {
+            console.log('here is the error');
+            console.log(err);
+            rej(err);
+          })
+      } else {
+        res(this.campaigns);
+      }
+    });
+    return promise;
   }
 
   deleteCampaign(campId) {
