@@ -1,10 +1,13 @@
 <div class="row">
-    <h3 class="page-title col-sm-12 col-md-9">Campaigns <span *ngIf="campaignStep == 'create'">- Create Campaign</span><span *ngIf="campaignStep == 'dashboard'">- Dashboard</span></h3>
-    <div class="col-md-3 col-sm-12">
-        <button *ngIf="campaignStep == 'campaigns'" class="btn btn-success btn-sm float-right" (click)="campaignStep = 'create'">Create Campaign</button>
-        <button *ngIf="campaignStep !== 'campaigns'" class="btn btn-default btn-sm float-right" (click)="backToCampaigns()">Back</button>
-    </div>
+  <h3 class="page-title col-sm-12 col-md-6">Campaigns <span *ngIf="campaignStep == 'create'">- Create Campaign</span><span *ngIf="campaignStep == 'dashboard'">- Dashboard</span></h3>
+  <div *ngIf="campaignStep === 'campaigns'" class="col-sm-12 col-md-4">
+      <input type="text" [(ngModel)]="campaignSearchTerm" [ngModelOptions]="{standalone: true}" class="form-control" id="campaignSearchTerm" aria-describedby="campaignSearchTerm" placeholder="Search for campaign">
   </div>
+  <div class="col-md-2 col-sm-12" [class.offset-md-4]="campaignStep !== 'campaigns'">
+      <button *ngIf="campaignStep == 'campaigns'" class="btn btn-success btn-sm float-right" (click)="campaignStep = 'create'">Create Campaign</button>
+      <button *ngIf="campaignStep !== 'campaigns'" class="btn btn-default btn-sm float-right" (click)="backToCampaigns()">Back</button>
+  </div>
+</div>
 
 <div *ngIf="campaignStep == 'campaigns' && !loading" class="row mb-2">
   <div class="col-lg-12">

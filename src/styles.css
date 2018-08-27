@@ -7232,3 +7232,26 @@ body {
     -webkit-transform: perspective(140px) rotateY(180deg);
     transform: perspective(140px) rotateY(180deg);
     opacity: 0; } }
+
+.input-list-container {
+  position: absolute;
+  bottom: -38px;
+  left: 16px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 1% 0% 0%;
+  text-align: center;
+  width: 45%;
+  z-index: 999; }
+  .input-list-container ul {
+    padding: 0; }
+    .input-list-container ul li a {
+      color: #007bff !important;
+      text-decoration: none;
+      background-color: transparent;
+      -webkit-text-decoration-skip: objects;
+      cursor: pointer; }
+      .input-list-container ul li a:hover {
+        color: #0056b3 !important;
+        text-decoration: underline !important; }

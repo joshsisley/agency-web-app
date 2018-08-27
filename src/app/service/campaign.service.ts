@@ -8,6 +8,7 @@ import * as awsservice from "aws-sdk/lib/service";
 import { CognitoCallback, CognitoUtil, LoggedInCallback } from "./cognito.service";
 import { OrganizationService } from "./organization.service";
 import { Campaign } from "../models/campaign";
+import { resolve } from "../../../node_modules/@types/q";
 
 @Injectable()
 export class CampaignService {
@@ -121,6 +122,44 @@ export class CampaignService {
         rej(err);
       })
     });
+    return promise;
+  }
+
+  private formatPlacesResult(body) {
+    let places = JSON.parse(body);
+    console.log(places);
+    let candidates = places.candidates;
+    let placesList = [];
+    for (var x in candidates) {
+      let place = {
+        'name': candidates[x].name,
+        'address': candidates[x].formatted_address,
+        'rating': candidates[x].rating,
+      }
+      placesList.push(place);
+    }
+    return placesList;
+  }
+
+  findLocalBusiness(searchTerm) {
+    // serialize the string thats using in the url
+    // make http get request to url
+    var promise = new Promise((resolve,reject) => {
+      let encodedSearch = encodeURIComponent(searchTerm);
+      console.log(encodedSearch);
+      let url = `${environment.googlePlacesURL}?input=${encodedSearch}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${environment.googlePlacesAPIKey}`;
+      this.http.get(url)
+      .toPromise()
+      .then(response => {
+        console.log('here is the response from google');
+        console.log(response);
+        let resultList = this.formatPlacesResult(response['_body']);
+        resolve(resultList);
+      })
+      .catch((e) => {
+        reject(e);
+      })
+    })
     return promise;
   }
 

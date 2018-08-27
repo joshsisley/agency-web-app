@@ -13,6 +13,9 @@ export const environment = {
 
     ddbTableName: 'LoginTrail',
 
+    googlePlacesURL: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json',
+    googlePlacesAPIKey: 'AIzaSyC_BAHlcNPJnAnhWb8Lsrzrk1DWMPqc6EY',
+
     frontEndApiUrl: 'https://qcj5gnlj4h.execute-api.us-east-2.amazonaws.com/v1/frontendapi',
 
     cognito_idp_endpoint: '',
