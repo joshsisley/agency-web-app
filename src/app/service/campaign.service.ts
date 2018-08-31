@@ -163,4 +163,45 @@ export class CampaignService {
     return promise;
   }
 
+  getRankedKeywords(targetName,campaign) {
+    var promise = new Promise((resolve, reject) => {
+      let orgId = this.orgService.getOrgId();
+      // make call to lambda function
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+      let queryString = `CampID=${orgId}&CampURL=${campaign.CampURL}&CampID=${campaign.CampID}&TargetName=${targetName}&SearchType=ranked`;
+    
+      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/keywords?${queryString}`, {headers: headers})
+      .toPromise()
+      .then(response => {
+        console.log(response);
+        let parsedResponse = JSON.parse(response["_body"])
+        console.log(parsedResponse);
+        if (parsedResponse.errorMessage) {
+          let errorResponse = {
+            "status": "error",
+            "error": {
+              "code": 503,
+              "message": parsedResponse.errorMessage
+            } 
+          }
+          resolve(errorResponse);
+        } else {
+          resolve(JSON.parse(parsedResponse));
+        }
+      })
+      .catch(err => {
+        console.log('here is the error');
+        console.log(err);
+        reject(err);
+      })
+    });
+    return promise;
+  }
+
+  getRelatedKeywords(keyword) {
+
+  }
+
 }

@@ -8,45 +8,35 @@
       <div *ngIf="showDropdown" class="input-list-container">
         <ul>
           <li *ngFor="let location of locationDropdownList">
-            <a (click)="getKeywords(location)">{{location.name}} {{location.address}}</a>
+            <button class="btn btn-link" (click)="getKeywords(location)" [disabled]="location.name == 'No Results Found'">{{location.name}} {{location.address}}</button>
           </li>
         </ul>
       </div>
     </div>
   </div>
-  <div *ngIf="selectedLocation" class="col-sm-12">
+  <div *ngIf="selectedLocation" class="col-sm-12 mt-4">
     <h5>Target Location: {{selectedLocation.name}} {{selectedLocation.address}}</h5>
   </div>
-  <div *ngIf="suggestedKeywords.length > 0" class="col-sm-12">
+  <div *ngIf="suggestedKeywords.length > 0" class="col-sm-12 mt-4">
     <h5 class="card-title mb-2">Keyword Suggestions</h5>
     <p>Select keywords from the suggestions below</p>
     <table class="table table-striped">
       <thead>
         <tr class="">
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Keyword</th>
+          <th>Searches</th>
+          <th>Position</th>
+          <th>Comp.</th>
+          <th>Score</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let keyword of suggestedKeywords">
           <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
+          <td>test</td>
+          <td>test</td>
           <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
+          <td>Test</td>
         </tr>
       </tbody>
     </table>
