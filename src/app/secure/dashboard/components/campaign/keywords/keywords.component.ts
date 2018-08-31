@@ -26,7 +26,7 @@ export class KeywordsComponent implements OnInit {
 
   ngOnInit() {
     this.searchTextChanged
-    .debounceTime(400)
+    .debounceTime(300)
     .distinctUntilChanged()
     .subscribe((search) => this.getGoogleLocations());
   }
