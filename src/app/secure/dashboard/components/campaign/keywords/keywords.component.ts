@@ -5,6 +5,7 @@ import "rxjs/add/operator/distinctUntilChanged";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/mergeMap";
 import { CampaignService } from '../../../../../service/campaign.service';
+import { LocalDataService } from '../../../../../service/local-data.service';
 
 @Component({
   selector: 'keywords',
@@ -22,7 +23,7 @@ export class KeywordsComponent implements OnInit {
   selectedLocation:any;
   showDropdown:boolean = false;
 
-  constructor(private campaignService:CampaignService) { }
+  constructor(private campaignService:CampaignService, private dataService: LocalDataService) { }
 
   ngOnInit() {
     this.searchTextChanged
@@ -52,41 +53,45 @@ export class KeywordsComponent implements OnInit {
     this.searchTextChanged.next($event.target.value);
   }
 
-  getKeywords(location) {
+  getKeywords(keyLocation) {
     this.showDropdown = false;
-    this.selectedLocation = location;
-    this.campaignService.getRankedKeywords(location, this.selectedCampaign).then((response) => {
-      console.log('here is the response to the UI');
-      console.log(response);
-      if (response["status"] == "error") {
-        console.log(`Error Code ${response["error"].code}: ${response["error"].message}`);
-        // TODO: Temp work around while figuring out the keywords
-        this.suggestedKeywords = [
-        {
-            "key": "serps rank checker",
-            "exact_domain": "dataforseo.com",
-            "country_code": "US",
-            "language": "en",
-            "position": 22,
-            "url": "https://dataforseo.com/apis/serp-api",
-            "relative_url": "/apis/serp-api",
-            "results_count": 65400,
-            "etv": 2,
-            "traffic_cost": 16.75442,
-            "competition": 0,
-            "cpc": 8.37721,
-            "date": "2018-03-16T00:00:00+00:00",
-            "extra": "",
-            "search_volume": 1000,
-            "spell": "",
-            "title": "SERP rank position checker API ⓴⓲ SERP analysis and keyword ...",
-            "snippet": "DataForSEO ➤➤➤ SERP API ➤➤➤ Google SERP Rankings Checker API ✓✓✓ Great Speed, Clear Stats, Simple Pricing. Try for free now!"
-        }]
-        console.log(this.suggestedKeywords);
-      } else {
-        this.suggestedKeywords = response['results'].ranked;
-      }
-    });
+    this.selectedLocation = keyLocation;
+    console.log(location.hostname);
+    if (location.hostname === 'localhost') {
+      this.suggestedKeywords = this.dataService.getRankedKeywords();
+    } else {
+      this.campaignService.getRankedKeywords(keyLocation, this.selectedCampaign).then((response) => {
+        if (response["status"] == "error") {
+          console.log(`Error Code ${response["error"].code}: ${response["error"].message}`);
+          // TODO: Temp work around while figuring out the keywords
+          this.suggestedKeywords = [
+          {
+              "key": "serps rank checker",
+              "exact_domain": "dataforseo.com",
+              "country_code": "US",
+              "language": "en",
+              "position": 22,
+              "url": "https://dataforseo.com/apis/serp-api",
+              "relative_url": "/apis/serp-api",
+              "results_count": 65400,
+              "etv": 2,
+              "traffic_cost": 16.75442,
+              "competition": 0,
+              "cpc": 8.37721,
+              "date": "2018-03-16T00:00:00+00:00",
+              "extra": "",
+              "search_volume": 1000,
+              "spell": "",
+              "title": "SERP rank position checker API ⓴⓲ SERP analysis and keyword ...",
+              "snippet": "DataForSEO ➤➤➤ SERP API ➤➤➤ Google SERP Rankings Checker API ✓✓✓ Great Speed, Clear Stats, Simple Pricing. Try for free now!"
+          }]
+        } else {
+          this.suggestedKeywords = response['results'][0].ranked;
+          console.log('here are the ranked keywords');
+          console.log(this.suggestedKeywords);
+        }
+      });
+    }
     // set the location
     // save to campaign?
     // call api to get the keywords passing in the location

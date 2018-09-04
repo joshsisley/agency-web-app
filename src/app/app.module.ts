@@ -38,6 +38,7 @@ import { CampaignEditComponent } from './secure/dashboard/components/campaign/ca
 import { CampaignDashboardComponent } from './secure/dashboard/components/campaign/campaign-dashboard/campaign-dashboard.component';
 import { KeywordsComponent } from './secure/dashboard/components/campaign/keywords/keywords.component';
 import { LocationProfileComponent } from './secure/dashboard/components/campaign/location-profile/location-profile.component';
+import { LocalDataService } from "./service/local-data.service";
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { LocationProfileComponent } from './secure/dashboard/components/campaign
         UserParametersService,
         OrganizationService,
         UserService,
-        CampaignService
+        CampaignService,
+        LocalDataService
     ],
     bootstrap: [AppComponent]
 })

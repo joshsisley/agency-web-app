@@ -9,6 +9,7 @@ import { CognitoCallback, CognitoUtil, LoggedInCallback } from "./cognito.servic
 import { OrganizationService } from "./organization.service";
 import { Campaign } from "../models/campaign";
 import { resolve } from "../../../node_modules/@types/q";
+import { LocalDataService } from "./local-data.service";
 
 @Injectable()
 export class CampaignService {
@@ -16,7 +17,10 @@ export class CampaignService {
   orgId:string;
   campaigns:any = [];
   
-  constructor(public cognitoUtil: CognitoUtil, public http: Http, public orgService: OrganizationService) {}
+  constructor(public cognitoUtil: CognitoUtil, 
+    public http: Http, 
+    public orgService: OrganizationService,
+    public dataService: LocalDataService) {}
 
   private buildQueryString(campObj, orgId) {
     let tempQueryString = `OrgID=${orgId}&CampStatus=active`;
