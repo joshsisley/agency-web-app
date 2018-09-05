@@ -6,6 +6,7 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/mergeMap";
 import { CampaignService } from '../../../../../service/campaign.service';
 import { LocalDataService } from '../../../../../service/local-data.service';
+import { _ } from 'underscore';
 
 @Component({
   selector: 'keywords',
@@ -20,6 +21,8 @@ export class KeywordsComponent implements OnInit {
   targetLocation:string;
   locationDropdownList:any = [];
   suggestedKeywords:any = [];
+  selectedKeywords:any = [];
+  otherKeywords:string;
   selectedLocation:any;
   showDropdown:boolean = false;
 
@@ -97,6 +100,33 @@ export class KeywordsComponent implements OnInit {
     // call api to get the keywords passing in the location
     // display keywords in table below
     // return ['pizza','grafton','wisconsin'];
+  }
+
+  handleSelected(keyword) {
+    let index = this.selectedKeywords.indexOf(keyword.key);
+    if (index > -1) {
+      this.selectedKeywords.splice(index, 1);
+    } else {
+      this.selectedKeywords.push(keyword.key);
+    }
+  }
+
+  parseOtherKeywords() {
+    // Format the string of other keywords into an array and add to the end of the selected keywords
+    if (this.otherKeywords) {
+      let keywordArray = this.otherKeywords.split(',');
+      for (var x in keywordArray) {
+        console.log(keywordArray[x].trim());
+        this.selectedKeywords.push(keywordArray[x].trim());
+      }
+    }
+  }
+
+  save() {
+    // save the selected location and list of keywords to the campaign.
+    this.parseOtherKeywords();
+    console.log('selected keywords');
+    console.log(this.selectedKeywords);
   }
 
 }

@@ -23,20 +23,26 @@
     <table class="table table-striped">
       <thead>
         <tr class="">
+          <th></th>
           <th>Keyword</th>
           <th>Searches</th>
           <th>Position</th>
           <th>Comp.</th>
-          <th>Score</th>
+          <th>CPC</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let keyword of suggestedKeywords">
-          <th scope="row">1</th>
-          <td>test</td>
-          <td>test</td>
-          <td>@mdo</td>
-          <td>Test</td>
+          <td>
+            <div class="form-check">
+              <input class="form-check-input position-static" (click)="handleSelected(keyword)" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+            </div>
+          </td>
+          <td>{{keyword.key}}</td>
+          <td>{{keyword.search_volume}}</td>
+          <td>{{keyword.position}}</td>
+          <td>{{keyword.competition}}</td>
+          <td>{{keyword.cpc}}</td>
         </tr>
       </tbody>
     </table>
@@ -44,8 +50,11 @@
   <div class="col-sm-12 mt-5">
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Enter your own keyword here (Separate each with a comma)</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea class="form-control" [(ngModel)]="otherKeywords" id="exampleFormControlTextarea1" rows="3"></textarea>
       <small id="emailHelp" class="form-text text-muted">EX: seo software, website, San Francisco healthcare</small>
     </div>
+  </div>
+  <div class="col-sm-12 mt-4">
+      <button type="submit" (click)="save()" class="btn btn-primary">Save</button>
   </div>
 </div>
