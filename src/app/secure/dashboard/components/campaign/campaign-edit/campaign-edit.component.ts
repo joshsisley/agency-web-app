@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CampaignService } from '../../../../../service/campaign.service';
 
 @Component({
   selector: 'campaign-edit',
@@ -9,7 +10,7 @@ export class CampaignEditComponent implements OnInit {
 
   @Input() selectedCampaign:any;
 
-  constructor() { }
+  constructor(private campaignService: CampaignService) { }
 
   ngOnInit() {
   }
@@ -18,6 +19,7 @@ export class CampaignEditComponent implements OnInit {
     // take the selectedCampaign and call update
     console.log('here is the updated campaign');
     console.log(this.selectedCampaign);
+    this.campaignService.updateCampaign(this.selectedCampaign);
   }
 
 }

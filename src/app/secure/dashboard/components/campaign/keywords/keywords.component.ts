@@ -22,6 +22,7 @@ export class KeywordsComponent implements OnInit {
   locationDropdownList:any = [];
   suggestedKeywords:any = [];
   selectedKeywords:any = [];
+  removedKeywords:any = [];
   otherKeywords:string;
   selectedLocation:any;
   showDropdown:boolean = false;
@@ -29,6 +30,14 @@ export class KeywordsComponent implements OnInit {
   constructor(private campaignService:CampaignService, private dataService: LocalDataService) { }
 
   ngOnInit() {
+    // Set the target location if it exists
+    if (this.selectedCampaign.CampTargetLocationName || this.selectedCampaign.CampTargetLocationAddress) {
+      this.selectedLocation = {
+        name: this.selectedCampaign.CampTargetLocationName,
+        address: this.selectedCampaign.CampTargetLocationAddress
+      }
+    }
+
     this.searchTextChanged
     .debounceTime(300)
     .distinctUntilChanged()
@@ -36,9 +45,7 @@ export class KeywordsComponent implements OnInit {
   }
 
   getGoogleLocations() {
-    console.log('this does get called');
     this.campaignService.findLocalBusiness(this.targetLocation).then((businessList:Array<object>) => {
-      console.log(businessList);
       if (businessList.length > 0) {
         this.locationDropdownList = businessList;
       } else {
@@ -52,14 +59,12 @@ export class KeywordsComponent implements OnInit {
   }
 
   search($event) {
-    console.log($event);
     this.searchTextChanged.next($event.target.value);
   }
 
   getKeywords(keyLocation) {
     this.showDropdown = false;
     this.selectedLocation = keyLocation;
-    console.log(location.hostname);
     if (location.hostname === 'localhost') {
       this.suggestedKeywords = this.dataService.getRankedKeywords();
     } else {
@@ -90,8 +95,6 @@ export class KeywordsComponent implements OnInit {
           }]
         } else {
           this.suggestedKeywords = response['results'][0].ranked;
-          console.log('here are the ranked keywords');
-          console.log(this.suggestedKeywords);
         }
       });
     }
@@ -125,8 +128,28 @@ export class KeywordsComponent implements OnInit {
   save() {
     // save the selected location and list of keywords to the campaign.
     this.parseOtherKeywords();
-    console.log('selected keywords');
-    console.log(this.selectedKeywords);
+    if (!this.selectedCampaign.CampKeywords) {
+      this.selectedCampaign.CampKeywords = this.selectedKeywords;
+    }
+    this.selectedCampaign.CampTargetLocationName = this.selectedLocation.name;
+    this.selectedCampaign.CampTargetLocationAddress = this.selectedLocation.address;
+    this.campaignService.updateCampaign(this.selectedCampaign).then((updatedCampaign) => {
+      this.selectedCampaign = updatedCampaign;
+    });
+  }
+
+  removeKeyword(keyword) {
+    // Show UI confirm to remove the keyword
+    // mark the keyword as removed and show msg for user to save changes
+    let index = this.selectedCampaign.CampKeywords.indexOf(keyword);
+    this.selectedCampaign.CampKeywords.splice(index, 1);
+    this.removedKeywords.push(keyword);
+  }
+
+  undoRemoveKeyword(keyword) {
+    this.selectedCampaign.CampKeywords.push(keyword);
+    this.removedKeywords = _.without(this.removedKeywords, keyword);
+
   }
 
 }

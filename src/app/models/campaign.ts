@@ -10,6 +10,8 @@ export class Campaign {
   "CampFax\t": string;
   "CampHours": string;
   "CampID": string;
+  "CampTargetLocationName": string;
+  "CampTargetLocationAddress": string;
   "CampKeywords": Array<string>;
   "CampName": string;
   "CampNumEmployees": string;

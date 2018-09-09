@@ -1,5 +1,5 @@
 <div class="row mb-2 mt-4">
-  <div class="col-lg-12">
+  <div *ngIf="!selectedLocation" class="col-lg-12">
     <div class="row">
       <div class="form-group col-md-6 col-sm-12">
         <label for="targetLocation">Enter campaign's target location</label>
@@ -47,6 +47,42 @@
       </tbody>
     </table>
   </div>
+  <div *ngIf="suggestedKeywords.length === 0 && selectedLocation" class="col-sm-6 mt-4">
+    <h5 class="card-title mb-2">Chosen Keywords</h5>
+    <p>Manage chosen keywords below</p>
+    <table class="table table-striped">
+      <thead>
+        <tr class="">
+          <th>Keyword</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let keyword of selectedCampaign.CampKeywords">
+          <td>{{keyword}}</td>
+          <td><a (click)="removeKeyword(keyword)" style="color: white;" class="btn btn-danger btn-sm">Remove</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="removedKeywords.length > 0 && selectedLocation" class="col-sm-6 mt-4">
+      <h5 class="card-title mb-2">Removed Keywords</h5>
+      <p>Keywords to be removed on save</p>
+      <table class="table table-striped">
+        <thead>
+          <tr class="">
+            <th>Keyword</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let keyword of removedKeywords">
+            <td>{{keyword}}</td>
+            <td><a (click)="undoRemoveKeyword(keyword)" style="color: white;" class="btn btn-primary btn-sm">Undo</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   <div class="col-sm-12 mt-5">
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Enter your own keyword here (Separate each with a comma)</label>
