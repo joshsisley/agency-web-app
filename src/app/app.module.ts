@@ -39,6 +39,7 @@ import { CampaignDashboardComponent } from './secure/dashboard/components/campai
 import { KeywordsComponent } from './secure/dashboard/components/campaign/keywords/keywords.component';
 import { LocationProfileComponent } from './secure/dashboard/components/campaign/location-profile/location-profile.component';
 import { LocalDataService } from "./service/local-data.service";
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { LocalDataService } from "./service/local-data.service";
         BrowserModule,
         FormsModule,
         HttpModule,
+        TextMaskModule,
         routing,
         NgbModule.forRoot()
     ],

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CampaignService } from '../../../../../service/campaign.service';
 
 @Component({
   selector: 'location-profile',
@@ -7,9 +8,73 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationProfileComponent implements OnInit {
 
-  constructor() { }
+  @Input() selectedCampaign:any;
+  hoursMap:any = [
+    {
+      name: 'Sunday',
+      status: 'Closed',
+      openTime: '',
+      closeTime: ''
+    },
+    {
+      name: 'Monday',
+      status: 'Closed',
+      openTime: '',
+      closeTime: ''
+    },
+    {
+      name: 'Tuesday',
+      status: 'Closed',
+      openTime: '',
+      closeTime: ''
+    },
+    {
+      name: 'Wednesday',
+      status: 'Closed',
+      openTime: '',
+      closeTime: ''
+    },
+    {
+      name: 'Thursday',
+      status: 'Closed',
+      openTime: '',
+      closeTime: ''
+    },
+    {
+      name: 'Friday',
+      status: 'Closed',
+      openTime: '',
+      closeTime: ''
+    },
+    {
+      name: 'Saturday',
+      status: 'Closed',
+      openTime: '',
+      closeTime: ''
+    }
+  ]
+
+  timeMask:any = [/[0-1]/, /(1[0-2]|0?[1-9])/,':',/[0-5]/,/[0-9]/, ' ',/[AaPp]/,/[Mm]/]
+
+  constructor(private campaignService: CampaignService) { }
 
   ngOnInit() {
+    console.log(this.selectedCampaign);
+    console.log(this.selectedCampaign.CampHours);
+    if (this.selectedCampaign.CampHours && this.selectedCampaign.CampHours != 'null') {
+      console.log('it still somehow gets inside')
+      this.hoursMap = this.selectedCampaign.CampHours;
+    }
+  }
+
+  saveCampaign() {
+    console.log('here are the times');
+    console.log(this.hoursMap);
+    this.selectedCampaign.CampHours = this.hoursMap;
+    this.campaignService.updateCampaign(this.selectedCampaign).then((camp) => {
+      console.log('here is the updated campaign');
+      console.log(camp);
+    })
   }
 
 }

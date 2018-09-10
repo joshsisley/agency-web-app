@@ -101,7 +101,7 @@ export class CampaignService {
       headers.append('Content-Type', 'application/json');
 
       let queryString = this.buildQueryString(campaignInfo, orgId);
-      this.http.put(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign/update?${queryString}`, campaignInfo, {headers: headers})
+      this.http.put(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign/update?${queryString}`, JSON.stringify(campaignInfo), {headers: headers})
       .toPromise()
       .then(response => {
         console.log('here is the response from lambda');

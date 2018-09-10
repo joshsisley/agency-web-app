@@ -38,6 +38,7 @@
     "@types/node": "^8.5.2",
     "@types/selenium-webdriver": "2.44.26",
     "amazon-cognito-identity-js": "1.29.0",
+    "angular2-text-mask": "^9.0.0",
     "aws-sdk": "2.67.0",
     "body-parser": "~1.15.1",
     "bootstrap": "^4.1.3",
