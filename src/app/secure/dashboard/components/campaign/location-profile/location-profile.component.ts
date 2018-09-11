@@ -9,6 +9,8 @@ import { CampaignService } from '../../../../../service/campaign.service';
 export class LocationProfileComponent implements OnInit {
 
   @Input() selectedCampaign:any;
+  success:boolean = false;
+  successMessage:string = '';
   hoursMap:any = [
     {
       name: 'Sunday',
@@ -74,6 +76,12 @@ export class LocationProfileComponent implements OnInit {
     this.campaignService.updateCampaign(this.selectedCampaign).then((camp) => {
       console.log('here is the updated campaign');
       console.log(camp);
+      this.successMessage = 'Successfully updated the campaign';
+      this.success = true;
+      setTimeout(() => {
+        this.success = false;
+        this.successMessage = '';
+      }, 1700)
     })
   }
 

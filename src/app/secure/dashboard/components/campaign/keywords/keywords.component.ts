@@ -19,6 +19,8 @@ export class KeywordsComponent implements OnInit {
   searchTextChanged = new Subject<string>();
   subscription:Observable<string>;
   targetLocation:string;
+  success:boolean = false;
+  successMessage:string = '';
   locationDropdownList:any = [];
   suggestedKeywords:any = [];
   selectedKeywords:any = [];
@@ -135,6 +137,12 @@ export class KeywordsComponent implements OnInit {
     this.selectedCampaign.CampTargetLocationAddress = this.selectedLocation.address;
     this.campaignService.updateCampaign(this.selectedCampaign).then((updatedCampaign) => {
       this.selectedCampaign = updatedCampaign;
+      this.successMessage = 'Successfully updated the campaign';
+      this.success = true;
+      setTimeout(() => {
+        this.success = false;
+        this.successMessage = '';
+      }, 1700)
     });
   }
 

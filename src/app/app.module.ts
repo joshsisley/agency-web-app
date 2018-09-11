@@ -40,6 +40,7 @@ import { KeywordsComponent } from './secure/dashboard/components/campaign/keywor
 import { LocationProfileComponent } from './secure/dashboard/components/campaign/location-profile/location-profile.component';
 import { LocalDataService } from "./service/local-data.service";
 import { TextMaskModule } from 'angular2-text-mask';
+import { SuccessAlertComponent } from './shared/success-alert/success-alert.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { TextMaskModule } from 'angular2-text-mask';
         CampaignEditComponent,
         CampaignDashboardComponent,
         KeywordsComponent,
-        LocationProfileComponent
+        LocationProfileComponent,
+        SuccessAlertComponent
     ],
     imports: [
         BrowserModule,

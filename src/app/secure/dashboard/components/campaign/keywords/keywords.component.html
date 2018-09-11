@@ -94,3 +94,4 @@
       <button type="submit" (click)="save()" class="btn btn-primary">Save</button>
   </div>
 </div>
+<success-alert *ngIf="success" [message]="successMessage"></success-alert>

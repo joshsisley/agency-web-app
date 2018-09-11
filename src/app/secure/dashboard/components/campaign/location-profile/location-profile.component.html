@@ -91,6 +91,7 @@
       <div class="mt-4">
           <button type="submit" (click)="saveCampaign()" class="btn btn-primary">Save</button>
       </div>
+      <success-alert *ngIf="success" [message]="successMessage"></success-alert>
       <!-- <button type="submit" class="btn btn-success">Next</button> -->
     </form>
   </div>
