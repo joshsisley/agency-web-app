@@ -43,8 +43,9 @@ export class CampaignService {
     let campaign = new Campaign();
     for (var key in awsCampaign) {
       campaign[key] = awsCampaign[key];
-      if (key === 'CampKeywords') {
-        campaign[key] = awsCampaign[key].split(",");
+      if (key === 'CampHours') {
+        let hoursArray = JSON.parse(awsCampaign[key]);
+        campaign[key] = hoursArray;
       }
     }
     return campaign;
@@ -101,15 +102,13 @@ export class CampaignService {
       headers.append('Content-Type', 'application/json');
 
       let queryString = this.buildQueryString(campaignInfo, orgId);
-      this.http.put(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign/update?${queryString}`, JSON.stringify(campaignInfo), {headers: headers})
+      this.http.put(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign/update`, JSON.stringify(campaignInfo), {headers: headers})
       .toPromise()
       .then(response => {
         console.log('here is the response from lambda');
         console.log(JSON.parse(response["_body"]));
         let parsedResponse = JSON.parse(response["_body"]);
         let updatedCampaign = parsedResponse.Campaign[0];
-        let keywordsArray = updatedCampaign.CampKeywords.split(",");
-        updatedCampaign.CampKeywords = keywordsArray;
         res(updatedCampaign);
       })
       .catch(err => {

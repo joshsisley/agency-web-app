@@ -61,7 +61,7 @@ export class LocationProfileComponent implements OnInit {
   ngOnInit() {
     console.log(this.selectedCampaign);
     console.log(this.selectedCampaign.CampHours);
-    if (this.selectedCampaign.CampHours && this.selectedCampaign.CampHours != 'null') {
+    if (this.selectedCampaign.CampHours && this.selectedCampaign.CampHours.length > 0 && this.selectedCampaign.CampHours != 'null') {
       console.log('it still somehow gets inside')
       this.hoursMap = this.selectedCampaign.CampHours;
     }
