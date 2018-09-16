@@ -2,7 +2,6 @@
   background: $content-bg;
   margin-left: $sidebar-width-lg;
   min-height: 100vh;
-  padding: 1rem 1.7rem;
   transition: all .8s ease;
   width: calc(100% - #{$sidebar-width-lg});
   @media (max-width: 991px) {

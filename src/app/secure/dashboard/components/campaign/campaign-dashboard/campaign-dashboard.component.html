@@ -1,25 +1,51 @@
-<div class="row mb-2">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-body">
+<div class="content-margin mb-2 mt-4">
+    <div class="col-lg-12">
         <ngb-tabset>
-          <ngb-tab title="Campaign Info">
+          <ngb-tab title="Overview">
             <ng-template ngbTabContent>
-              <campaign-edit [selectedCampaign]="selectedCampaign"></campaign-edit>
+              <div class="card">
+                <div class="card-body tab-card-body">
+                  <campaign-overview [selectedCampaign]="selectedCampaign"></campaign-overview>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Edit Campaign">
+            <ng-template ngbTabContent>
+              <div class="card">
+                <div class="card-body tab-card-body">
+                  <campaign-edit [selectedCampaign]="selectedCampaign"></campaign-edit>
+                </div>
+              </div>
             </ng-template>
           </ngb-tab>
           <ngb-tab title="Keywords">
             <ng-template ngbTabContent>
-              <keywords [selectedCampaign]="selectedCampaign"></keywords>
+              <div class="card">
+                <div class="card-body tab-card-body">
+                  <keywords [selectedCampaign]="selectedCampaign"></keywords>
+                </div>
+              </div>
             </ng-template>
           </ngb-tab>
           <ngb-tab title="Location Profile">
             <ng-template ngbTabContent>
-              <location-profile [selectedCampaign]="selectedCampaign"></location-profile>
+              <div class="card">
+                <div class="card-body tab-card-body">
+                  <location-profile [selectedCampaign]="selectedCampaign"></location-profile>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Reviews">
+            <ng-template ngbTabContent>
+              <div class="card">
+                <div class="card-body tab-card-body">
+                  <reviews [selectedCampaign]="selectedCampaign"></reviews>
+                </div>
+              </div>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>
       </div>
-    </div>
-  </div>
 </div>

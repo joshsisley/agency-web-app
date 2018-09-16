@@ -2,6 +2,19 @@ body {
   background: #edf1f5;
 }
 
+.no-margin {
+  margin: 0;
+}
+
+.content-margin {
+  margin: 0 15px;
+}
+
+.tab-card-body {
+  border: 1px solid transparent;
+  border-color: #fff #dee2e6 #dee2e6 #dee2e6;
+}
+
 .main-loader {
   position:fixed;
   top: 55%;
@@ -112,6 +125,21 @@ body {
 
 .btn-primary {
   color: white !important;
+}
+
+.component-nav {
+  background: white;
+  padding: 1rem 15px 0rem 15px;
+}
+
+.search-input {
+  background: #eee;
+  border: 1px solid #e4e4e4;
+  font-weight: 400;
+  &::placeholder {
+    color: #888;
+    font-weight: 300;
+  }
 }
 
 .input-list-container {

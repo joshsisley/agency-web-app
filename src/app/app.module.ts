@@ -41,6 +41,8 @@ import { LocationProfileComponent } from './secure/dashboard/components/campaign
 import { LocalDataService } from "./service/local-data.service";
 import { TextMaskModule } from 'angular2-text-mask';
 import { SuccessAlertComponent } from './shared/success-alert/success-alert.component';
+import { CampaignOverviewComponent } from './secure/dashboard/components/campaign/campaign-overview/campaign-overview.component';
+import { ReviewsComponent } from './secure/dashboard/components/campaign/reviews/reviews.component';
 
 
 @NgModule({
@@ -74,7 +76,9 @@ import { SuccessAlertComponent } from './shared/success-alert/success-alert.comp
         CampaignDashboardComponent,
         KeywordsComponent,
         LocationProfileComponent,
-        SuccessAlertComponent
+        SuccessAlertComponent,
+        CampaignOverviewComponent,
+        ReviewsComponent
     ],
     imports: [
         BrowserModule,

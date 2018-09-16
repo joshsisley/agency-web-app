@@ -1,5 +1,6 @@
 .sidebar {
-  background: $white;
+  background: #302f3f;
+  opacity: .95;
   font-family: 'source-sans-pro-regular',sans-serif;
   min-height: 100%;
   padding: 0;
@@ -45,7 +46,7 @@
         }
 
         .menu-title {
-          color: $dark-text-color;
+          color: $white;
           display: inline-block;
           font-size: 1rem;
         }
