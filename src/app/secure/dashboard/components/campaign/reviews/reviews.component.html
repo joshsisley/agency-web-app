@@ -1,6 +1,17 @@
 <div class="row mb-2 mt-4">
   <div class="col-sm-12">
-    <h5>You have not connected an account yet.</h5>
+    <h5 class="card-title">You have not connected an account yet.</h5>
+    <h6 class="card-subtitle mb-4 text-muted">Enter your information below to link your Google account</h6>
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <input placeholder="Client ID" type="text" class="form-control" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <input placeholder="Client Secret" type="text" class="form-control" />
+      </div>
+    </div>
     <button class="btn btn-primary" (click)="getGoogleAccount()"><i class="fa fa-google" style="margin-right: 10px;"></i> Connect Google Account</button>
   </div>
 </div>
