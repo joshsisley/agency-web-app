@@ -228,16 +228,13 @@ export class CampaignService {
 
   }
 
-  getGoogleReviews() {
+  getGoogleReviews(token) {
     var promise = new Promise((resolve, reject) => {
       let orgId = this.orgService.getOrgId();
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
 
-      // Temp test string
-      let queryString = '?1234';
-
-      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/gmbreviews?access_token=${queryString}`, {headers: headers})
+      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/gmbreviews?access_token=${token}`, {headers: headers})
       .toPromise()
       .then((response) => {
         console.log('here is the response');
