@@ -341,12 +341,19 @@
             <span class="menu-title">Overview</span>
             </a>
         </li> -->
-        <li class="nav-item">
+        <li class="nav-item" [class.active]="selectedTab === 'campaigns'">
             <a class="nav-link" (click)="setSelectedTab('campaigns')" routerLinkActive="active">
-            <i class="flaticon-paper"></i>
+            <i style="color:white; margin-right: .75rem;" class="fa fa-tasks"></i>
             <span class="menu-title">Campaigns</span>
+            </a>
+        </li>
+        <li class="nav-item" [class.active]="selectedTab === 'reports'">
+            <a class="nav-link" (click)="setSelectedTab('reports')" routerLinkActive="active">
+            <i style="color:white; margin-right: .75rem;" class="fa fa-bar-chart-o"></i>
+            <span class="menu-title">Reports</span>
             </a>
         </li>
     </ul>
 </nav>
 <campaigns *ngIf="selectedTab == 'campaigns'" [loading]="loading" [campaigns]="campaigns"></campaigns>
+<reports *ngIf="selectedTab === 'reports'" [loading]="loading" [campaigns]="campaigns"></reports>

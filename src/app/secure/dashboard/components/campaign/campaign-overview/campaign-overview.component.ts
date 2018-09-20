@@ -14,4 +14,9 @@ export class CampaignOverviewComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToReports() {
+    // pass in the selectedCampaign to auto select from dropdown
+    // then navigate to other component
+  }
+
 }

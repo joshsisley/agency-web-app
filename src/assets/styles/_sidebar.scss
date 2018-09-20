@@ -13,6 +13,14 @@
     flex-wrap: nowrap;
     flex-direction: column;
     .nav-item {
+      cursor: pointer;
+      &:hover {
+        background: #302F49;
+        opacity: 1;
+      }
+      &.active {
+        border-left: 5px solid white;
+      }
       .collapse{
         z-index:999;
       }

@@ -43,6 +43,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { SuccessAlertComponent } from './shared/success-alert/success-alert.component';
 import { CampaignOverviewComponent } from './secure/dashboard/components/campaign/campaign-overview/campaign-overview.component';
 import { ReviewsComponent } from './secure/dashboard/components/campaign/reviews/reviews.component';
+import { ReportsComponent } from './secure/dashboard/components/reports/reports.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { ReviewsComponent } from './secure/dashboard/components/campaign/reviews
         LocationProfileComponent,
         SuccessAlertComponent,
         CampaignOverviewComponent,
-        ReviewsComponent
+        ReviewsComponent,
+        ReportsComponent
     ],
     imports: [
         BrowserModule,
