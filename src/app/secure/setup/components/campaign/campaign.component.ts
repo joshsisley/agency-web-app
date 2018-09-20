@@ -26,7 +26,7 @@ export class FirstCampaignComponent implements OnInit {
         // update the var that sets whether you can see the sidenave
         console.log('it gets to here');
         this.orgService.updateOrg({'orgOnboardingStatus':'completed'});
-        this.router.navigate(['/securehome']);
+        this.router.navigate(['/dashboard']);
       } else {
         console.log('there was an error');
       }

@@ -23,7 +23,7 @@ export class AgencyComponent implements OnInit {
     this.orgService.updateOrg(this.agency).then(response => {
       console.log(response);
       if (response[1] == 'true') {
-        this.router.navigate(['/securehome/setup/campaign'])
+        this.router.navigate(['/dashboard/setup/campaign'])
         // route to campaign
       } else {
         console.log('there was an error');

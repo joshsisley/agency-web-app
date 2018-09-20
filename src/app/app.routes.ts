@@ -43,11 +43,11 @@ const secureHomeRoutes: Routes = [
     {
 
         path: '',
-        redirectTo: '/securehome',
+        redirectTo: '/dashboard',
         pathMatch: 'full'
     },
     {
-        path: 'securehome', component: SecureHomeComponent, children: [
+        path: 'dashboard', component: SecureHomeComponent, children: [
         {path: 'logout', component: LogoutComponent},
         {path: 'jwttokens', component: JwtComponent},
         {path: 'myprofile', component: MyProfileComponent},
