@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ReportsService } from '../../../../service/reports.service';
 
 @Component({
   selector: 'reports',
@@ -11,7 +12,7 @@ export class ReportsComponent implements OnInit {
   @Input() campaigns:any;
   selectedCampaign:any;
 
-  constructor() { }
+  constructor(private reportService: ReportsService) { }
 
   ngOnInit() {
     if (!this.selectedCampaign && this.campaigns && this.campaigns.length > 0) {
@@ -20,7 +21,7 @@ export class ReportsComponent implements OnInit {
     console.log('here is the default campaign');
     console.log(this.selectedCampaign);
     // make call to get the overview report
-    
+
   }
 
   get

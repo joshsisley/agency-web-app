@@ -7138,6 +7138,21 @@ pre {
 body {
   background: #edf1f5; }
 
+.custom-card .card-body {
+  padding: 0; }
+  .custom-card .card-body .list-group {
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
+    .custom-card .card-body .list-group .list-group-item {
+      padding: 1.3rem 2rem; }
+      .custom-card .card-body .list-group .list-group-item .info .badge {
+        font-size: 70%; }
+      .custom-card .card-body .list-group .list-group-item .info .campInfo {
+        float: left;
+        margin-left: 35px; }
+        .custom-card .card-body .list-group .list-group-item .info .campInfo h5 {
+          margin-bottom: 0px; }
+
 .ratings {
   font-size: 1.2rem;
   color: #f7cf5f; }
@@ -7293,3 +7308,24 @@ body {
       .input-list-container ul li button:hover {
         color: #0056b3 !important;
         text-decoration: underline !important; }
+
+.sub-nav {
+  padding: 1rem 2rem; }
+  .sub-nav select {
+    border: none; }
+
+.custom-tabset .nav-tabs {
+  padding: 0 2rem; }
+  .custom-tabset .nav-tabs .nav-item {
+    margin-right: 7px; }
+    .custom-tabset .nav-tabs .nav-item .nav-link {
+      padding: .75rem 1.2rem;
+      border-top-left-radius: 0.35rem;
+      border-top-right-radius: 0.35rem;
+      border-color: #e4e4e4 #e4e4e4 #e4e4e4;
+      background: #EEEFF0;
+      color: #c1c1c1; }
+      .custom-tabset .nav-tabs .nav-item .nav-link.active {
+        background: white;
+        color: #597be3;
+        border-color: #e4e4e4 #e4e4e4 #fff; }

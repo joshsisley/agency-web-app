@@ -44,6 +44,7 @@ import { SuccessAlertComponent } from './shared/success-alert/success-alert.comp
 import { CampaignOverviewComponent } from './secure/dashboard/components/campaign/campaign-overview/campaign-overview.component';
 import { ReviewsComponent } from './secure/dashboard/components/campaign/reviews/reviews.component';
 import { ReportsComponent } from './secure/dashboard/components/reports/reports.component';
+import { ReportsService } from "./service/reports.service";
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { ReportsComponent } from './secure/dashboard/components/reports/reports.
         OrganizationService,
         UserService,
         CampaignService,
-        LocalDataService
+        LocalDataService,
+        ReportsService
     ],
     bootstrap: [AppComponent]
 })

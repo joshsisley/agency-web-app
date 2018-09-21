@@ -1,17 +1,17 @@
-<div class="row no-margin component-nav">
-  <h3 class="page-title col-sm-12 col-md-6">Campaigns <span *ngIf="campaignStep == 'create'">- Create Campaign</span><span *ngIf="campaignStep == 'dashboard'">- {{selectedCampaign.CampName}}</span></h3>
-  <div *ngIf="campaignStep === 'campaigns'" class="col-sm-12 col-md-4">
+<div class="row sub-nav">
+  <h3 class="page-title col-sm-12 col-md-10">Campaigns <span *ngIf="campaignStep == 'create'">- Create Campaign</span><span *ngIf="campaignStep == 'dashboard'">- {{selectedCampaign.CampName}}</span></h3>
+  <!-- <div *ngIf="campaignStep === 'campaigns'" class="col-sm-12 col-md-4">
       <input type="text" [(ngModel)]="campaignSearchTerm" [ngModelOptions]="{standalone: true}" class="form-control search-input" id="campaignSearchTerm" aria-describedby="campaignSearchTerm" placeholder="Search for campaign">
-  </div>
-  <div class="col-md-2 col-sm-12" [class.offset-md-4]="campaignStep !== 'campaigns'">
-      <button *ngIf="campaignStep == 'campaigns'" class="btn btn-success btn-sm float-right" (click)="campaignStep = 'create'">Create Campaign</button>
+  </div> -->
+  <div class="col-md-2 col-sm-12">
+      <button *ngIf="campaignStep == 'campaigns'" class="btn btn-success float-right" (click)="campaignStep = 'create'"><i style="margin-right:7px;" class="fa fa-plus-circle"></i>New Campaign</button>
       <button *ngIf="campaignStep !== 'campaigns'" class="btn btn-default btn-sm float-right" (click)="backToCampaigns()">Back</button>
   </div>
 </div>
 
-<div *ngIf="campaignStep == 'campaigns' && !loading" class="row content-margin mb-2 mt-4">
+<div *ngIf="campaignStep == 'campaigns' && !loading" class="row mb-2 mt-4">
   <div class="col-lg-12">
-    <div class="card">
+    <div class="card custom-card">
       <div class="card-body">
         <div class="row justify-content-md-center" *ngIf="!campaigns || campaigns.length == 0">
             <div class="col-sm-12 col-md-6 text-center">
@@ -19,8 +19,28 @@
                 <button (click)="createCampaign = true" class="btn btn-primary">Create Campaign</button>
             </div>
         </div>
-        <div *ngIf="campaigns.length > 0" class="table-responsive">
-          <table class="table center-aligned-table">
+        <div *ngIf="campaigns.length > 0">
+            <ul class="list-group list-group-flush">
+                <li *ngFor="let campaign of campaigns" class="list-group-item">
+                  <div class="d-flex w-100 justify-content-between">
+                    <div class="info">
+                      <label style="float:left;" class="badge badge-success">Active</label>
+                      <div class="campInfo">
+                        <h5>{{campaign.CampName}}</h5>
+                        <small>{{campaign.CampAddress1}} {{campaign.CampCity}}, {{campaign.CampState}}</small>
+                      </div>
+                    </div>
+                    <div class="actions">
+                      <a (click)="manageCampaign(campaign)" class="btn btn-primary btn-sm">Manage</a>
+                    </div>
+                  </div>
+                </li>
+                <!-- <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li> -->
+              </ul>
+          <!-- <table class="table center-aligned-table">
             <thead>
               <tr class="text-primary">
                 <th>Name</th>
@@ -39,7 +59,7 @@
                 <td><a (click)="manageCampaign(campaign)" class="btn btn-primary btn-sm">Manage</a></td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
         </div>
       </div>
     </div>

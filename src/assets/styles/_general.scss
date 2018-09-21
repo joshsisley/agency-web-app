@@ -2,6 +2,34 @@ body {
   background: #edf1f5;
 }
 
+.custom-card {
+  .card-body {
+    padding: 0;
+    .list-group {
+      border-top: 1px solid rgba(0, 0, 0, 0.125);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      .list-group-item {
+        padding: 1.3rem 2rem;
+        .info {
+          .badge {
+            font-size: 70%;
+          }
+          .campInfo {
+            float: left;
+            margin-left: 35px;
+            h5 {
+              margin-bottom: 0px;
+            }
+          }
+        }
+        .actions {
+  
+        }
+      }
+    }
+  }
+}
+
 .ratings {
   font-size: 1.2rem;
   color: #f7cf5f;

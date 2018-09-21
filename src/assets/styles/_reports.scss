@@ -1,0 +1,28 @@
+.sub-nav {
+  padding: 1rem 2rem;
+  select {
+    border: none;
+  }
+}
+
+.custom-tabset {
+  .nav-tabs {
+    padding: 0 2rem;
+    .nav-item {
+      margin-right: 7px;
+      .nav-link {
+        padding: .75rem 1.2rem;
+        border-top-left-radius: 0.35rem;
+        border-top-right-radius: 0.35rem;
+        border-color: #e4e4e4 #e4e4e4 #e4e4e4;
+        background: #EEEFF0;
+        color: #c1c1c1;
+        &.active {
+          background: white;
+          color: #597be3;
+          border-color: #e4e4e4 #e4e4e4 #fff;
+        }
+      }
+    }
+  }
+}
