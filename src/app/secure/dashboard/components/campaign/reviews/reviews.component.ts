@@ -85,6 +85,7 @@ export class ReviewsComponent implements OnInit {
       if (cookie) {
         // Set the results to stored list
         this.locationList = JSON.parse(localStorage.getItem(`${this.selectedCampaign.CampName}-locationList`));
+        console.log(this.locationList);
       } else {
         // Get the reviews again
 
@@ -141,9 +142,10 @@ export class ReviewsComponent implements OnInit {
             this.setCookie(`${this.selectedCampaign.CampName}-reviewTimeout`,'reviewTimeout');
             // TODO: Fix this to return correctly. Right now it looks like we need to setup a whitelist business
             // in order to get access to the API. We would then use the client id from that above.
-            self.step = 'reviews';
-            this.averageRating = 4.5;
-            this.totalReviewCount = 3;
+            console.log('it sets the step');
+            this.updateStep();
+            console.log(self.step);
+
             // this.reviews = this.tempReviews;
           })
           // now make the calls to get the reviews using the access token
@@ -152,6 +154,10 @@ export class ReviewsComponent implements OnInit {
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
       });
+  }
+
+  updateStep() {
+    this.step = 'reviews';
   }
 
   setCookie(name,value) {

@@ -263,11 +263,13 @@ export class CampaignService {
         let locationList = JSON.parse(response["_body"]);
         for (var x in locationList) {
           if (locationList[x].reviews) {
-            for (var y in locationList[x].reviews) {
-              locationList[x].reviews[y].starRating = this.getNumberForReview(locationList[x].reviews[y]);
+            for (var y in locationList[x].reviews.reviews) {
+              locationList[x].reviews.reviews[y].starRating = this.getNumberForReview(locationList[x].reviews.reviews[y]);
             }
           }
         }
+        console.log('here is the final list');
+        console.log(locationList);
         resolve(locationList);
       })
       .catch((e) => {

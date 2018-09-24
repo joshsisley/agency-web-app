@@ -15,12 +15,12 @@
     <div class="btn btn-primary" id="googleBtn"><i class="fa fa-google" style="margin-right: 10px;"></i> Connect Google Account</div>
     <!-- <button class="btn btn-primary" (click)="getGoogleAccount()"><i class="fa fa-google" style="margin-right: 10px;"></i> Connect Google Account</button> -->
   </div>
-  <div *ngIf="step === 'reviews'" class="col-sm-12">
+  <div *ngIf="step == 'reviews'" class="col-sm-12">
     <div class="mb-5" *ngFor="let location of locationList">
-      <h4>Overall Rating <small>({{location.totalReviewCount}} Review<span *ngIf="totalReviewCount > 1 || totalReviewCount == 0">s</span>)</small></h4>
+      <h4>{{location.displayName}} - Overall Rating <small>({{location.totalReviewCount}} Review<span *ngIf="totalReviewCount > 1 || totalReviewCount == 0">s</span>)</small></h4>
       <ngb-rating class="ratings" [(rate)]="location.averageRating" [readonly]="true" max="5"></ngb-rating>
       <div class="list-group mt-4">
-        <a *ngFor="let review of location.reviews" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a *ngFor="let review of location.reviews.reviews" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">
               <!-- {{review.starRating}} <span style="font-size:1rem; color: #f7cf5f;">★</span> -->
