@@ -3,14 +3,14 @@
     <!-- These are used for setup -->
     <div *ngIf="setupFlow !== 'completed'">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/forms" routerLinkActive="active">
+        <a class="nav-link" routerLinkActive="active">
           <i class="flaticon-interface-1"></i>
           <span class="menu-title">Setup Agency</span> 
           <i *ngIf="setupFlow === 'campaign'" class="fa fa-check-circle-o text-success" aria-hidden="true"></i>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/forms" routerLinkActive="active">
+        <a class="nav-link" routerLinkActive="active">
           <i class="flaticon-interface-1"></i>
           <span class="menu-title">First Campaign</span>
         </a>

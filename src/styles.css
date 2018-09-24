@@ -7164,13 +7164,34 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
     .custom-card .card-body .list-group .list-group-item {
       padding: 1.3rem 2rem; }
-      .custom-card .card-body .list-group .list-group-item .info .badge {
-        font-size: 70%; }
-      .custom-card .card-body .list-group .list-group-item .info .campInfo {
-        float: left;
-        margin-left: 35px; }
-        .custom-card .card-body .list-group .list-group-item .info .campInfo h5 {
-          margin-bottom: 0px; }
+      .custom-card .card-body .list-group .list-group-item .info {
+        padding-left: 0; }
+        .custom-card .card-body .list-group .list-group-item .info .badge {
+          font-size: 70%; }
+        .custom-card .card-body .list-group .list-group-item .info .campInfo {
+          float: left;
+          margin-left: 35px; }
+          .custom-card .card-body .list-group .list-group-item .info .campInfo h5 {
+            margin-bottom: 0px; }
+          .custom-card .card-body .list-group .list-group-item .info .campInfo small {
+            color: #777; }
+      .custom-card .card-body .list-group .list-group-item .actions {
+        border-left: 1px solid #e4e4e4;
+        padding-left: 5%;
+        padding-right: 0;
+        text-align: right; }
+        .custom-card .card-body .list-group .list-group-item .actions .action-link {
+          font-size: 1.3rem;
+          color: #777;
+          cursor: pointer;
+          margin-left: 20%; }
+          .custom-card .card-body .list-group .list-group-item .actions .action-link:hover {
+            color: #597be3; }
+
+.center-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
 
 .ratings {
   font-size: 1.2rem;

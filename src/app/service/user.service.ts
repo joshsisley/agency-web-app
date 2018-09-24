@@ -35,11 +35,11 @@ export class UserService {
         'CognitoID': cognitoUser["username"]
       }
 
-      this.http.get('https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/core-stage-v4/searchUser', {params:body, headers:headers})
+      this.http.get('https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/searchUser', {params:body, headers:headers})
       .toPromise()
       .then(response => {
         console.log('here is the response from lambda');
-        console.log(response['_body']);
+        console.log(response);
         let user = JSON.parse(response['_body']);
         this.user = user;
         resolve(user);

@@ -40,7 +40,7 @@ export class OrganizationService {
         'OrgID': orgId
       }
 
-      this.http.post('https://qcj5gnlj4h.execute-api.us-east-2.amazonaws.com/v1/FrontEndApi', body, {headers: headers})
+      this.http.post('https://qcj5gnlj4h.execute-api.us-east-2.amazonaws.com/dev/FrontEndApi', body, {headers: headers})
       .toPromise()
       .then(response => {
         console.log('here is the response from lambda');
@@ -71,7 +71,7 @@ export class OrganizationService {
 
       let queryString = `OrgID=${this.orgId}&OrgName=${orgInfo.name}&OrgOnboardingComplete=${orgInfo.orgOnboardingStatus}`;
 
-      this.http.post('https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/core-stage-v1/organization', queryString, {headers: headers})
+      this.http.post('https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/organization', queryString, {headers: headers})
       .toPromise()
       .then(response => {
         console.log('here is the response from lambda');

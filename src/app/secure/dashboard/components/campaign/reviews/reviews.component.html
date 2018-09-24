@@ -16,21 +16,23 @@
     <!-- <button class="btn btn-primary" (click)="getGoogleAccount()"><i class="fa fa-google" style="margin-right: 10px;"></i> Connect Google Account</button> -->
   </div>
   <div *ngIf="step === 'reviews'" class="col-sm-12">
-    <h4>Overall Rating <small>({{totalReviewCount}} Review<span *ngIf="totalReviewCount > 1 || totalReviewCount == 0">s</span>)</small></h4>
-    <ngb-rating class="ratings" [(rate)]="averageRating" [readonly]="true" max="5"></ngb-rating>
-    <div class="list-group mt-4">
-      <a *ngFor="let review of reviews" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">
-            <!-- {{review.starRating}} <span style="font-size:1rem; color: #f7cf5f;">★</span> -->
-            <ngb-rating style="color: #f7cf5f;" [(rate)]="review.starRating" [readonly]="true" max="5"></ngb-rating>
-            <!-- <small style="margin-left:10px;">{{review.reviewer.displayName}}</small> -->
-          </h5>
-          <small>{{review.createTime | date: 'mediumDate'}}</small>
-        </div>
-        <p class="mb-1">{{review.comment}}</p>
-        <small>- {{review.reviewer.displayName}}</small>
-      </a>
+    <div *ngFor="let location of locationList">
+      <h4>Overall Rating <small>({{location.totalReviewCount}} Review<span *ngIf="totalReviewCount > 1 || totalReviewCount == 0">s</span>)</small></h4>
+      <ngb-rating class="ratings" [(rate)]="location.averageRating" [readonly]="true" max="5"></ngb-rating>
+      <div class="list-group mt-4">
+        <a *ngFor="let review of location.reviews" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">
+              <!-- {{review.starRating}} <span style="font-size:1rem; color: #f7cf5f;">★</span> -->
+              <ngb-rating style="color: #f7cf5f;" [(rate)]="review.starRating" [readonly]="true" max="5"></ngb-rating>
+              <!-- <small style="margin-left:10px;">{{review.reviewer.displayName}}</small> -->
+            </h5>
+            <small>{{review.createTime | date: 'mediumDate'}}</small>
+          </div>
+          <p class="mb-1">{{review.comment}}</p>
+          <small>- {{review.reviewer.displayName}}</small>
+        </a>
+      </div>
     </div>
   </div>
 </div>

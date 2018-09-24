@@ -38,6 +38,7 @@ body {
       .list-group-item {
         padding: 1.3rem 2rem;
         .info {
+          padding-left: 0;
           .badge {
             font-size: 70%;
           }
@@ -47,14 +48,35 @@ body {
             h5 {
               margin-bottom: 0px;
             }
+            small {
+              color: #777;
+            }
           }
         }
         .actions {
-  
+          border-left: 1px solid #e4e4e4;
+          padding-left: 5%;
+          padding-right: 0;
+          text-align: right;
+          .action-link {
+            font-size: 1.3rem;
+            color: #777;
+            cursor: pointer;
+            margin-left: 20%;
+            &:hover {
+              color: #597be3;
+            }
+          }
         }
       }
     }
   }
+}
+
+.center-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .ratings {

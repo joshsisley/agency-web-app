@@ -15,6 +15,7 @@ import { DashboardComponent } from "./secure/dashboard/dashboard.component";
 import { SetupComponent } from "./secure/setup/setup.component";
 import { AgencyComponent } from "./secure/setup/components/agency/agency.component";
 import { FirstCampaignComponent } from "./secure/setup/components/campaign/campaign.component";
+import { ReportsComponent } from "./secure/dashboard/components/reports/reports.component";
 
 const homeRoutes: Routes = [
     {
@@ -56,6 +57,7 @@ const secureHomeRoutes: Routes = [
             {path: '', component: AgencyComponent},
             {path: 'campaign', component: FirstCampaignComponent}
         ]},
+        {path: 'reports', component: ReportsComponent},
         {path: '', component: DashboardComponent}]
     }
 ];

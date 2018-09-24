@@ -69,6 +69,7 @@ export class ReviewsComponent implements OnInit {
   reviews:any;
   averageRating:any;
   totalReviewCount:number;
+  locationList:any;
 
   @Input() selectedCampaign:any;
 
@@ -79,7 +80,7 @@ export class ReviewsComponent implements OnInit {
     // if token is good, make call to get reviews
     // if not, reauth the user
     let refreshToken = this.selectedCampaign.CampRefreshToken;
-    if (refreshToken) {
+    if (refreshToken && refreshToken != 'null') {
       // show the reviews
       this.step = 'reviews';
       // TODO: Change this to go and grab the latest reviews on page load
@@ -105,7 +106,7 @@ export class ReviewsComponent implements OnInit {
   googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
-        client_id: '599335119509-unfh985atjiepr1js16spg23r0m07m63.apps.googleusercontent.com',
+        client_id: '118306580572-fjshggl9vgomhsj2edmf8gri4vujfp1m.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
         scope: 'profile email https://www.googleapis.com/auth/plus.business.manage'
       });
@@ -114,6 +115,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   attachSignin(element) {
+    let self = this;
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
         //YOUR CODE HERE
@@ -129,12 +131,13 @@ export class ReviewsComponent implements OnInit {
           this.campaignService.getGoogleReviews(googleUser.getAuthResponse().access_token).then((response) => {
             console.log('here is the response from GMB');
             console.log(response);
+            self.locationList = response;
             // TODO: Fix this to return correctly. Right now it looks like we need to setup a whitelist business
             // in order to get access to the API. We would then use the client id from that above.
-            this.step = 'reviews';
+            self.step = 'reviews';
             this.averageRating = 4.5;
             this.totalReviewCount = 3;
-            this.reviews = this.tempReviews;
+            // this.reviews = this.tempReviews;
           })
           // now make the calls to get the reviews using the access token
         })

@@ -23,15 +23,18 @@
             <ul class="list-group list-group-flush">
                 <li *ngFor="let campaign of campaigns" class="list-group-item">
                   <div class="d-flex w-100 justify-content-between">
-                    <div class="info">
+                    <div class="info col-sm-10">
                       <label style="float:left;" class="badge badge-success">Active</label>
                       <div class="campInfo">
                         <h5>{{campaign.CampName}}</h5>
                         <small>{{campaign.CampAddress1}} {{campaign.CampCity}}, {{campaign.CampState}}</small>
                       </div>
                     </div>
-                    <div class="actions">
-                      <a (click)="manageCampaign(campaign)" class="btn btn-primary btn-sm">Manage</a>
+                    <div class="actions col-sm-2">
+                      <div class="center-content">
+                        <a (click)="manageCampaign(campaign)" placement="top" ngbTooltip="Manage Campaign" class="action-link"><i class="fa fa-edit"></i></a>
+                        <a (click)="goToReports(campaign)" placement="top" ngbTooltip="Go to Reports" class="action-link"><i class="fa fa-bar-chart-o"></i></a>
+                      </div>
                     </div>
                   </div>
                 </li>

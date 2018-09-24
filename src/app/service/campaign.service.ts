@@ -228,6 +228,27 @@ export class CampaignService {
 
   }
 
+  getNumberForReview(review) {
+    let num = 5;
+    switch (review.starRating) {
+      case "ONE":
+        num = 1;
+        break;
+      case "TWO":
+        num = 2;
+        break;
+      case "THREE":
+        num = 3;
+        break;
+      case "FOUR":
+        num = 4;
+        break;
+      default:
+        break;
+    }
+    return num;
+  }
+
   getGoogleReviews(token) {
     var promise = new Promise((resolve, reject) => {
       let orgId = this.orgService.getOrgId();
@@ -238,8 +259,16 @@ export class CampaignService {
       .toPromise()
       .then((response) => {
         console.log('here is the response');
-        console.log(response);
-        resolve(response);
+        console.log(JSON.parse(response["_body"]));
+        let locationList = JSON.parse(response["_body"]);
+        for (var x in locationList) {
+          if (locationList[x].reviews) {
+            for (var y in locationList[x].reviews) {
+              locationList[x].reviews[y].starRating = this.getNumberForReview(locationList[x].reviews[y]);
+            }
+          }
+        }
+        resolve(locationList);
       })
       .catch((e) => {
         if (e) {

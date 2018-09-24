@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'campaigns',
@@ -9,13 +10,14 @@ export class CampaignsComponent implements OnInit {
 
   @Input() campaigns:any;
   @Input() loading:boolean;
+  @Output() updateSelectedTab:EventEmitter<any> = new EventEmitter();
   showCreateCampaign:boolean = false;
   showEditCampaign:boolean = false;
   selectedCampaign:any;
   campaignStep:string = 'campaigns';
   updateDashboardCampaignList:EventEmitter<string> = new EventEmitter();
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
@@ -38,6 +40,15 @@ export class CampaignsComponent implements OnInit {
 
   backToCampaigns() {
     this.campaignStep = 'campaigns';
+  }
+
+  goToReports(campaign) {
+    this.selectedCampaign = campaign;
+    this.campaignStep = 'reports';
+    this.updateSelectedTab.emit({
+      tab: 'reports',
+      campaign: campaign
+    })
   }
 
 }

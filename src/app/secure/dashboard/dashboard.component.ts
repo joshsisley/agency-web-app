@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   isOrgOwner:boolean = false;
   campaigns:any;
   loading:boolean = true;
+  selectedCampaign:any;
 
   constructor(private campaignService: CampaignService, private orgService: OrganizationService, private userService: UserService) { }
 
@@ -56,6 +57,11 @@ export class DashboardComponent implements OnInit {
     this.campaigns.push(event.newCampaign);
     console.log('here are the new campaigns');
     console.log(this.campaigns);
+  }
+
+  updateSelectedTab(event) {
+    this.selectedTab = event.tab;
+    this.selectedCampaign = event.campaign;
   }
 
 }

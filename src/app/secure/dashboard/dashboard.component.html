@@ -355,5 +355,5 @@
         </li>
     </ul>
 </nav>
-<campaigns *ngIf="selectedTab == 'campaigns'" [loading]="loading" [campaigns]="campaigns"></campaigns>
-<reports *ngIf="selectedTab === 'reports'" [loading]="loading" [campaigns]="campaigns"></reports>
+<campaigns *ngIf="selectedTab == 'campaigns'" (updateSelectedTab)="updateSelectedTab($event)" [loading]="loading" [campaigns]="campaigns"></campaigns>
+<reports *ngIf="selectedTab === 'reports'" [loading]="loading" [campaigns]="campaigns" [selectedCampaign]="selectedCampaign"></reports>
