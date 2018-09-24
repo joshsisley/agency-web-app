@@ -81,6 +81,14 @@ export class ReviewsComponent implements OnInit {
     // if not, reauth the user
     let refreshToken = this.selectedCampaign.CampRefreshToken;
     if (refreshToken && refreshToken != 'null') {
+      let cookie = this.getCookie(`${this.selectedCampaign.CampName}-reviewTimeout`);
+      if (cookie) {
+        // Set the results to stored list
+        this.locationList = JSON.parse(localStorage.getItem(`${this.selectedCampaign.CampName}-locationList`));
+      } else {
+        // Get the reviews again
+
+      }
       // show the reviews
       this.step = 'reviews';
       // TODO: Change this to go and grab the latest reviews on page load
@@ -126,12 +134,11 @@ export class ReviewsComponent implements OnInit {
         this.selectedCampaign.CampRefreshToken = googleUser.getAuthResponse().id_token;
         this.selectedCampaign.CampTokenTimeOut = googleUser.getAuthResponse().expires_at;
         this.campaignService.updateCampaign(this.selectedCampaign).then((response) => {
-          console.log('here is the returned camp');
-          console.log(response);
           this.campaignService.getGoogleReviews(googleUser.getAuthResponse().access_token).then((response) => {
-            console.log('here is the response from GMB');
-            console.log(response);
             self.locationList = response;
+            // Save list to storage and create cookie
+            localStorage.setItem(`${this.selectedCampaign.CampName}-locationList`,JSON.stringify(response));
+            this.setCookie(`${this.selectedCampaign.CampName}-reviewTimeout`,'reviewTimeout');
             // TODO: Fix this to return correctly. Right now it looks like we need to setup a whitelist business
             // in order to get access to the API. We would then use the client id from that above.
             self.step = 'reviews';
@@ -145,6 +152,25 @@ export class ReviewsComponent implements OnInit {
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
       });
+  }
+
+  setCookie(name,value) {
+    var expires = "";
+    var date = new Date();
+    date.setTime(date.getTime() + (6*60*60*1000));
+    expires = "; expires=" + date.toUTCString();
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+  }
+
+  getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
   }
 
 }
