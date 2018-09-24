@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { CampaignService } from '../../../../../service/campaign.service';
 
 declare const gapi: any;
@@ -73,7 +73,7 @@ export class ReviewsComponent implements OnInit {
 
   @Input() selectedCampaign:any;
 
-  constructor(private campaignService: CampaignService) { }
+  constructor(private campaignService: CampaignService, private zone: NgZone) { }
 
   ngOnInit() {
     // check token expiration
@@ -127,8 +127,6 @@ export class ReviewsComponent implements OnInit {
     let self = this;
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
-        //YOUR CODE HERE
-        console.log(googleUser);
         // TODO: Now need to store this info in the org or user profile????
         // make call to update campaign with access token and expiration
         // Then, make call to get the reviews using the new access_token
@@ -143,7 +141,9 @@ export class ReviewsComponent implements OnInit {
             // TODO: Fix this to return correctly. Right now it looks like we need to setup a whitelist business
             // in order to get access to the API. We would then use the client id from that above.
             console.log('it sets the step');
-            this.updateStep();
+            this.zone.run(() => {
+              this.step = 'reviews';
+            });
             console.log(self.step);
 
             // this.reviews = this.tempReviews;
@@ -156,7 +156,8 @@ export class ReviewsComponent implements OnInit {
       });
   }
 
-  updateStep() {
+  successCallback = function (data) {
+    // this.changeDetectorRef.detectChanges();
     this.step = 'reviews';
   }
 
