@@ -1,5 +1,5 @@
 <div class="mb-2 mt-4">
-  <div class="col-lg-12">
+  <div *ngIf="!loading" class="col-lg-12">
     <div class="row">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-4">
         <div class="card card-social card-border">
@@ -7,8 +7,8 @@
             <i class="fa fa-times-circle text-danger highlight-icon"></i>
           </div>
           <div class="card-body">
-            <h5 class="card-title">22 Errors</h5>
-            <button class="btn btn-danger btn-sm">View Errors</button>
+            <h5 class="card-title">{{selectedAudit.totalErrors}} Errors</h5>
+            <button (click)="selectedSection = 'Errors'" class="btn btn-danger btn-sm">View Errors</button>
           </div>
         </div>
       </div>
@@ -18,8 +18,8 @@
             <i class="fa fa-warning text-warning highlight-icon"></i>
           </div>
           <div class="card-body">
-            <h5 class="card-title">45 Warnings</h5>
-            <button class="btn btn-warning btn-sm">View Warnings</button>
+            <h5 class="card-title">{{selectedAudit.totalWarnings}} Warnings</h5>
+            <button (click)="selectedSection = 'Warnings'" class="btn btn-warning btn-sm">View Warnings</button>
           </div>
         </div>
       </div>
@@ -29,72 +29,24 @@
             <i class="fa fa-info-circle text-info highlight-icon"></i>
           </div>
           <div class="card-body">
-            <h5 class="card-title">100 Notices</h5>
-            <button class="btn btn-info btn-sm">View Notices</button>
+            <h5 class="card-title">{{selectedAudit.totalNotices}} Notices</h5>
+            <button (click)="selectedSection = 'Notices'" class="btn btn-info btn-sm">View Notices</button>
           </div>
         </div>
       </div>
     </div>
-    <h5 class="card-title mb-3 mt-4">Errors</h5>
+    <h5 class="card-title mb-3 mt-4">{{selectedSection}}</h5>
     <div class="card custom-card">
       <div class="card-body">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li *ngFor="let issue of selectedAudit[selectedSection]" class="list-group-item">
             <div class="d-flex w-100 justify-content-between">
               <div class="info col-sm-10">
                 <!-- Add a cool badge here with number of errors -->
-                <label style="float:left;" class="badge badge-secondary">2</label>
+                <label style="float:left;" class="badge badge-secondary">{{issue.value}}</label>
                 <div class="campInfo">
-                  <h5>Response Code of 4xx (error)</h5>
-                  <small>2 errors found</small>
-                </div>
-              </div>
-              <div class="actions col-sm-2">
-                <div class="center-content">
-                  <a (click)="manageIssue()" placement="top" ngbTooltip="Manage Issues" class="action-link"><i class="fa fa-edit"></i></a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="d-flex w-100 justify-content-between">
-              <div class="info col-sm-10">
-                <label style="float:left;" class="badge badge-secondary">1</label>
-                <div class="campInfo">
-                  <h5>Broken Pages</h5>
-                  <small>1 error found</small>
-                </div>
-              </div>
-              <div class="actions col-sm-2">
-                <div class="center-content">
-                  <a (click)="manageIssue()" placement="top" ngbTooltip="Manage Issues" class="action-link"><i class="fa fa-edit"></i></a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="d-flex w-100 justify-content-between">
-              <div class="info col-sm-10">
-                <label style="float:left;" class="badge badge-secondary">3</label>
-                <div class="campInfo">
-                  <h5>Duplicate Meta Tags</h5>
-                  <small>3 errors found</small>
-                </div>
-              </div>
-              <div class="actions col-sm-2">
-                <div class="center-content">
-                  <a (click)="manageIssue()" placement="top" ngbTooltip="Manage Issues" class="action-link"><i class="fa fa-edit"></i></a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="d-flex w-100 justify-content-between">
-              <div class="info col-sm-10">
-                <label style="float:left;" class="badge badge-secondary">2</label>
-                <div class="campInfo">
-                  <h5>Duplicate Page Content</h5>
-                  <small>2 errors found</small>
+                  <h5>{{issue.title}}</h5>
+                  <small>{{issue.value}} {{selectedSection}} Found</small>
                 </div>
               </div>
               <div class="actions col-sm-2">

@@ -9,10 +9,13 @@ export class AuditComponent implements OnInit {
 
   @Input() selectedCampaign: any;
   @Input() selectedAudit: any;
+  @Input() loading: boolean;
+  selectedSection: string = "Errors";
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.loading);
   }
 
   manageIssue() {

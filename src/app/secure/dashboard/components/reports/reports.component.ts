@@ -8,17 +8,18 @@ import { ReportsService } from '../../../../service/reports.service';
 })
 export class ReportsComponent implements OnInit {
 
-  @Input() loading:boolean;
-  @Input() campaigns:any;
-  @Input() selectedCampaign:any;
-  campAudits:any;
-  selectedAudit:any;
+  @Input() loading: boolean;
+  @Input() campaigns: any;
+  @Input() selectedCampaign: any;
+  campAudits: any;
+  selectedAudit: any;
 
   constructor(private reportService: ReportsService) { }
 
   ngOnInit() {
     console.log('here is the incoming selected campaign');
     console.log(this.selectedCampaign);
+    this.loading = true;
     if (!this.selectedCampaign && this.campaigns && this.campaigns.length > 0) {
       this.selectedCampaign = this.campaigns[0];
     }
@@ -29,13 +30,14 @@ export class ReportsComponent implements OnInit {
 
     // If stored audits aren't there, get latest audits from DB
     if (!this.campAudits) {
-      this.reportService.getCampaignAudits(this.selectedCampaign.CampURL,this.selectedCampaign.CampID, 'get').then((auditResults) => {
+      this.reportService.getCampaignAudits(this.selectedCampaign.CampURL, this.selectedCampaign.CampID, 'get').then((auditResults) => {
         console.log(auditResults);
         this.campAudits = [];
         for (var x in auditResults) {
           this.campAudits.push(auditResults[x].Result.results[0]);
         }
         this.selectedAudit = this.campAudits[0];
+        this.selectedAudit = this.mapAudit(this.selectedAudit);
 
         if (this.campAudits.length == 0) {
           // fetch the audit from dataforseo
@@ -46,6 +48,194 @@ export class ReportsComponent implements OnInit {
         this.loading = false;
       });
     }
+  }
+
+  // Takes an audit and maps it out to how the UI needs it in order to display
+  mapAudit(audit) {
+    let auditMap = {
+      totalErrors: 0,
+      totalWarnings: 0,
+      totalNotices: 0,
+      ErrorsMap: {
+        duplicate_pages: {
+          title: 'Duplicate Pages'
+        },
+        duplicate_meta_tags: {
+          title: 'Duplicate Meta Tags'
+        },
+        duplicate_meta_descriptions: {
+          title: 'Duplicate Meta Descriptions'
+        },
+        duplicate_titles: {
+          title: 'Duplicate Titles'
+        },
+        links_broken: {
+          value: '',
+          title: 'Links Broken'
+        },
+        pages_broken: {
+          value: '',
+          title: 'Pages Broken'
+        },
+        pages_invalid_size: {
+          value: '',
+          title: 'Pages Invalid Size'
+        },
+        pages_with_lorem_ipsum: {
+          value: '',
+          title: 'Pages with lorem ipsum'
+        },
+        response_code_4xx: {
+          value: '',
+          title: 'Response Code 4xx'
+        },
+        response_code_5xx: {
+          value: '',
+          title: 'Response Code 5xx'
+        },
+        title_duplicate_tag: {
+          value: '',
+          title: 'Duplicate Title Tag'
+        },
+        title_empty: {
+          value: '',
+          title: 'Empty Title'
+        },
+        title_inappropriate: {
+          value: '',
+          title: 'Inappropriate Title'
+        }
+      },
+      WarningsMap: {
+        absent_doctype: {
+          value: '',
+          title: 'Missing Doctype'
+        },
+        absent_encoding_meta_tag: {
+          value: '',
+          title: 'Absent Encoding Meta Tag'
+        },
+        deprecated_html_tags: {
+          value: '',
+          title: 'Deprecated HTML Tags'
+        },
+        images_invalid_alt: {
+          value: '',
+          title: 'Invalid Image Alt'
+        },
+        images_invalid_title: {
+          value: '',
+          title: 'Invalid Image Title'
+        },
+        meta_description_empty: {
+          value: '',
+          title: 'Meta Description Empty'
+        },
+        meta_description_inappropriate: {
+          value: '',
+          title: 'Inappropriate Meta Description'
+        },
+        meta_keywords_empty: {
+          value: '',
+          title: 'Empty Meta Keywords'
+        },
+        meta_keywords_inappropriate: {
+          value: '',
+          title: 'Inappropriate Meta Keywords'
+        },
+        seo_non_friendly_url: {
+          value: '',
+          title: 'SEO Non-Friendly URL'
+        },
+        time_load_high: {
+          value: '',
+          title: 'High Load Time'
+        },
+        time_waiting_high: {
+          value: '',
+          title: 'High Waiting Time'
+        },
+        title_long: {
+          value: '',
+          title: 'Title is to long'
+        },
+        title_short: {
+          value: '',
+          title: 'Title is to short'
+        }
+      },
+      NoticesMap: {
+        content_readability_bad: {
+          value: '',
+          title: 'Bad Content Readability'
+        },
+        pages_http: {
+          value: '',
+          title: 'Http Pages'
+        },
+        pages_https: {
+          value: '',
+          title: 'Https Pages'
+        },
+        pages_total: {
+          value: '',
+          title: 'Total Pages'
+        },
+        response_code_3xx: {
+          value: '',
+          title: 'Response code of 3xx'
+        },
+        seo_friendly_url: {
+          value: '',
+          title: 'SEO Friendly URL'
+        },
+      }
+    }
+    console.log('here are the audit results');
+    console.log(audit.summary[0]);
+    let totalErrors = 0;
+    let totalWarnings = 0;
+    let totalNotices = 0;
+    for (var key in audit.summary[0]) {
+      console.log(key);
+      if (auditMap.ErrorsMap[key]) {
+        auditMap.ErrorsMap[key].value = audit.summary[0][key];
+        if (!isNaN(auditMap.ErrorsMap[key].value)) {
+          totalErrors += auditMap.ErrorsMap[key].value;
+        }
+      }
+      if (auditMap.WarningsMap[key]) {
+        auditMap.WarningsMap[key].value = audit.summary[0][key];
+        if (!isNaN(auditMap.WarningsMap[key].value)) {
+          totalWarnings += auditMap.WarningsMap[key].value;
+        }
+      }
+      if (auditMap.NoticesMap[key]) {
+        auditMap.NoticesMap[key].value = audit.summary[0][key];
+        if (!isNaN(auditMap.NoticesMap[key].value)) {
+          totalNotices += auditMap.NoticesMap[key].value;
+        }
+      }
+    }
+    // Go through and create an array of each
+    let errorsList = [], warningsList = [], noticeList = [];
+    for (var x in auditMap.ErrorsMap) {
+      errorsList.push(auditMap.ErrorsMap[x]);
+    }
+    for (var x in auditMap.WarningsMap) {
+      warningsList.push(auditMap.WarningsMap[x]);
+    }
+    for (var x in auditMap.NoticesMap) {
+      noticeList.push(auditMap.NoticesMap[x]);
+    }
+    auditMap.totalErrors = totalErrors;
+    auditMap.totalWarnings = totalWarnings;
+    auditMap.totalNotices = totalNotices;
+    auditMap["Errors"] = errorsList;
+    auditMap["Warnings"] = warningsList;
+    auditMap["Notices"] = noticeList;
+    console.log(auditMap);
+    return auditMap;
   }
 
   // Called when the user wants to refresh the dashboard for latest info
