@@ -1,11 +1,13 @@
 <div class="row sub-nav">
-  <h3 class="page-title col-sm-12 col-md-10">Campaigns <span *ngIf="campaignStep == 'create'">- Create Campaign</span><span *ngIf="campaignStep == 'dashboard'">- {{selectedCampaign.CampName}}</span></h3>
+  <h3 class="page-title col-sm-12 col-md-10">Campaigns <span *ngIf="campaignStep == 'create'">- Create Campaign</span><span
+      *ngIf="campaignStep == 'dashboard'">- {{selectedCampaign.CampName}}</span></h3>
   <!-- <div *ngIf="campaignStep === 'campaigns'" class="col-sm-12 col-md-4">
       <input type="text" [(ngModel)]="campaignSearchTerm" [ngModelOptions]="{standalone: true}" class="form-control search-input" id="campaignSearchTerm" aria-describedby="campaignSearchTerm" placeholder="Search for campaign">
   </div> -->
   <div class="col-md-2 col-sm-12">
-      <button *ngIf="campaignStep == 'campaigns'" class="btn btn-success float-right" (click)="campaignStep = 'create'"><i style="margin-right:7px;" class="fa fa-plus-circle"></i>New Campaign</button>
-      <button *ngIf="campaignStep !== 'campaigns'" class="btn btn-default btn-sm float-right" (click)="backToCampaigns()">Back</button>
+    <button *ngIf="campaignStep == 'campaigns'" class="btn btn-success float-right" (click)="campaignStep = 'create'"><i
+        style="margin-right:7px;" class="fa fa-plus-circle"></i>New Campaign</button>
+    <button *ngIf="campaignStep !== 'campaigns'" class="btn btn-default btn-sm float-right" (click)="backToCampaigns()">Back</button>
   </div>
 </div>
 
@@ -14,35 +16,33 @@
     <div class="card custom-card">
       <div class="card-body">
         <div class="row justify-content-md-center" *ngIf="!campaigns || campaigns.length == 0">
-            <div class="col-sm-12 col-md-6 text-center">
-                <h5 class="mb-4">It looks like you don't have any campaigns yet.</h5>
-                <button (click)="createCampaign = true" class="btn btn-primary">Create Campaign</button>
-            </div>
+          <div class="col-sm-12 col-md-6 text-center">
+            <h5 class="mb-4">It looks like you don't have any campaigns yet.</h5>
+            <button (click)="createCampaign = true" class="btn btn-primary">Create Campaign</button>
+          </div>
         </div>
         <div *ngIf="campaigns.length > 0">
-            <ul class="list-group list-group-flush">
-                <li *ngFor="let campaign of campaigns" class="list-group-item">
-                  <div class="d-flex w-100 justify-content-between">
-                    <div class="info col-sm-10">
-                      <label style="float:left;" class="badge badge-success">Active</label>
-                      <div class="campInfo">
-                        <h5>{{campaign.CampName}}</h5>
-                        <small>{{campaign.CampAddress1}} {{campaign.CampCity}}, {{campaign.CampState}}</small>
-                      </div>
-                    </div>
-                    <div class="actions col-sm-2">
-                      <div class="center-content">
-                        <a (click)="manageCampaign(campaign)" placement="top" ngbTooltip="Manage Campaign" class="action-link"><i class="fa fa-edit"></i></a>
-                        <a (click)="goToReports(campaign)" placement="top" ngbTooltip="Go to Reports" class="action-link"><i class="fa fa-bar-chart-o"></i></a>
-                      </div>
-                    </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let campaign of campaigns" class="list-group-item">
+              <div class="d-flex w-100 justify-content-between">
+                <div class="info col-sm-10">
+                  <label style="float:left;" class="badge badge-success">Active</label>
+                  <div class="campInfo">
+                    <h5>{{campaign.CampName}}</h5>
+                    <small>{{campaign.CampAddress1}} {{campaign.CampCity}}, {{campaign.CampState}}</small>
                   </div>
-                </li>
-                <!-- <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li> -->
-              </ul>
+                </div>
+                <div class="actions col-sm-2">
+                  <div class="center-content">
+                    <a (click)="manageCampaign(campaign)" placement="top" ngbTooltip="Manage Campaign" class="action-link"><i
+                        class="fa fa-edit"></i></a>
+                    <a (click)="goToReports(campaign)" placement="top" ngbTooltip="Go to Reports" class="action-link"><i
+                        class="fa fa-bar-chart-o"></i></a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
           <!-- <table class="table center-aligned-table">
             <thead>
               <tr class="text-primary">

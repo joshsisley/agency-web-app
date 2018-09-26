@@ -45,6 +45,7 @@ import { CampaignOverviewComponent } from './secure/dashboard/components/campaig
 import { ReviewsComponent } from './secure/dashboard/components/campaign/reviews/reviews.component';
 import { ReportsComponent } from './secure/dashboard/components/reports/reports.component';
 import { ReportsService } from "./service/reports.service";
+import { AuditComponent } from './secure/dashboard/components/reports/components/audit/audit.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { ReportsService } from "./service/reports.service";
         SuccessAlertComponent,
         CampaignOverviewComponent,
         ReviewsComponent,
-        ReportsComponent
+        ReportsComponent,
+        AuditComponent
     ],
     imports: [
         BrowserModule,

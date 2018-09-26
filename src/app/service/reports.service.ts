@@ -1,14 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { _ } from 'underscore'
 
 @Injectable()
 export class ReportsService {
 
-  campAudits:any = [];
+  campAudits:any;
 
   constructor(private http: Http) { }
 
-  getCampaignAudit(url, id, method) {
+  getLocalAudits() {
+    return this.campAudits;
+  }
+
+  formatAuditResults(results) {
+    for (var x in results) {
+      results[x].Result = JSON.parse(results[x].Result);
+    }
+    return results;
+  }
+
+  getCampaignAudits(url, id, method) {
     // pass in a domain and find all rows with that domain
     // set the campAudits to the returned docs
     // if no campAudits, make call to get camp audits from dataforseo
@@ -18,12 +30,12 @@ export class ReportsService {
 
       let queryString = `?CampURL=${url}&CampID=${id}&action=${method}`;
 
-      this.http.post(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/report${queryString}`, {headers: headers})
+      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/getonpageresultbycampurl?action=get&domain=HumphreysMedia.com`)
       .toPromise()
       .then(response => {
-        console.log('here is the response from the audit api');
-        console.log(response);
-        res(response);
+        let results = JSON.parse(response["_body"]);
+        this.campAudits = this.formatAuditResults(results);
+        res(this.campAudits);
       })
       .catch(err => {
         console.log('here is the error');
