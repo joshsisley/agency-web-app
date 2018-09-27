@@ -139,6 +139,7 @@ export class KeywordsComponent implements OnInit {
     this.campaignService.updateCampaign(this.selectedCampaign).then((updatedCampaign) => {
       this.selectedCampaign = updatedCampaign;
       this.successMessage = 'Successfully updated the campaign';
+      this.suggestedKeywords = [];
       this.success = true;
       setTimeout(() => {
         this.success = false;
