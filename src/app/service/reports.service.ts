@@ -5,7 +5,7 @@ import { _ } from 'underscore'
 @Injectable()
 export class ReportsService {
 
-  campAudits:any;
+  campAudits: any;
 
   constructor(private http: Http) { }
 
@@ -20,28 +20,40 @@ export class ReportsService {
     return results;
   }
 
+  formatUrl(url) {
+    let formattedUrl = url.replace(/(^\w+:|^)\/\//, '');
+    return formattedUrl;
+  }
+
   getCampaignAudits(url, id, method) {
     // pass in a domain and find all rows with that domain
     // set the campAudits to the returned docs
     // if no campAudits, make call to get camp audits from dataforseo
-    var promise = new Promise((res,rej) => {
+    var promise = new Promise((res, rej) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
 
-      let queryString = `?CampURL=${url}&CampID=${id}&action=${method}`;
+      let strippedUrl = this.formatUrl(url);
+      console.log('here is the formatted url');
+      console.log(strippedUrl);
 
-      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/getonpageresultbycampurl?action=get&domain=HumphreysMedia.com`)
-      .toPromise()
-      .then(response => {
-        let results = JSON.parse(response["_body"]);
-        this.campAudits = this.formatAuditResults(results);
-        res(this.campAudits);
-      })
-      .catch(err => {
-        console.log('here is the error');
-        console.log(err);
-        rej(err);
-      })
+      let queryString = `?domain=${strippedUrl}&action=${method}`;
+
+      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/getonpageresultbycampurl${queryString}`)
+        .toPromise()
+        .then(response => {
+          let results = JSON.parse(response["_body"]);
+          console.log(results);
+          if (results && results.length > 0) {
+            this.campAudits = this.formatAuditResults(results);
+          }
+          res(this.campAudits);
+        })
+        .catch(err => {
+          console.log('here is the error');
+          console.log(err);
+          rej(err);
+        })
     });
     return promise;
   }

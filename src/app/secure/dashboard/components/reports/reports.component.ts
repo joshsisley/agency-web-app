@@ -17,8 +17,6 @@ export class ReportsComponent implements OnInit {
   constructor(private reportService: ReportsService) { }
 
   ngOnInit() {
-    console.log('here is the incoming selected campaign');
-    console.log(this.selectedCampaign);
     this.loading = true;
     if (!this.selectedCampaign && this.campaigns && this.campaigns.length > 0) {
       this.selectedCampaign = this.campaigns[0];
@@ -26,25 +24,24 @@ export class ReportsComponent implements OnInit {
 
     // Get stored audits
     this.campAudits = this.reportService.getLocalAudits();
-    console.log(this.campAudits);
 
     // If stored audits aren't there, get latest audits from DB
     if (!this.campAudits) {
       this.reportService.getCampaignAudits(this.selectedCampaign.CampURL, this.selectedCampaign.CampID, 'get').then((auditResults) => {
-        console.log(auditResults);
         this.campAudits = [];
         for (var x in auditResults) {
           this.campAudits.push(auditResults[x].Result.results[0]);
         }
+        console.log(this.campAudits);
         this.selectedAudit = this.campAudits[0];
         this.selectedAudit = this.mapAudit(this.selectedAudit);
+
+        console.log('here is the selectedAudit');
+        console.log(this.selectedAudit);
 
         if (this.campAudits.length == 0) {
           // fetch the audit from dataforseo
         }
-
-        console.log('here is the audit to display');
-        console.log(this.selectedAudit);
         this.loading = false;
       });
     }
@@ -191,49 +188,49 @@ export class ReportsComponent implements OnInit {
         },
       }
     }
-    console.log('here are the audit results');
-    console.log(audit.summary[0]);
-    let totalErrors = 0;
-    let totalWarnings = 0;
-    let totalNotices = 0;
-    for (var key in audit.summary[0]) {
-      console.log(key);
-      if (auditMap.ErrorsMap[key]) {
-        auditMap.ErrorsMap[key].value = audit.summary[0][key];
-        if (!isNaN(auditMap.ErrorsMap[key].value)) {
-          totalErrors += auditMap.ErrorsMap[key].value;
+    if (audit) {
+      let totalErrors = 0;
+      let totalWarnings = 0;
+      let totalNotices = 0;
+      for (var key in audit.summary[0]) {
+        console.log(key);
+        if (auditMap.ErrorsMap[key]) {
+          auditMap.ErrorsMap[key].value = audit.summary[0][key];
+          if (!isNaN(auditMap.ErrorsMap[key].value)) {
+            totalErrors += auditMap.ErrorsMap[key].value;
+          }
+        }
+        if (auditMap.WarningsMap[key]) {
+          auditMap.WarningsMap[key].value = audit.summary[0][key];
+          if (!isNaN(auditMap.WarningsMap[key].value)) {
+            totalWarnings += auditMap.WarningsMap[key].value;
+          }
+        }
+        if (auditMap.NoticesMap[key]) {
+          auditMap.NoticesMap[key].value = audit.summary[0][key];
+          if (!isNaN(auditMap.NoticesMap[key].value)) {
+            totalNotices += auditMap.NoticesMap[key].value;
+          }
         }
       }
-      if (auditMap.WarningsMap[key]) {
-        auditMap.WarningsMap[key].value = audit.summary[0][key];
-        if (!isNaN(auditMap.WarningsMap[key].value)) {
-          totalWarnings += auditMap.WarningsMap[key].value;
-        }
+      // Go through and create an array of each
+      let errorsList = [], warningsList = [], noticeList = [];
+      for (var x in auditMap.ErrorsMap) {
+        errorsList.push(auditMap.ErrorsMap[x]);
       }
-      if (auditMap.NoticesMap[key]) {
-        auditMap.NoticesMap[key].value = audit.summary[0][key];
-        if (!isNaN(auditMap.NoticesMap[key].value)) {
-          totalNotices += auditMap.NoticesMap[key].value;
-        }
+      for (var x in auditMap.WarningsMap) {
+        warningsList.push(auditMap.WarningsMap[x]);
       }
+      for (var x in auditMap.NoticesMap) {
+        noticeList.push(auditMap.NoticesMap[x]);
+      }
+      auditMap.totalErrors = totalErrors;
+      auditMap.totalWarnings = totalWarnings;
+      auditMap.totalNotices = totalNotices;
+      auditMap["Errors"] = errorsList;
+      auditMap["Warnings"] = warningsList;
+      auditMap["Notices"] = noticeList;
     }
-    // Go through and create an array of each
-    let errorsList = [], warningsList = [], noticeList = [];
-    for (var x in auditMap.ErrorsMap) {
-      errorsList.push(auditMap.ErrorsMap[x]);
-    }
-    for (var x in auditMap.WarningsMap) {
-      warningsList.push(auditMap.WarningsMap[x]);
-    }
-    for (var x in auditMap.NoticesMap) {
-      noticeList.push(auditMap.NoticesMap[x]);
-    }
-    auditMap.totalErrors = totalErrors;
-    auditMap.totalWarnings = totalWarnings;
-    auditMap.totalNotices = totalNotices;
-    auditMap["Errors"] = errorsList;
-    auditMap["Warnings"] = warningsList;
-    auditMap["Notices"] = noticeList;
     console.log(auditMap);
     return auditMap;
   }

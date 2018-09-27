@@ -1,5 +1,5 @@
 <div class="mb-2 mt-4">
-  <div *ngIf="!loading" class="col-lg-12">
+  <div *ngIf="!loading && campAudits.length > 0" class="col-lg-12">
     <div class="row">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-4">
         <div class="card card-social card-border">
@@ -8,7 +8,7 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">{{selectedAudit.totalErrors}} Errors</h5>
-            <button (click)="selectedSection = 'Errors'" class="btn btn-danger btn-sm">View Errors</button>
+            <button (click)="changeSection('Errors')" class="btn btn-danger btn-sm">View Errors</button>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">{{selectedAudit.totalWarnings}} Warnings</h5>
-            <button (click)="selectedSection = 'Warnings'" class="btn btn-warning btn-sm">View Warnings</button>
+            <button (click)="changeSection('Warnings')" class="btn btn-warning btn-sm">View Warnings</button>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
           </div>
           <div class="card-body">
             <h5 class="card-title">{{selectedAudit.totalNotices}} Notices</h5>
-            <button (click)="selectedSection = 'Notices'" class="btn btn-info btn-sm">View Notices</button>
+            <button (click)="changeSection('Notices')" class="btn btn-info btn-sm">View Notices</button>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
     <h5 class="card-title mb-3 mt-4">{{selectedSection}}</h5>
     <div class="card custom-card">
       <div class="card-body">
-        <ul class="list-group list-group-flush">
+        <ul *ngIf="totalIssues > 0" class="list-group list-group-flush">
           <li *ngFor="let issue of selectedAudit[selectedSection]" class="list-group-item">
             <div class="d-flex w-100 justify-content-between">
               <div class="info col-sm-10">
@@ -46,7 +46,7 @@
                 <label style="float:left;" class="badge badge-secondary">{{issue.value}}</label>
                 <div class="campInfo">
                   <h5>{{issue.title}}</h5>
-                  <small>{{issue.value}} {{selectedSection}} Found</small>
+                  <small>{{issue.value}} Found</small>
                 </div>
               </div>
               <div class="actions col-sm-2">
@@ -57,6 +57,10 @@
             </div>
           </li>
         </ul>
+        <!-- Show if no errors -->
+        <div *ngIf="totalIssues === 0">
+          <h5>No {{selectedSection}}</h5>
+        </div>
       </div>
     </div>
     <!-- <div class="table-responsive">
@@ -92,5 +96,8 @@
         </tbody>
       </table>
     </div> -->
+  </div>
+  <div *ngIf="!loading && campAudits.length === 0" class="col-lg-12">
+    <h5>Fetching the latest report....</h5>
   </div>
 </div>
