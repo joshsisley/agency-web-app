@@ -2,7 +2,7 @@
   <h3 class="page-title col-sm-12 col-md-7">Reports</h3>
   <div class="col-sm-12 col-md-5">
     <div class="form-group">
-      <select *ngIf="campaigns.length > 0" class="form-control" id="exampleSelect1" [(ngModel)]="selectedCampaign">
+      <select *ngIf="campaigns.length > 0" class="form-control" id="exampleSelect1" (change)="onCampaignChange()" [(ngModel)]="selectedCampaign">
         <option [ngValue]="campaign" *ngFor="let campaign of campaigns">{{campaign.CampName}}</option>
       </select>
       <select disabled *ngIf="!campaigns || campaigns.length == 0" class="form-control" id="exampleSelect1">

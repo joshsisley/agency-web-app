@@ -24,6 +24,11 @@ export class AuditComponent implements OnInit {
     if (changes.loading && !changes.currentValue && this.selectedAudit) {
       this.totalIssues = this.selectedAudit.totalErrors;
     }
+    if (changes.selectedCampaign && !changes.selectedCampaign.firstChange) {
+      console.log('the selected campaign has changed');
+      console.log(changes);
+      console.log(this.selectedCampaign);
+    }
   }
 
   manageIssue() {

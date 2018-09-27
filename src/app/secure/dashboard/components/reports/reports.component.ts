@@ -27,24 +27,31 @@ export class ReportsComponent implements OnInit {
 
     // If stored audits aren't there, get latest audits from DB
     if (!this.campAudits) {
-      this.reportService.getCampaignAudits(this.selectedCampaign.CampURL, this.selectedCampaign.CampID, 'get').then((auditResults) => {
-        this.campAudits = [];
-        for (var x in auditResults) {
-          this.campAudits.push(auditResults[x].Result.results[0]);
-        }
-        console.log(this.campAudits);
-        this.selectedAudit = this.campAudits[0];
-        this.selectedAudit = this.mapAudit(this.selectedAudit);
-
-        console.log('here is the selectedAudit');
-        console.log(this.selectedAudit);
-
-        if (this.campAudits.length == 0) {
-          // fetch the audit from dataforseo
-        }
-        this.loading = false;
-      });
+      this.getAudits();
     }
+  }
+
+  onCampaignChange() {
+    this.loading = true;
+    this.getAudits();
+  }
+
+  getAudits() {
+    this.reportService.getCampaignAudits(this.selectedCampaign.CampURL, this.selectedCampaign.CampID, 'get').then((auditResults) => {
+      console.log('Here are the audit results');
+      console.log(auditResults);
+      this.campAudits = [];
+      for (var x in auditResults) {
+        this.campAudits.push(auditResults[x].Result.results[0]);
+      }
+      this.selectedAudit = this.campAudits[0];
+      this.selectedAudit = this.mapAudit(this.selectedAudit);
+
+      if (this.campAudits.length == 0) {
+        // fetch the audit from dataforseo
+      }
+      this.loading = false;
+    });
   }
 
   // Takes an audit and maps it out to how the UI needs it in order to display
@@ -193,7 +200,6 @@ export class ReportsComponent implements OnInit {
       let totalWarnings = 0;
       let totalNotices = 0;
       for (var key in audit.summary[0]) {
-        console.log(key);
         if (auditMap.ErrorsMap[key]) {
           auditMap.ErrorsMap[key].value = audit.summary[0][key];
           if (!isNaN(auditMap.ErrorsMap[key].value)) {
@@ -231,7 +237,6 @@ export class ReportsComponent implements OnInit {
       auditMap["Warnings"] = warningsList;
       auditMap["Notices"] = noticeList;
     }
-    console.log(auditMap);
     return auditMap;
   }
 
