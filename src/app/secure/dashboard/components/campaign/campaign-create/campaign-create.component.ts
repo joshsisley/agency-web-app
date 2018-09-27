@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Campaign } from "../../../../../models/campaign";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 import { CampaignService } from '../../../../../service/campaign.service';
 
 @Component({
@@ -10,8 +10,8 @@ import { CampaignService } from '../../../../../service/campaign.service';
 })
 export class CampaignCreateComponent implements OnInit {
 
-  campaign:any = new Campaign();
-  @Output() updateCampaigns:EventEmitter<Object> = new EventEmitter();
+  campaign: any = new Campaign();
+  @Output() updateCampaigns: EventEmitter<Object> = new EventEmitter();
 
   constructor(private campaignService: CampaignService, private router: Router) { }
 
@@ -19,6 +19,7 @@ export class CampaignCreateComponent implements OnInit {
   }
 
   saveCampaign() {
+    this.campaign.CampStatus = 'setup';
     this.campaignService.createCampaign(this.campaign).then((res) => {
       console.log(res);
       this.updateCampaigns.emit(this.campaign)

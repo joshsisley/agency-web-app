@@ -26,7 +26,8 @@
             <li *ngFor="let campaign of campaigns" class="list-group-item">
               <div class="d-flex w-100 justify-content-between">
                 <div class="info col-sm-10">
-                  <label style="float:left;" class="badge badge-success">Active</label>
+                  <label *ngIf="campaign.CampStatus === 'active'" style="float:left;" class="badge badge-success">Active</label>
+                  <label *ngIf="campaign.CampStatus === 'setup'" style="float:left;" class="badge badge-warning">Setup</label>
                   <div class="campInfo">
                     <h5>{{campaign.CampName}}</h5>
                     <small>{{campaign.CampAddress1}} {{campaign.CampCity}}, {{campaign.CampState}}</small>

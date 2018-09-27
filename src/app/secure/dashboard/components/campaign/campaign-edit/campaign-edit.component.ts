@@ -8,9 +8,9 @@ import { CampaignService } from '../../../../../service/campaign.service';
 })
 export class CampaignEditComponent implements OnInit {
 
-  @Input() selectedCampaign:any;
-  success:boolean = false;
-  successMessage:string = '';
+  @Input() selectedCampaign: any;
+  success: boolean = false;
+  successMessage: string = '';
 
   constructor(private campaignService: CampaignService) { }
 
@@ -19,8 +19,7 @@ export class CampaignEditComponent implements OnInit {
 
   updateCampaign() {
     // take the selectedCampaign and call update
-    console.log('here is the updated campaign');
-    console.log(this.selectedCampaign);
+    this.selectedCampaign.CampStatus = 'active';
     this.campaignService.updateCampaign(this.selectedCampaign).then((res) => {
       this.successMessage = 'Successfully updated the campaign';
       this.success = true;

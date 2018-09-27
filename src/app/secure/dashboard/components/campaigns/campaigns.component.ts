@@ -8,18 +8,20 @@ import { Router } from '@angular/router';
 })
 export class CampaignsComponent implements OnInit {
 
-  @Input() campaigns:any;
-  @Input() loading:boolean;
-  @Output() updateSelectedTab:EventEmitter<any> = new EventEmitter();
-  showCreateCampaign:boolean = false;
-  showEditCampaign:boolean = false;
-  selectedCampaign:any;
-  campaignStep:string = 'campaigns';
-  updateDashboardCampaignList:EventEmitter<string> = new EventEmitter();
+  @Input() campaigns: any;
+  @Input() loading: boolean;
+  @Output() updateSelectedTab: EventEmitter<any> = new EventEmitter();
+  showCreateCampaign: boolean = false;
+  showEditCampaign: boolean = false;
+  selectedCampaign: any;
+  campaignStep: string = 'campaigns';
+  updateDashboardCampaignList: EventEmitter<string> = new EventEmitter();
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log('here are the campaigns');
+    console.log(this.campaigns);
   }
 
   editCampaign(campaign) {
@@ -33,7 +35,6 @@ export class CampaignsComponent implements OnInit {
   }
 
   updateCampaignList(event) {
-    console.log('this gets called to update the list');
     this.campaigns.push(event);
     this.backToCampaigns();
   }

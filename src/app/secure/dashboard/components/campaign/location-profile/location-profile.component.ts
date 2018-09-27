@@ -8,10 +8,10 @@ import { CampaignService } from '../../../../../service/campaign.service';
 })
 export class LocationProfileComponent implements OnInit {
 
-  @Input() selectedCampaign:any;
-  success:boolean = false;
-  successMessage:string = '';
-  hoursMap:any = [
+  @Input() selectedCampaign: any;
+  success: boolean = false;
+  successMessage: string = '';
+  hoursMap: any = [
     {
       name: 'Sunday',
       status: 'Closed',
@@ -56,7 +56,7 @@ export class LocationProfileComponent implements OnInit {
     }
   ]
 
-  timeMask:any = [/[0-1]/, /(1[0-2]|0?[1-9])/,':',/[0-5]/,/[0-9]/, ' ',/[AaPp]/,/[Mm]/]
+  timeMask: any = [/[0-1]/, /(1[0-2]|0?[1-9])/, ':', /[0-5]/, /[0-9]/, ' ', /[AaPp]/, /[Mm]/]
 
   constructor(private campaignService: CampaignService) { }
 
@@ -73,6 +73,7 @@ export class LocationProfileComponent implements OnInit {
     console.log('here are the times');
     console.log(this.hoursMap);
     this.selectedCampaign.CampHours = this.hoursMap;
+    this.selectedCampaign.CampStatus = 'active';
     this.campaignService.updateCampaign(this.selectedCampaign).then((camp) => {
       console.log('here is the updated campaign');
       console.log(camp);

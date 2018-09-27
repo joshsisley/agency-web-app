@@ -15,21 +15,21 @@ import { _ } from 'underscore';
 })
 export class KeywordsComponent implements OnInit {
 
-  @Input() selectedCampaign:any;
+  @Input() selectedCampaign: any;
   searchTextChanged = new Subject<string>();
-  subscription:Observable<string>;
-  targetLocation:string;
-  success:boolean = false;
-  successMessage:string = '';
-  locationDropdownList:any = [];
-  suggestedKeywords:any = [];
-  selectedKeywords:any = [];
-  removedKeywords:any = [];
-  otherKeywords:string;
-  selectedLocation:any;
-  showDropdown:boolean = false;
+  subscription: Observable<string>;
+  targetLocation: string;
+  success: boolean = false;
+  successMessage: string = '';
+  locationDropdownList: any = [];
+  suggestedKeywords: any = [];
+  selectedKeywords: any = [];
+  removedKeywords: any = [];
+  otherKeywords: string;
+  selectedLocation: any;
+  showDropdown: boolean = false;
 
-  constructor(private campaignService:CampaignService, private dataService: LocalDataService) { }
+  constructor(private campaignService: CampaignService, private dataService: LocalDataService) { }
 
   ngOnInit() {
     // Set the target location if it exists
@@ -41,13 +41,13 @@ export class KeywordsComponent implements OnInit {
     }
 
     this.searchTextChanged
-    .debounceTime(300)
-    .distinctUntilChanged()
-    .subscribe((search) => this.getGoogleLocations());
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .subscribe((search) => this.getGoogleLocations());
   }
 
   getGoogleLocations() {
-    this.campaignService.findLocalBusiness(this.targetLocation).then((businessList:Array<object>) => {
+    this.campaignService.findLocalBusiness(this.targetLocation).then((businessList: Array<object>) => {
       if (businessList.length > 0) {
         this.locationDropdownList = businessList;
       } else {
@@ -75,7 +75,7 @@ export class KeywordsComponent implements OnInit {
           console.log(`Error Code ${response["error"].code}: ${response["error"].message}`);
           // TODO: Temp work around while figuring out the keywords
           this.suggestedKeywords = [
-          {
+            {
               "key": "serps rank checker",
               "exact_domain": "dataforseo.com",
               "country_code": "US",
@@ -94,7 +94,7 @@ export class KeywordsComponent implements OnInit {
               "spell": "",
               "title": "SERP rank position checker API ⓴⓲ SERP analysis and keyword ...",
               "snippet": "DataForSEO ➤➤➤ SERP API ➤➤➤ Google SERP Rankings Checker API ✓✓✓ Great Speed, Clear Stats, Simple Pricing. Try for free now!"
-          }]
+            }]
         } else {
           this.suggestedKeywords = response['results'][0].ranked;
         }
@@ -133,6 +133,7 @@ export class KeywordsComponent implements OnInit {
     if (!this.selectedCampaign.CampKeywords) {
       this.selectedCampaign.CampKeywords = this.selectedKeywords;
     }
+    this.selectedCampaign.CampStatus = 'active';
     this.selectedCampaign.CampTargetLocationName = this.selectedLocation.name;
     this.selectedCampaign.CampTargetLocationAddress = this.selectedLocation.address;
     this.campaignService.updateCampaign(this.selectedCampaign).then((updatedCampaign) => {
