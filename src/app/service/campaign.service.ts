@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import {Http, Headers, RequestOptions} from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { environment } from "../../environments/environment";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 import { UserService } from "../service/user.service";
@@ -14,13 +14,13 @@ import { LocalDataService } from "./local-data.service";
 @Injectable()
 export class CampaignService {
 
-  orgId:string;
-  campaigns:any = [];
-  
-  constructor(public cognitoUtil: CognitoUtil, 
-    public http: Http, 
+  orgId: string;
+  campaigns: any = [];
+
+  constructor(public cognitoUtil: CognitoUtil,
+    public http: Http,
     public orgService: OrganizationService,
-    public dataService: LocalDataService) {}
+    public dataService: LocalDataService) { }
 
   private buildQueryString(campObj, orgId) {
     let tempQueryString = `OrgID=${orgId}&CampStatus=active`;
@@ -55,16 +55,16 @@ export class CampaignService {
     console.log('get campaigns by ord id is called');
     console.log(orgId);
     // If the campaigns don't exist, go fetch them
-    var promise = new Promise((res,rej) => {
+    var promise = new Promise((res, rej) => {
       if (!this.campaigns || this.campaigns.length == 0) {
         // make call to get campaigns from aws by orgId
         // save campaigns to the service
-          let headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-    
-          let queryString = `?OrgID=${orgId}`;
-    
-          this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign${queryString}`, {headers: headers})
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        let queryString = `?OrgID=${orgId}`;
+
+        this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign${queryString}`, { headers: headers })
           .toPromise()
           .then(response => {
             let campaignArray = [];
@@ -97,25 +97,25 @@ export class CampaignService {
     let orgId = this.orgService.getOrgId();
     console.log('here is the org id');
     console.log(orgId);
-    var promise = new Promise((res,rej) => {
+    var promise = new Promise((res, rej) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
 
       let queryString = this.buildQueryString(campaignInfo, orgId);
-      this.http.put(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign/update`, JSON.stringify(campaignInfo), {headers: headers})
-      .toPromise()
-      .then(response => {
-        console.log('here is the response from lambda');
-        console.log(JSON.parse(response["_body"]));
-        let parsedResponse = JSON.parse(response["_body"]);
-        let updatedCampaign = parsedResponse.Campaign[0];
-        res(updatedCampaign);
-      })
-      .catch(err => {
-        console.log('here is the error');
-        console.log(err);
-        rej(err);
-      })
+      this.http.put(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/campaign/update`, JSON.stringify(campaignInfo), { headers: headers })
+        .toPromise()
+        .then(response => {
+          console.log('here is the response from lambda');
+          console.log(JSON.parse(response["_body"]));
+          let parsedResponse = JSON.parse(response["_body"]);
+          let updatedCampaign = parsedResponse.Campaign[0];
+          res(updatedCampaign);
+        })
+        .catch(err => {
+          console.log('here is the error');
+          console.log(err);
+          rej(err);
+        })
     });
     return promise;
   }
@@ -124,27 +124,27 @@ export class CampaignService {
     let orgId = this.orgService.getOrgId();
     console.log('here is the org id');
     console.log(orgId);
-    var promise = new Promise((res,rej) => {
+    var promise = new Promise((res, rej) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
       let queryString = this.buildQueryString(newCampaign, orgId);
 
-      this.http.post('https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/core-stage-v2/campaign', queryString, {headers: headers})
-      .toPromise()
-      .then(response => {
-        this.campaigns.push(newCampaign);
-        console.log('here is the response from lambda');
-        console.log(response["_body"]);
-        let tempBody = response["_body"].replace(/[{}]/g, "");
-        let responseArray = tempBody.split('=');
-        res(responseArray);
-      })
-      .catch(err => {
-        console.log('here is the error');
-        console.log(err);
-        rej(err);
-      })
+      this.http.post('https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/core-stage-v2/campaign', queryString, { headers: headers })
+        .toPromise()
+        .then(response => {
+          this.campaigns.push(newCampaign);
+          console.log('here is the response from lambda');
+          console.log(response["_body"]);
+          let tempBody = response["_body"].replace(/[{}]/g, "");
+          let responseArray = tempBody.split(/,|=/);
+          res(responseArray);
+        })
+        .catch(err => {
+          console.log('here is the error');
+          console.log(err);
+          rej(err);
+        })
     });
     return promise;
   }
@@ -168,26 +168,26 @@ export class CampaignService {
   findLocalBusiness(searchTerm) {
     // serialize the string thats using in the url
     // make http get request to url
-    var promise = new Promise((resolve,reject) => {
+    var promise = new Promise((resolve, reject) => {
       let encodedSearch = encodeURIComponent(searchTerm);
       console.log(encodedSearch);
       let url = `${environment.googlePlacesURL}?input=${encodedSearch}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${environment.googlePlacesAPIKey}`;
       this.http.get(url)
-      .toPromise()
-      .then(response => {
-        console.log('here is the response from google');
-        console.log(response);
-        let resultList = this.formatPlacesResult(response['_body']);
-        resolve(resultList);
-      })
-      .catch((e) => {
-        reject(e);
-      })
+        .toPromise()
+        .then(response => {
+          console.log('here is the response from google');
+          console.log(response);
+          let resultList = this.formatPlacesResult(response['_body']);
+          resolve(resultList);
+        })
+        .catch((e) => {
+          reject(e);
+        })
     })
     return promise;
   }
 
-  getRankedKeywords(targetName,campaign) {
+  getRankedKeywords(targetName, campaign) {
     var promise = new Promise((resolve, reject) => {
       let orgId = this.orgService.getOrgId();
       // make call to lambda function
@@ -195,31 +195,31 @@ export class CampaignService {
       headers.append('Content-Type', 'application/json');
 
       let queryString = `CampID=${orgId}&CampURL=${campaign.CampURL}&CampID=${campaign.CampID}&TargetName=${targetName}&SearchType=ranked`;
-    
-      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/keywords?${queryString}`, {headers: headers})
-      .toPromise()
-      .then(response => {
-        console.log(response);
-        let parsedResponse = JSON.parse(response["_body"])
-        console.log(parsedResponse);
-        if (parsedResponse.errorMessage) {
-          let errorResponse = {
-            "status": "error",
-            "error": {
-              "code": 503,
-              "message": parsedResponse.errorMessage
-            } 
+
+      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/campaign-stage/keywords?${queryString}`, { headers: headers })
+        .toPromise()
+        .then(response => {
+          console.log(response);
+          let parsedResponse = JSON.parse(response["_body"])
+          console.log(parsedResponse);
+          if (parsedResponse.errorMessage) {
+            let errorResponse = {
+              "status": "error",
+              "error": {
+                "code": 503,
+                "message": parsedResponse.errorMessage
+              }
+            }
+            resolve(errorResponse);
+          } else {
+            resolve(JSON.parse(parsedResponse));
           }
-          resolve(errorResponse);
-        } else {
-          resolve(JSON.parse(parsedResponse));
-        }
-      })
-      .catch(err => {
-        console.log('here is the error');
-        console.log(err);
-        reject(err);
-      })
+        })
+        .catch(err => {
+          console.log('here is the error');
+          console.log(err);
+          reject(err);
+        })
     });
     return promise;
   }
@@ -255,28 +255,28 @@ export class CampaignService {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
 
-      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/gmbreviews?access_token=${token}`, {headers: headers})
-      .toPromise()
-      .then((response) => {
-        console.log('here is the response');
-        console.log(JSON.parse(response["_body"]));
-        let locationList = JSON.parse(response["_body"]);
-        for (var x in locationList) {
-          if (locationList[x].reviews) {
-            for (var y in locationList[x].reviews.reviews) {
-              locationList[x].reviews.reviews[y].starRating = this.getNumberForReview(locationList[x].reviews.reviews[y]);
+      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/gmbreviews?access_token=${token}`, { headers: headers })
+        .toPromise()
+        .then((response) => {
+          console.log('here is the response');
+          console.log(JSON.parse(response["_body"]));
+          let locationList = JSON.parse(response["_body"]);
+          for (var x in locationList) {
+            if (locationList[x].reviews) {
+              for (var y in locationList[x].reviews.reviews) {
+                locationList[x].reviews.reviews[y].starRating = this.getNumberForReview(locationList[x].reviews.reviews[y]);
+              }
             }
           }
-        }
-        console.log('here is the final list');
-        console.log(locationList);
-        resolve(locationList);
-      })
-      .catch((e) => {
-        if (e) {
-          reject(e);
-        }
-      })
+          console.log('here is the final list');
+          console.log(locationList);
+          resolve(locationList);
+        })
+        .catch((e) => {
+          if (e) {
+            reject(e);
+          }
+        })
     })
     return promise;
   }

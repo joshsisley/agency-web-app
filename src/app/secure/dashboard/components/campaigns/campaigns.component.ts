@@ -20,8 +20,7 @@ export class CampaignsComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log('here are the campaigns');
-    console.log(this.campaigns);
+
   }
 
   editCampaign(campaign) {

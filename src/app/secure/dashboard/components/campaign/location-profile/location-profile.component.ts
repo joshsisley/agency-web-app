@@ -61,22 +61,15 @@ export class LocationProfileComponent implements OnInit {
   constructor(private campaignService: CampaignService) { }
 
   ngOnInit() {
-    console.log(this.selectedCampaign);
-    console.log(this.selectedCampaign.CampHours);
     if (this.selectedCampaign.CampHours && this.selectedCampaign.CampHours.length > 0 && this.selectedCampaign.CampHours != 'null') {
-      console.log('it still somehow gets inside')
       this.hoursMap = this.selectedCampaign.CampHours;
     }
   }
 
   saveCampaign() {
-    console.log('here are the times');
-    console.log(this.hoursMap);
     this.selectedCampaign.CampHours = this.hoursMap;
     this.selectedCampaign.CampStatus = 'active';
     this.campaignService.updateCampaign(this.selectedCampaign).then((camp) => {
-      console.log('here is the updated campaign');
-      console.log(camp);
       this.successMessage = 'Successfully updated the campaign';
       this.success = true;
       setTimeout(() => {

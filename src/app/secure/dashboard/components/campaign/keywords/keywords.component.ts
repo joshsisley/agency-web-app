@@ -72,7 +72,6 @@ export class KeywordsComponent implements OnInit {
     } else {
       this.campaignService.getRankedKeywords(keyLocation, this.selectedCampaign).then((response) => {
         if (response["status"] == "error") {
-          console.log(`Error Code ${response["error"].code}: ${response["error"].message}`);
           // TODO: Temp work around while figuring out the keywords
           this.suggestedKeywords = [
             {
@@ -121,7 +120,6 @@ export class KeywordsComponent implements OnInit {
     if (this.otherKeywords) {
       let keywordArray = this.otherKeywords.split(',');
       for (var x in keywordArray) {
-        console.log(keywordArray[x].trim());
         this.selectedKeywords.push(keywordArray[x].trim());
       }
     }

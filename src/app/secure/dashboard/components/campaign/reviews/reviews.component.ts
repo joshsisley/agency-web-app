@@ -10,7 +10,7 @@ declare const gapi: any;
 })
 export class ReviewsComponent implements OnInit {
 
-  tempReviews:any = [
+  tempReviews: any = [
     {
       "name": '',
       "reviewId": '',
@@ -64,14 +64,14 @@ export class ReviewsComponent implements OnInit {
     }
   ]
 
-  auth2:any;
-  step:string = 'auth';
-  reviews:any;
-  averageRating:any;
-  totalReviewCount:number;
-  locationList:any;
+  auth2: any;
+  step: string = 'auth';
+  reviews: any;
+  averageRating: any;
+  totalReviewCount: number;
+  locationList: any;
 
-  @Input() selectedCampaign:any;
+  @Input() selectedCampaign: any;
 
   constructor(private campaignService: CampaignService, private zone: NgZone) { }
 
@@ -85,7 +85,6 @@ export class ReviewsComponent implements OnInit {
       if (cookie) {
         // Set the results to stored list
         this.locationList = JSON.parse(localStorage.getItem(`${this.selectedCampaign.CampName}-locationList`));
-        console.log(this.locationList);
       } else {
         // Get the reviews again
 
@@ -136,11 +135,10 @@ export class ReviewsComponent implements OnInit {
           this.campaignService.getGoogleReviews(googleUser.getAuthResponse().access_token).then((response) => {
             self.locationList = response;
             // Save list to storage and create cookie
-            localStorage.setItem(`${this.selectedCampaign.CampName}-locationList`,JSON.stringify(response));
-            this.setCookie(`${this.selectedCampaign.CampName}-reviewTimeout`,'reviewTimeout');
+            localStorage.setItem(`${this.selectedCampaign.CampName}-locationList`, JSON.stringify(response));
+            this.setCookie(`${this.selectedCampaign.CampName}-reviewTimeout`, 'reviewTimeout');
             // TODO: Fix this to return correctly. Right now it looks like we need to setup a whitelist business
             // in order to get access to the API. We would then use the client id from that above.
-            console.log('it sets the step');
             this.zone.run(() => {
               this.step = 'reviews';
             });
@@ -161,21 +159,21 @@ export class ReviewsComponent implements OnInit {
     this.step = 'reviews';
   }
 
-  setCookie(name,value) {
+  setCookie(name, value) {
     var expires = "";
     var date = new Date();
-    date.setTime(date.getTime() + (6*60*60*1000));
+    date.setTime(date.getTime() + (6 * 60 * 60 * 1000));
     expires = "; expires=" + date.toUTCString();
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
   }
 
   getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
   }

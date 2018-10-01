@@ -38,8 +38,6 @@ export class ReportsComponent implements OnInit {
 
   getAudits() {
     this.reportService.getCampaignAudits(this.selectedCampaign.CampURL, this.selectedCampaign.CampID, 'get').then((auditResults) => {
-      console.log('Here are the audit results');
-      console.log(auditResults);
       this.campAudits = [];
       for (var x in auditResults) {
         this.campAudits.push(auditResults[x].Result.results[0]);
@@ -49,6 +47,22 @@ export class ReportsComponent implements OnInit {
 
       if (this.campAudits.length == 0) {
         // fetch the audit from dataforseo
+        let taskId = localStorage.getItem(`${this.selectedCampaign.CampURL}-taskId`);
+        if (taskId) {
+          this.reportService.manageOnPage(this.selectedCampaign.CampURL, 'get', this.selectedCampaign.CampID).then((res) => {
+            // check for success
+            this.reportService.getCampaignAudits(this.selectedCampaign.CampURL, this.selectedCampaign.CampID, 'get').then((results) => {
+              for (var x in results) {
+                this.campAudits.push(results[x].Result.results[0]);
+              }
+              this.selectedAudit = this.campAudits[0];
+              this.selectedAudit = this.mapAudit(this.selectedAudit);
+
+              // Clear taskId from localStorage
+              localStorage.removeItem(`${this.selectedCampaign.CampURL}-taskId`);
+            });
+          })
+        }
       }
       this.loading = false;
     });
@@ -57,6 +71,7 @@ export class ReportsComponent implements OnInit {
   // Takes an audit and maps it out to how the UI needs it in order to display
   mapAudit(audit) {
     let auditMap = {
+      campaign: this.selectedCampaign.CampName,
       totalErrors: 0,
       totalWarnings: 0,
       totalNotices: 0,
