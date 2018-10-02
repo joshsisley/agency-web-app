@@ -85,12 +85,11 @@ export class ReviewsComponent implements OnInit {
       if (cookie) {
         // Set the results to stored list
         this.locationList = JSON.parse(localStorage.getItem(`${this.selectedCampaign.CampName}-locationList`));
+        this.step = 'reviews';
       } else {
         // Get the reviews again
-
       }
       // show the reviews
-      this.step = 'reviews';
       // TODO: Change this to go and grab the latest reviews on page load
       this.reviews = this.tempReviews;
       this.averageRating = 4.5;
@@ -104,13 +103,6 @@ export class ReviewsComponent implements OnInit {
     this.googleInit();
   }
 
-  // getGoogleAccount() {
-  //   this.campaignService.getGoogleReviews('ya29.GlwdBnJMQOh2WIYHwS3hK49LcMUAwbOVIQqvV8gHZ2S0Y2imdss4R2fwVtwvcVU9dvvgszs3TabQpwz4lcLyIjbfT6EbVN719jHL4ZsVw0YrjwB58vv8W0Br_C048g').then((response) => {
-  //     console.log('here is the returned response');
-  //     console.log(response);
-  //   })
-  // }
-
   googleInit() {
     gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
@@ -118,7 +110,11 @@ export class ReviewsComponent implements OnInit {
         cookiepolicy: 'single_host_origin',
         scope: 'profile email https://www.googleapis.com/auth/plus.business.manage'
       });
-      this.attachSignin(document.getElementById('googleBtn'));
+      if (this.locationList && this.locationList.length === 0) {
+        this.attachSignin(document.getElementById('googleBtnReDo'));
+      } else {
+        this.attachSignin(document.getElementById('googleBtn'));
+      }
     });
   }
 
@@ -126,9 +122,7 @@ export class ReviewsComponent implements OnInit {
     let self = this;
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
-        // TODO: Now need to store this info in the org or user profile????
-        // make call to update campaign with access token and expiration
-        // Then, make call to get the reviews using the new access_token
+        // TODO: Handle automatic sign in for google user without popup
         this.selectedCampaign.CampRefreshToken = googleUser.getAuthResponse().id_token;
         this.selectedCampaign.CampTokenTimeOut = googleUser.getAuthResponse().expires_at;
         this.campaignService.updateCampaign(this.selectedCampaign).then((response) => {
@@ -162,7 +156,7 @@ export class ReviewsComponent implements OnInit {
   setCookie(name, value) {
     var expires = "";
     var date = new Date();
-    date.setTime(date.getTime() + (6 * 60 * 60 * 1000));
+    date.setTime(date.getTime() + (24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toUTCString();
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
   }

@@ -34,5 +34,12 @@
         </a>
       </div>
     </div>
+    <div [hidden]="step == 'auth' || locationList.length > 0" class="mb-5">
+      <h5 class="card-title">It looks like you don't have any reviews for this account.</h5>
+      <h6 class="card-subtitle mb-4 text-muted">Use the button below to link a different account for this campaign</h6>
+      <div class="btn btn-primary" id="googleBtnReDo"><i class="fa fa-google" style="margin-right: 10px;"></i> Connect Google
+        Account
+      </div>
+    </div>
   </div>
 </div>
