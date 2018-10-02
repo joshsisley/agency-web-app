@@ -8,7 +8,7 @@
             <div class="row mt-4">
               <div class="form-group col-md-6 col-sm-12">
                 <label for="inputName">Name</label>
-                <input type="text" [(ngModel)]="campaign.CampName" [ngModelOptions]="{standalone: true}" class="form-control" id="inputName"
+                <input type="text" [(ngModel)]="campaign.CampName" (input)="validateInput()" [ngModelOptions]="{standalone: true}" class="form-control" id="inputName"
                   aria-describedby="campaignName" placeholder="Enter name">
                 <small id="emailHelp" class="form-text text-muted">Enter the name of the site or business.</small>
               </div>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group mt-2">
               <label for="websiteURL">Website URL</label>
-              <input type="text" [(ngModel)]="campaign.CampURL" [ngModelOptions]="{standalone: true}" class="form-control" id="websiteURL"
+              <input type="text" [(ngModel)]="campaign.CampURL" (input)="validateInput()" [ngModelOptions]="{standalone: true}" class="form-control" id="websiteURL"
                 aria-describedby="websiteURL" placeholder="Enter website URL">
               <small id="emailHelp" class="form-text text-muted">Enter the sites primary web address.</small>
             </div>
@@ -82,7 +82,7 @@
               </div>
             </div>
             <div class="mt-4">
-              <button type="submit" (click)="saveCampaign()" class="btn btn-primary">Save</button>
+              <button type="submit" [disabled]="!validForm" (click)="saveCampaign()" class="btn btn-primary">Save</button>
             </div>
             <!-- <button type="submit" class="btn btn-success">Next</button> -->
           </form>
