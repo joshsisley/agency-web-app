@@ -23,6 +23,14 @@
             </div>
             <div class="row mt-2">
               <div class="form-group col-md-6 col-sm-12">
+                <label for="countrySelect">What country does your site target?</label>
+                <select class="form-control" name="countrySelect" id="countrySelect" [(ngModel)]="campaign.CampCountry">
+                  <option *ngFor="let country of country_list" value="country">{{country}}</option>
+                </select>
+              </div>
+            </div>
+<!--             <div class="row mt-2">
+              <div class="form-group col-md-6 col-sm-12">
                 <label for="exampleSelect1">What is the type of your site?</label>
                 <select class="form-control" id="exampleSelect1">
                   <option>1</option>
@@ -42,7 +50,7 @@
                   <option>5</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <div class="form-check mt-2">
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input">
