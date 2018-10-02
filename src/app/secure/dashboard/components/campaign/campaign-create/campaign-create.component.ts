@@ -12,6 +12,7 @@ import { ReportsService } from '../../../../../service/reports.service';
 export class CampaignCreateComponent implements OnInit {
 
   campaign: any = new Campaign();
+  validForm: boolean = false;
   @Output() updateCampaigns: EventEmitter<Object> = new EventEmitter();
 
   constructor(private campaignService: CampaignService,
@@ -19,6 +20,13 @@ export class CampaignCreateComponent implements OnInit {
     private reportService: ReportsService) { }
 
   ngOnInit() {
+  }
+  
+  validateInput() {
+    if (this.campaign.CampName && this.campaign.CampURL && this.campaign.CampName.length > 0
+    && this.campaign.CampURL.length > 0) {
+      this.validForm = true;
+    }
   }
 
   saveCampaign() {
