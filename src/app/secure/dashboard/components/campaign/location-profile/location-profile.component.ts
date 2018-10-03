@@ -11,6 +11,7 @@ export class LocationProfileComponent implements OnInit {
   @Input() selectedCampaign: any;
   success: boolean = false;
   successMessage: string = '';
+  saveInProgress: boolean = false;
   hoursMap: any = [
     {
       name: 'Sunday',
@@ -67,11 +68,13 @@ export class LocationProfileComponent implements OnInit {
   }
 
   saveCampaign() {
+    this.saveInProgress = true;
     this.selectedCampaign.CampHours = this.hoursMap;
     this.selectedCampaign.CampStatus = 'active';
     this.campaignService.updateCampaign(this.selectedCampaign).then((camp) => {
       this.successMessage = 'Successfully updated the campaign';
       this.success = true;
+      this.saveInProgress = false;
       setTimeout(() => {
         this.success = false;
         this.successMessage = '';

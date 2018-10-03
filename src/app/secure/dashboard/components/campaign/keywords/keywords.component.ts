@@ -28,6 +28,7 @@ export class KeywordsComponent implements OnInit {
   otherKeywords: string;
   selectedLocation: any;
   showDropdown: boolean = false;
+  saveInProgress: boolean = false;
 
   constructor(private campaignService: CampaignService, private dataService: LocalDataService) { }
 
@@ -126,6 +127,7 @@ export class KeywordsComponent implements OnInit {
   }
 
   save() {
+    this.saveInProgress = true;
     // save the selected location and list of keywords to the campaign.
     this.parseOtherKeywords();
     if (!this.selectedCampaign.CampKeywords) {
@@ -139,6 +141,7 @@ export class KeywordsComponent implements OnInit {
       this.successMessage = 'Successfully updated the campaign';
       this.suggestedKeywords = [];
       this.success = true;
+      this.saveInProgress = false;
       setTimeout(() => {
         this.success = false;
         this.successMessage = '';

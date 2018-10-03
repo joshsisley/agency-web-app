@@ -3,12 +3,14 @@
     <div class="row">
       <div class="form-group col-md-6 col-sm-12">
         <label for="targetLocation">Enter campaign's target location</label>
-        <input type="text" [(ngModel)]="targetLocation" [ngModelOptions]="{standalone: true}" (keyup)="search($event)" class="form-control" id="targetLocation" aria-describedby="targetLocation" placeholder="">
+        <input type="text" [(ngModel)]="targetLocation" [ngModelOptions]="{standalone: true}" (keyup)="search($event)" class="form-control"
+          id="targetLocation" aria-describedby="targetLocation" placeholder="">
       </div>
       <div *ngIf="showDropdown" class="input-list-container">
         <ul>
           <li *ngFor="let location of locationDropdownList">
-            <button class="btn btn-link" (click)="getKeywords(location)" [disabled]="location.name == 'No Results Found'">{{location.name}} {{location.address}}</button>
+            <button class="btn btn-link" (click)="getKeywords(location)" [disabled]="location.name == 'No Results Found'">{{location.name}}
+              {{location.address}}</button>
           </li>
         </ul>
       </div>
@@ -35,7 +37,8 @@
         <tr *ngFor="let keyword of suggestedKeywords">
           <td>
             <div class="form-check">
-              <input class="form-check-input position-static" (click)="handleSelected(keyword)" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+              <input class="form-check-input position-static" (click)="handleSelected(keyword)" type="checkbox" id="blankCheckbox" value="option1"
+                aria-label="...">
             </div>
           </td>
           <td>{{keyword.key}}</td>
@@ -66,23 +69,23 @@
     </table>
   </div>
   <div *ngIf="removedKeywords.length > 0 && selectedLocation" class="col-sm-6 mt-4">
-      <h5 class="card-title mb-2">Removed Keywords</h5>
-      <p>Keywords to be removed on save</p>
-      <table class="table table-striped">
-        <thead>
-          <tr class="">
-            <th>Keyword</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let keyword of removedKeywords">
-            <td>{{keyword}}</td>
-            <td><a (click)="undoRemoveKeyword(keyword)" style="color: white;" class="btn btn-primary btn-sm">Undo</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <h5 class="card-title mb-2">Removed Keywords</h5>
+    <p>Keywords to be removed on save</p>
+    <table class="table table-striped">
+      <thead>
+        <tr class="">
+          <th>Keyword</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let keyword of removedKeywords">
+          <td>{{keyword}}</td>
+          <td><a (click)="undoRemoveKeyword(keyword)" style="color: white;" class="btn btn-primary btn-sm">Undo</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <div class="col-sm-12 mt-5">
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Enter your own keyword here (Separate each with a comma)</label>
@@ -91,7 +94,10 @@
     </div>
   </div>
   <div class="col-sm-12 mt-4">
-      <button type="submit" (click)="save()" class="btn btn-primary">Save</button>
+    <button type="submit" [disabled]="saveInProgress" (click)="save()" class="btn btn-primary">
+      <div *ngIf="saveInProgress" class="loader"></div>
+      <span *ngIf="!saveInProgress">Save</span>
+    </button>
   </div>
 </div>
 <success-alert *ngIf="success" [message]="successMessage"></success-alert>

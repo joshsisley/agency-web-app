@@ -1,6 +1,7 @@
 <div class="row sub-nav">
   <h3 class="page-title col-sm-12 col-md-10">Campaigns <span *ngIf="campaignStep == 'create'">- Create</span><span *ngIf="campaignStep == 'dashboard'">-
-      {{selectedCampaign.CampName}}</span></h3>
+      {{selectedCampaign.CampName}}
+    </span></h3>
   <!-- <div *ngIf="campaignStep === 'campaigns'" class="col-sm-12 col-md-4">
       <input type="text" [(ngModel)]="campaignSearchTerm" [ngModelOptions]="{standalone: true}" class="form-control search-input" id="campaignSearchTerm" aria-describedby="campaignSearchTerm" placeholder="Search for campaign">
   </div> -->
@@ -68,6 +69,15 @@
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="loading" class="main-loader card-loader">
+  <div class="sk-folding-cube">
+    <div class="sk-cube1 sk-cube"></div>
+    <div class="sk-cube2 sk-cube"></div>
+    <div class="sk-cube4 sk-cube"></div>
+    <div class="sk-cube3 sk-cube"></div>
+  </div>
+  <h2>Loading...</h2>
 </div>
 <campaign-dashboard *ngIf="campaignStep == 'dashboard'" [selectedCampaign]="selectedCampaign"></campaign-dashboard>
 <campaign-create *ngIf="campaignStep == 'create'" (updateCampaigns)="updateCampaignList($event)"></campaign-create>
