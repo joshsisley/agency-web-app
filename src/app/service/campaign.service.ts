@@ -249,13 +249,54 @@ export class CampaignService {
     return num;
   }
 
-  getGoogleReviews(token) {
+  // Need a function to get the locations and have user choose locations
+  // Need a function to get the reviews for those locations, possibly have to loop
+
+  getGoogleLocations(token) {
+    // return the token
     var promise = new Promise((resolve, reject) => {
       let orgId = this.orgService.getOrgId();
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
 
-      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/gmbreviews?access_token=${token}`, { headers: headers })
+      let query = `?access_token=${token}&what=locations`;
+
+      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/gmbreviews${query}`, { headers: headers })
+        .toPromise()
+        .then((response) => {
+          let parsedList = JSON.parse(response["_body"]);
+          console.log('here is the location list');
+          console.log(parsedList);
+          // let locationList = JSON.parse(response["_body"]);
+          // for (var x in locationList) {
+          //   if (locationList[x].reviews) {
+          //     for (var y in locationList[x].reviews.reviews) {
+          //       locationList[x].reviews.reviews[y].starRating = this.getNumberForReview(locationList[x].reviews.reviews[y]);
+          //     }
+          //   }
+          // }
+          // console.log('here is the final list');
+          // console.log(locationList);
+          resolve(parsedList);
+        })
+        .catch((e) => {
+          if (e) {
+            reject(e);
+          }
+        })
+    })
+    return promise;
+  }
+
+  getGoogleReviews(token, locations) {
+    var promise = new Promise((resolve, reject) => {
+      let orgId = this.orgService.getOrgId();
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+      let query = `?access_token=${token}&what=reviews&locationNames=${locations}`;
+
+      this.http.get(`https://lkgxlf78fe.execute-api.us-east-2.amazonaws.com/Dev/gmbreviews${query}`, { headers: headers })
         .toPromise()
         .then((response) => {
           console.log('here is the response');
