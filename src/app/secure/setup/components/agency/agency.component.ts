@@ -9,19 +9,17 @@ import { Router } from '../../../../../../node_modules/@angular/router';
 })
 export class AgencyComponent implements OnInit {
 
-  agency:any = {}
+  agency: any = {}
 
-  constructor(private orgService: OrganizationService, private router:Router) { }
+  constructor(private orgService: OrganizationService, private router: Router) { }
 
   ngOnInit() {
 
   }
 
   saveAgency() {
-    console.log(this.agency);
     this.agency.orgOnboardingStatus = 'campaign';
     this.orgService.updateOrg(this.agency).then(response => {
-      console.log(response);
       if (response[1] == 'true') {
         this.router.navigate(['/dashboard/setup/campaign'])
         // route to campaign

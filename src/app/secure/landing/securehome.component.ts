@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {UserLoginService} from "../../service/user-login.service";
-import {LoggedInCallback} from "../../service/cognito.service";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { UserLoginService } from "../../service/user-login.service";
+import { LoggedInCallback } from "../../service/cognito.service";
 import { OrganizationService } from "../../service/organization.service";
 import { resolve } from "../../../../node_modules/@types/q";
 import { UserService } from "../../service/user.service";
@@ -14,17 +14,16 @@ import { CampaignService } from "../../service/campaign.service";
 })
 export class SecureHomeComponent implements OnInit, LoggedInCallback {
 
-    loading:boolean = true;
-    setupFlow:string = 'completed';
-    campaigns:any;
+    loading: boolean = true;
+    setupFlow: string = 'completed';
+    campaigns: any;
 
-    constructor(public router: Router, 
-        public userLoginService: UserLoginService, 
+    constructor(public router: Router,
+        public userLoginService: UserLoginService,
         public orgService: OrganizationService,
         public userService: UserService,
         public campaignService: CampaignService) {
         this.userLoginService.isAuthenticated(this);
-        console.log("SecureHomeComponent: constructor");
     }
 
     ngOnInit() {
@@ -32,21 +31,15 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
     }
 
     updateTab(tab) {
-        console.log('here is the new tab');
-        console.log(tab);
+
     }
 
     isLoggedIn(message: string, isLoggedIn: boolean) {
         if (!isLoggedIn) {
             this.router.navigate(['/home/login']);
         } else {
-            console.log('the user is logged in');
             this.userService.getUserByCognitoID().then((user) => {
-                console.log('here is the user');
-                console.log(user);
                 this.orgService.getOrgById(user["Org"]).then((org) => {
-                    console.log('successfully receives the org');
-                    console.log(org);
                     if (user['CognitoID'] === org['owner']) {
                         localStorage.setItem('orgOwner', 'true');
                         // Check the org setup flow since user is the owner
@@ -55,7 +48,6 @@ export class SecureHomeComponent implements OnInit, LoggedInCallback {
                             this.router.navigate(['/dashboard'])
                             this.loading = false;
                         } else if (org["onboardingComplete"] && org["onboardingComplete"] === 'campaign') {
-                            console.log('it is set to campaign');
                             this.setupFlow = 'campaign';
                             this.router.navigate(['/dashboard/setup/campaign'])
                             this.loading = false;

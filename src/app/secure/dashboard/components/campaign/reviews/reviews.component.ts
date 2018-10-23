@@ -141,14 +141,6 @@ export class ReviewsComponent implements OnInit {
             // // Save list to storage and create cookie
             // localStorage.setItem(`${this.selectedCampaign.CampName}-locationList`, JSON.stringify(response));
             // this.setCookie(`${this.selectedCampaign.CampName}-reviewTimeout`, 'reviewTimeout');
-            // // TODO: Fix this to return correctly. Right now it looks like we need to setup a whitelist business
-            // // in order to get access to the API. We would then use the client id from that above.
-            // this.zone.run(() => {
-            //   this.step = 'reviews';
-            // });
-            // console.log(self.step);
-
-            // this.reviews = this.tempReviews;
           })
           // now make the calls to get the reviews using the access token
         })
@@ -169,16 +161,9 @@ export class ReviewsComponent implements OnInit {
   }
 
   getGoogleReviews() {
-    // pass back the user selected locations
-    // use selectedLocations
-    console.log('getting reviews for the following locations:');
-    console.log(this.selectedLocations);
-    console.log('get the access token from google');
-    console.log(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token);
     let token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
     this.campaignService.getGoogleReviews(token, this.selectedLocations).then((response) => {
-      console.log('here is the response from the reviews');
-      console.log(response);
+
     })
   }
 
