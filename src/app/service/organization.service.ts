@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { environment } from "../../environments/environment";
-import { CognitoUserPool } from "amazon-cognito-identity-js";
-import { UserService } from "../service/user.service";
-import * as AWS from "aws-sdk";
-import * as awsservice from "aws-sdk/lib/service";
-import { CognitoCallback, CognitoUtil, LoggedInCallback } from "./cognito.service";
+import { environment } from '../../environments/environment';
+import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import { UserService } from '../service/user.service';
+import * as AWS from 'aws-sdk';
+import * as awsservice from 'aws-sdk/lib/service';
+import { CognitoCallback, CognitoUtil, LoggedInCallback } from './cognito.service';
 
 @Injectable()
 export class OrganizationService {
@@ -24,7 +24,7 @@ export class OrganizationService {
     return JSON.parse(localStorage.getItem('orgInfo'));
   }
 
-  /* 
+  /*
   *   Takes in Param of Id = orgId = string
   */
   getOrgById(orgId) {

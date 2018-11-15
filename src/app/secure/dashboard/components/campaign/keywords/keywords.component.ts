@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { debounceTime } from 'rxjs/operators';
 import { Subject } from '../../../../../../../node_modules/rxjs';
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/distinctUntilChanged";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/mergeMap";
+import { Observable } from "rxjs";
 import { CampaignService } from '../../../../../service/campaign.service';
 import { LocalDataService } from '../../../../../service/local-data.service';
 import { _ } from 'underscore';
@@ -42,8 +40,7 @@ export class KeywordsComponent implements OnInit {
     }
 
     this.searchTextChanged
-      .debounceTime(300)
-      .distinctUntilChanged()
+      .pipe(debounceTime(300))
       .subscribe((search) => this.getGoogleLocations());
   }
 

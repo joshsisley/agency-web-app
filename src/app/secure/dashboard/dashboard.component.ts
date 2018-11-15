@@ -10,10 +10,10 @@ import { UserService } from '../../service/user.service';
 })
 export class DashboardComponent implements OnInit {
 
-  selectedTab: string = 'campaigns';
-  isOrgOwner: boolean = false;
+  selectedTab = 'campaigns';
+  isOrgOwner = false;
   campaigns: any;
-  loading: boolean = true;
+  loading = true;
   selectedCampaign: any;
 
   constructor(private campaignService: CampaignService, private orgService: OrganizationService, private userService: UserService) { }
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     // get the campaigns and info needed for the overview page
     let orgOwnerStatus = localStorage.getItem('orgOwner')
-    if (orgOwnerStatus == 'true') {
+    if (orgOwnerStatus === 'true') {
       this.isOrgOwner = true;
     }
 
