@@ -7169,8 +7169,9 @@ body {
       background: #EEEFF0;
       color: #c1c1c1; }
       .custom-tabset .nav-tabs .nav-item .nav-link.active {
-        background: white;
-        color: #597be3;
+        background: #58d8a3;
+        border-bottom-color: #58d8a3 !important;
+        color: white;
         border-color: #e4e4e4 #e4e4e4 #fff; }
 
 .custom-tabset .tab-content .tab-card-body {

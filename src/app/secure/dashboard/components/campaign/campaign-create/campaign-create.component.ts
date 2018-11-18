@@ -39,7 +39,7 @@ export class CampaignCreateComponent implements OnInit {
       console.log(res);
       let id = res[3];
       this.reportService.manageOnPage(this.campaign.CampURL, 'post', id).then((response) => {
-        let parsedBody = JSON.parse(response["_body"]);
+        let parsedBody = JSON.parse(response['_body']);
         let body = JSON.parse(parsedBody);
         let taskId = body.results[0]['task_id'];
         // set the localstorage item
