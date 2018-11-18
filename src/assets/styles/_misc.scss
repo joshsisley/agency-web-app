@@ -1,9 +1,10 @@
 .content-wrapper {
-  background: $content-bg;
-  margin-left: $sidebar-width-lg;
+  background: #f4f6f9;
+  margin-left: 235px;
   min-height: 100vh;
-  transition: all .8s ease;
-  width: calc(100% - #{$sidebar-width-lg});
+  padding: 1rem 1.7rem;
+  transition: all .2s ease;
+  width: calc(100% - 235px);
   @media (max-width: 991px) {
     margin-left: 0;
     width: 100%;

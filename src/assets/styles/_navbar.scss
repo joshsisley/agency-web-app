@@ -7,6 +7,7 @@
 }
 .navbar {
   background: $white;
+  border-bottom: 1px solid #eceeef;
 
   .navbar-brand-wrapper {
       @include sidebar-toggle-animation();

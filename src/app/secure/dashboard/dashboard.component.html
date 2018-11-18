@@ -1,25 +1,29 @@
-<nav style="margin-left: -236px;" class="sidebar sidebar-fixed sidebar-offcanvas" id="sidebar">
-    <ul class="nav">
-        <!-- <li class="nav-item">
+<div style="width:100%; position: relative;">
+    <nav class="sidebar sidebar-fixed sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+            <!-- <li class="nav-item">
             <a class="nav-link" (click)="setSelectedTab('overview')" routerLinkActive="active">
             <i class="flaticon-speedometer"></i>
             <span class="menu-title">Overview</span>
             </a>
         </li> -->
-        <li class="nav-item" [class.active]="selectedTab === 'campaigns'">
-            <a class="nav-link" (click)="setSelectedTab('campaigns')" routerLinkActive="active">
-                <i style="color:white; margin-right: .75rem;" class="fa fa-tasks"></i>
-                <span class="menu-title">Campaigns</span>
-            </a>
-        </li>
-        <li class="nav-item" [class.active]="selectedTab === 'reports'">
-            <a class="nav-link" (click)="setSelectedTab('reports')" routerLinkActive="active">
-                <i style="color:white; margin-right: .75rem;" class="fa fa-bar-chart-o"></i>
-                <span class="menu-title">Reports</span>
-            </a>
-        </li>
-    </ul>
-</nav>
-<campaigns *ngIf="selectedTab == 'campaigns'" (updateSelectedTab)="updateSelectedTab($event)" [loading]="loading"
-    [campaigns]="campaigns"></campaigns>
-<reports *ngIf="selectedTab === 'reports'" [loading]="loading" [campaigns]="campaigns" [selectedCampaign]="selectedCampaign"></reports>
+            <li class="nav-item" [class.active]="selectedTab === 'campaigns'">
+                <a class="nav-link" (click)="setSelectedTab('campaigns')" routerLinkActive="active">
+                    <i style="color:#495057; margin-right: .75rem;" class="fa fa-tasks"></i>
+                    <span class="menu-title">Campaigns</span>
+                </a>
+            </li>
+            <li class="nav-item" [class.active]="selectedTab === 'reports'">
+                <a class="nav-link" (click)="setSelectedTab('reports')" routerLinkActive="active">
+                    <i style="color:#495057; margin-right: .75rem;" class="fa fa-bar-chart-o"></i>
+                    <span class="menu-title">Reports</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="content-wrapper">
+        <campaigns *ngIf="selectedTab == 'campaigns'" (updateSelectedTab)="updateSelectedTab($event)" [loading]="loading"
+            [campaigns]="campaigns"></campaigns>
+        <reports *ngIf="selectedTab === 'reports'" [loading]="loading" [campaigns]="campaigns" [selectedCampaign]="selectedCampaign"></reports>
+    </div>
+</div>
