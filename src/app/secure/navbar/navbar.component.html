@@ -1,5 +1,5 @@
 <!--Navbar-->
-<nav class="navbar navbar-dark col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper">
         <a class="navbar-brand brand-logo" href="#">Agency App</a>
         <a class="navbar-brand brand-logo-mini" href="#">T</a>
@@ -9,17 +9,17 @@
             <input class="form-control mr-sm-2 search" type="text" placeholder="Search">
         </form> -->
         <ul class="navbar-nav ml-lg-auto">
-            <li class="nav-item nav-profile">
+            <li class="nav-item">
                 <a *ngIf="!isLogin" class="nav-link" [routerLink]="['/dashboard/logout']">
-                    Logout
+                    <i class="fa fa-sign-out"></i>
                 </a>
                 <a *ngIf="isLogin" class="nav-link" [routerLink]="['/home/login']">
-                    Login
+                    <i class="fa fa-sign-in"></i>
                 </a>
             </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggleSubmenu()">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </nav>
