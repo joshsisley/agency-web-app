@@ -46,6 +46,7 @@ import { ReviewsComponent } from './secure/dashboard/components/campaign/reviews
 import { ReportsComponent } from './secure/dashboard/components/reports/reports.component';
 import { ReportsService } from "./service/reports.service";
 import { AuditComponent } from './secure/dashboard/components/reports/components/audit/audit.component';
+import { CallTrackingComponent } from './secure/dashboard/components/call-tracking/call-tracking.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { AuditComponent } from './secure/dashboard/components/reports/components
         CampaignOverviewComponent,
         ReviewsComponent,
         ReportsComponent,
-        AuditComponent
+        AuditComponent,
+        CallTrackingComponent
     ],
     imports: [
         BrowserModule,

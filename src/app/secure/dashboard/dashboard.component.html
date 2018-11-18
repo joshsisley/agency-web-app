@@ -13,6 +13,18 @@
                     <span class="menu-title">Campaigns</span>
                 </a>
             </li>
+            <li class="nav-item" [class.active]="selectedTab === 'tracking'">
+                <a class="nav-link" (click)="setSelectedTab('tracking')" routerLinkActive="active">
+                    <i style="color:#495057; margin-right: .75rem;" class="fa fa-phone"></i>
+                    <span class="menu-title">Call Tracking</span>
+                </a>
+            </li>
+            <li class="nav-item" [class.active]="selectedTab === 'tasks'">
+                <a class="nav-link" (click)="setSelectedTab('tasks')" routerLinkActive="active">
+                    <i style="color:#495057; margin-right: .75rem;" class="fa fa-check-square-o"></i>
+                    <span class="menu-title">Tasks</span>
+                </a>
+            </li>
             <li class="nav-item" [class.active]="selectedTab === 'reports'">
                 <a class="nav-link" (click)="setSelectedTab('reports')" routerLinkActive="active">
                     <i style="color:#495057; margin-right: .75rem;" class="fa fa-bar-chart-o"></i>
@@ -25,5 +37,7 @@
         <campaigns *ngIf="selectedTab == 'campaigns'" (updateSelectedTab)="updateSelectedTab($event)" [loading]="loading"
             [campaigns]="campaigns"></campaigns>
         <reports *ngIf="selectedTab === 'reports'" [loading]="loading" [campaigns]="campaigns" [selectedCampaign]="selectedCampaign"></reports>
+        <call-tracking *ngIf="selectedTab === 'tracking'" [loading]="loading" [campaigns]="campaigns"
+            [selectedCampaign]="selectedCampaign"></call-tracking>
     </div>
 </div>

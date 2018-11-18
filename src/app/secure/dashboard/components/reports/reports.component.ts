@@ -13,6 +13,8 @@ export class ReportsComponent implements OnInit {
   @Input() selectedCampaign: any;
   campAudits: any;
   selectedAudit: any;
+  reportTypes = ['Website Audit'];
+  selectedReport = 'Website Audit';
 
   constructor(private reportService: ReportsService) { }
 
@@ -34,6 +36,10 @@ export class ReportsComponent implements OnInit {
   onCampaignChange() {
     this.loading = true;
     this.getAudits();
+  }
+
+  onReportChange() {
+
   }
 
   getAudits() {

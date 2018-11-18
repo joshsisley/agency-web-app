@@ -35,7 +35,7 @@ export class AuditComponent implements OnInit {
 
   stripOutEntriesWithZeroIssues(issueArray) {
     let newIssueArray = [];
-    for (var x in issueArray) {
+    for (let x in issueArray) {
       if (issueArray[x].value && issueArray[x].value > 0) {
         // Only return entries with value greater than 0
         newIssueArray.push(issueArray[x]);
